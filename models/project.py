@@ -1,4 +1,4 @@
-from app import db
+from app import db, mllo
 
 class Project(db.Model):
 
@@ -11,3 +11,9 @@ class Project(db.Model):
     # location_lng = db.Column(db.Integer)
     # date_start = db.Column()
     # date_end = db.Column()
+
+
+class ProjectSchema(mllo.ModelSchema):
+
+    class Meta:
+        model = Project
