@@ -1,4 +1,5 @@
 from app import app
-from controllers import projects
+from controllers import projects, clients
 
 app.register_blueprint(projects.api, url_prefix='/api')
+app.register_blueprint(clients.api, url_prefix='/api')

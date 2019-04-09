@@ -1,5 +1,7 @@
 from app import db, mllo
-from .base import BaseModel
+from marshmallow import fields
+from .base import BaseModel, BaseSchema
+from .client import Client
 
 
 class Project(db.Model, BaseModel):
@@ -12,9 +14,10 @@ class Project(db.Model, BaseModel):
     # location_lng = db.Column(db.Integer)
     # date_start = db.Column()
     # date_end = db.Column()
+    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
+    client = db.relationship('Client', backref='projects')
 
-
-class ProjectSchema(mllo.ModelSchema):
-
+class ProjectSchema(mllo.ModelSchema, BaseSchema):
+    client = fields.Nested('ClientSchema', only=('id', 'name'))
     class Meta:
         model = Project
