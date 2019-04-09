@@ -13,7 +13,7 @@ mllo = Marshmallow(app)
 # pylint: disable=C0413
 from models.project import Project, ProjectSchema
 
-projects_schema = ProjectSchema(many=True)
+project_schema = ProjectSchema()
 
 # @app.route('/')
 # def home():
@@ -22,4 +22,9 @@ projects_schema = ProjectSchema(many=True)
 @app.route('/projects', methods=['GET'])
 def index():
     projects = Project.query.all()
-    return projects_schema.jsonify(projects), 200
+    return project_schema.jsonify(projects, many=True), 200
+
+@app.route('/projects/<int:project_id>', methods=['GET'])
+def show(project_id):
+    project = Project.query.get(project_id)
+    return project_schema.jsonify(project), 200
