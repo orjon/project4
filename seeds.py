@@ -1,6 +1,7 @@
 from app import db, app
-from models.project import Project, ProjectSchema
-from models.client import Client, ClientSchema
+from models.project import Project
+from models.client import Client
+from models.invoice import Invoice, InvoiceSchema
 
 
 with app.app_context():
@@ -28,5 +29,15 @@ with app.app_context():
     db.session.add(heathrow)
     db.session.add(aspire)
     db.session.add(playstation)
+    db.session.commit()
 
+    inv1 = Invoice(number='INV-001', amount=100, project=samsung)
+    inv2 = Invoice(number='INV-002', amount=200, project=aspire)
+    inv3 = Invoice(number='INV-003', amount=300, project=playstation)
+    inv4 = Invoice(number='INV-004', amount=400, project=heathrow)
+
+    db.session.add(inv1)
+    db.session.add(inv2)
+    db.session.add(inv3)
+    db.session.add(inv4)
     db.session.commit()

@@ -2,10 +2,11 @@ from app import db, mllo
 from marshmallow import fields
 from .base import BaseModel, BaseSchema
 
-
 class Client(db.Model, BaseModel):
     __tablename__ = 'clients'
     name = db.Column(db.String(40), nullable=False)
+    # contact = db.Column(db.Srting)
+    # email
 
 
 class ClientSchema(mllo.ModelSchema, BaseSchema):

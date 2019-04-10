@@ -19,5 +19,6 @@ class Project(db.Model, BaseModel):
 
 class ProjectSchema(mllo.ModelSchema, BaseSchema):
     client = fields.Nested('ClientSchema', only=('id', 'name'))
+    invoices = fields.Nested('InvoiceSchema', many=True, only=('id', 'number'))
     class Meta:
         model = Project
