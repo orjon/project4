@@ -1,6 +1,6 @@
 from app import db, mllo
 from marshmallow import fields
-from .base import BaseModel, BaseSchema
+from models.base import BaseModel, BaseSchema
 
 class Client(db.Model, BaseModel):
     __tablename__ = 'clients'
@@ -11,5 +11,7 @@ class Client(db.Model, BaseModel):
 
 class ClientSchema(mllo.ModelSchema, BaseSchema):
     projects = fields.Nested('ProjectSchema', many=True, only=('id', 'name'))
+    invoices = fields.Nested('InvoiceSchema', many=True, only=('id', 'number'))
     class Meta:
         model = Client
+        exclude = ('created', 'updated')

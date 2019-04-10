@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models.project import Project, ProjectSchema
+from models.client import Client
 
 project_schema = ProjectSchema()
 
@@ -21,18 +22,28 @@ def show(project_id):
 
 @api.route('/projects', methods=['POST'])
 def create():
-    project, errors = project_schema.load(request.get_json())
+    data = request.get_json()
+    project, errors = project_schema.load(data)
     if errors:
         return jsonify(errors), 422 #Unprocessable Entity
+
+    client = Client.query.get(data['client_id'])
+    project.client = client
+
     project.save()
     return project_schema.jsonify(project), 201 #Created
 
 @api.route('/projects/<int:project_id>', methods=['PUT'])
 def update(project_id):
+    data = request.get_json()
     project = Project.query.get(project_id)
-    project, errors = project_schema.load(request.get_json(), instance=project, partial=True)
+    project, errors = project_schema.load(data, instance=project, partial=True)
     if errors:
         return jsonify(errors), 422 #Unprocessable Entity
+
+    client = Client.query.get(data['client_id'])
+    project.client = client
+
     project.save()
     return project_schema.jsonify(project), 202 #Accepted
 

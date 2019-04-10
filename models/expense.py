@@ -2,15 +2,14 @@ from app import db, mllo
 from marshmallow import fields
 from models.base import BaseModel, BaseSchema
 from models.project import Project
-from models.client import Client
+from models.supplier import Supplier
 
 
-class Invoice(db.Model, BaseModel):
+class Expense(db.Model, BaseModel):
 
-    __tablename__ = 'invoices'
+    __tablename__ = 'expenses'
 
-    number = db.Column(db.String(10), nullable=False)
-
+    description = db.Column(db.String(100), nullable=False)
     # date_issued = db.Column(db.DateTime, default=datetime.utcnow)
     # date_due = db.Column(db.DateTime, default=datetime.utcnow)
     # date_paid = db.Column(db.DateTime, default=datetime.utcnow)
@@ -18,14 +17,16 @@ class Invoice(db.Model, BaseModel):
     amount = db.Column(db.Integer, nullable=False)
     # vat - = db.Column(db.Integer, nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
-    project = db.relationship('Project', backref='invoices')
+    project = db.relationship('Project', backref='expenses')
 
-    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
-    client = db.relationship('Client', backref='invoices')
+    supplier_id = db.Column(db.Integer, db.ForeignKey('suppliers.id'))
+    supplier = db.relationship('Supplier', backref='expenses')
 
-class InvoiceSchema(mllo.ModelSchema, BaseSchema):
+
+class ExpenseSchema(mllo.ModelSchema, BaseSchema):
     project = fields.Nested('ProjectSchema', only=('id', 'code'))
-    client = fields.Nested('ClientSchema', only=('id', 'name'))
+    supplier = fields.Nested('SupplierSchema', only=('id', 'name'))
+
     class Meta:
-        model = Invoice
+        model = Expense
         exclude = ('created', 'updated')
