@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from models.project import Project, ProjectSchema
 from models.client import Client
+from lib.secure_route import secure_route
 
 project_schema = ProjectSchema()
 
@@ -11,16 +12,19 @@ api = Blueprint('projects', __name__)
 #     return 'Project4 is live!', 200
 
 @api.route('/projects', methods=['GET'])
+
 def index():
     projects = Project.query.all()
     return project_schema.jsonify(projects, many=True), 200 #OK
 
 @api.route('/projects/<int:project_id>', methods=['GET'])
+
 def show(project_id):
     project = Project.query.get(project_id)
     return project_schema.jsonify(project), 200 #OK
 
 @api.route('/projects', methods=['POST'])
+
 def create():
     data = request.get_json()
     project, errors = project_schema.load(data)
@@ -34,6 +38,7 @@ def create():
     return project_schema.jsonify(project), 201 #Created
 
 @api.route('/projects/<int:project_id>', methods=['PUT'])
+
 def update(project_id):
     data = request.get_json()
     project = Project.query.get(project_id)
@@ -49,6 +54,7 @@ def update(project_id):
 
 
 @api.route('/projects/<int:project_id>', methods=['DELETE'])
+
 def delete(project_id):
     project = Project.query.get(project_id)
     project.remove()

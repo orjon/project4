@@ -4,24 +4,89 @@ from models.client import Client
 from models.invoice import Invoice
 from models.expense import Expense
 from models.supplier import Supplier
+from models.user import UserSchema
+
+user_schema = UserSchema()
 
 with app.app_context():
     db.drop_all()
     db.create_all()
 
+    orjon, errors = user_schema.load({
+        'username':'orjon',
+        'email':'orjon@email',
+        'password':'passwordo',
+        'password_confirmation':'passwordo'
+    })
+
+    if errors:
+        raise Exception(errors)
+
+    bill, errors = user_schema.load({
+        'username':'bill',
+        'email':'bill@email',
+        'password':'passwordb',
+        'password_confirmation':'passwordb'
+    })
+
+    if errors:
+        raise Exception(errors)
+
+    ted, errors = user_schema.load({
+        'username':'ted',
+        'email':'ted@email',
+        'password':'passwordt',
+        'password_confirmation':'passwordt'
+    })
+
+    if errors:
+        raise Exception(errors)
+
+    db.session.add(orjon)
+    db.session.add(bill)
+    db.session.add(ted)
+
     clientA = Client(name='Brands at Work')
     clientB = Client(name='Swissport')
     clientC = Client(name='George P. Johnson')
 
+    clientD = Client(name='Simon Parker')
+    clientE = Client(name='The Greenwards')
+    clientF = Client(name='Paul & Athony')
+    clientG = Client(name='Ducan Loache')
+    clientH = Client(name='NatWest')
+
+    # clientI = Client(name='Paul & Athony')
+    # clientJ = Client(name='Ducan Loache')
+    # clientK = Client(name='NatWest')
+    # clientL = Client(name='NatWest')
+
     db.session.add(clientA)
     db.session.add(clientB)
     db.session.add(clientC)
+
+    db.session.add(clientD)
+    db.session.add(clientE)
+    db.session.add(clientF)
+    db.session.add(clientG)
+    db.session.add(clientH)
+
+    # db.session.add(clientI)
+    # db.session.add(clientJ)
+    # db.session.add(clientK)
+    # db.session.add(clientL)
 
     deloitte = Project(name='Deloitte - Berlin', code='19-008', client=clientA)
     samsung = Project(name='Samsung Summer2019', code='19-009', client=clientC)
     heathrow = Project(name='HeathrowT4', code='19-010', client=clientB)
     aspire = Project(name='Aspire Lounge - Luton', code='19-011', client=clientB)
     playstation = Project(name='PlayStation - Xtreme', code='19-012', client=clientC)
+
+    photo1 = Project(name='Simon & Kate', code='BP-01', client=clientD)
+    photo2 = Project(name='Peter & Ellenor', code='BP-02', client=clientE)
+    photo3 = Project(name='Paul & Anthony', code='BP-03', client=clientF)
+    photo4 = Project(name='Baby Jane', code='BP-04', client=clientG)
+    photo5 = Project(name='NatWest Conference', code='BP-05', client=clientH)
 
     db.session.add(deloitte)
     db.session.add(samsung)
