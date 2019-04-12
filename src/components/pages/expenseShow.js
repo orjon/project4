@@ -72,8 +72,7 @@ class ExpenseShow extends React.Component {
         </div>
         <div>
           {this.state.expenses && this.state.expenses.map(expense => (
-
-            <div key={expense.id}>
+            <div key={expense.id}  className="lineItem">
               <div>{expense.id} : ({expense.supplier.name}){expense.description} : ({expense.project.client.name}) {expense.project.name} : {expense.amount}</div>
             </div>
           ))}

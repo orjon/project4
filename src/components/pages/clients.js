@@ -50,7 +50,7 @@ class Clients extends React.Component {
         </div>
         <div>
           {this.state.clients && this.state.clients.map(client => (
-            <div key={client.id}>
+            <div key={client.id} className="lineItem">
               <div>{client.id} : {client.name} (user: {client.user.id})</div>
             </div>
           ))}

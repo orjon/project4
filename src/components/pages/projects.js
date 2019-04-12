@@ -59,7 +59,7 @@ class Projects extends React.Component {
         <div className="container">
           <h3>Projects</h3>
         </div>
-        <div>
+        <div className="container">
           {this.state.projects && this.state.projects.map(project => (
             <Link to={`/project/${project.id}`} key={project.id} className="lineItem">
               <div >{project.id} : {project.code} : {project.name} : {project.client.name} : {project.invoices.id}</div>
@@ -68,7 +68,7 @@ class Projects extends React.Component {
         </div>
 
 
-        <form className="update" onSubmit={this.handleSubmit}>
+        <form className="update container" onSubmit={this.handleSubmit}>
           <h3 className="title">New Project</h3>
 
           <div className="select">

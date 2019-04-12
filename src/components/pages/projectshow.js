@@ -59,7 +59,7 @@ class ProjectShow extends React.Component {
         <div>
           <div className="subHeader3">Invoices</div>
           {this.state.project.invoices && this.state.project.invoices.map(invoice => (
-            <div key={invoice.id}>{invoice.id} : {invoice.number} : {invoice.amount}</div>
+            <div key={invoice.id} className="lineItem">{invoice.id} : {invoice.number} : {invoice.amount}</div>
           ))}
         </div>
 

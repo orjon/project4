@@ -40,7 +40,11 @@ html, body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  // border: 1px solid red;
+}
+
+.container {
+  border: 1px solid #888;
 }
 
 nav {
@@ -53,7 +57,7 @@ nav {
   padding: 5px;
   background-color: #444;
   height: 50px;
-  border: 1px solid blue;
+  border-bottom: 1px solid #888;
 
   .menuItem {
     color: #888;

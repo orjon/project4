@@ -51,7 +51,7 @@ class Suppliers extends React.Component {
         </div>
         <div>
           {this.state.suppliers && this.state.suppliers.map(supplier => (
-            <div key={supplier.id}>
+            <div key={supplier.id} className="lineItem">
               <div>{supplier.id} : {supplier.name}</div>
             </div>
           ))}
