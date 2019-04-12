@@ -30,7 +30,7 @@ class Expense(db.Model, BaseModel):
 
 class ExpenseSchema(mllo.ModelSchema, BaseSchema):
     user = fields.Nested('UserSchema', only=('id', 'username'))
-    project = fields.Nested('ProjectSchema', only=('id', 'code'))
+    project = fields.Nested('ProjectSchema', only=('id', 'code', 'name', 'client.name'))
     supplier = fields.Nested('SupplierSchema', only=('id', 'name'))
 
     class Meta:

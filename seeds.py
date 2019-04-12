@@ -124,11 +124,11 @@ with app.app_context():
     photo4 = Project(user=bill, name='Baby Jane', code='BP-04', client=clientG)
     photo5 = Project(user=bill, name='NatWest Conference', code='BP-05', client=clientH)
 
-    inv7 = Invoice(user=bill, number='INV-001', amount=100, client=clientC, project=samsung)
-    inv8 = Invoice(user=bill, number='INV-002', amount=200, client=clientB, project=aspire)
-    inv9 = Invoice(user=bill, number='INV-003', amount=300, client=clientC, project=playstation)
-    inv10 = Invoice(user=bill, number='INV-004', amount=400, client=clientB, project=heathrow)
-    inv11 = Invoice(user=bill, number='INV-005', amount=750, client=clientA, project=deloitte)
+    inv7 = Invoice(user=bill, number='BILL-#01', amount=100, client=clientD, project=photo1)
+    inv8 = Invoice(user=bill, number='BILL-#02', amount=200, client=clientE, project=photo2)
+    inv9 = Invoice(user=bill, number='BILL-#03', amount=300, client=clientF, project=photo3)
+    inv10 = Invoice(user=bill, number='BILL-#04', amount=400, client=clientG, project=photo4)
+    inv11 = Invoice(user=bill, number='BILL-#05', amount=750, client=clientH, project=photo5)
 
     ramada = Supplier(user=bill, name='Ramada Hotel')
     uber1 = Supplier(user=bill, name='Uber')

@@ -17,7 +17,7 @@ def index():
     projects = Project.query.all()
     return project_schema.jsonify(projects, many=True), 200 #OK
 
-@api.route('/projects/<int:project_id>', methods=['GET'])
+@api.route('/project/<int:project_id>', methods=['GET'])
 @secure_route
 def show(project_id):
     project = Project.query.get(project_id)

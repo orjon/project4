@@ -1,7 +1,8 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
 from models.expense import Expense, ExpenseSchema
 from models.project import Project
 from models.supplier import Supplier
+from lib.secure_route import secure_route
 
 expense_schema = ExpenseSchema()
 
@@ -13,11 +14,13 @@ def index():
     return expense_schema.jsonify(expenses, many=True), 200 #OK
 
 @api.route('/expenses/<int:expense_id>', methods=['GET'])
+@secure_route
 def show(expense_id):
     expense = Expense.query.get(expense_id)
     return expense_schema.jsonify(expense), 200 #OK
 
 @api.route('/expenses', methods=['POST'])
+@secure_route
 def create():
     data = request.get_json()
 
@@ -30,6 +33,8 @@ def create():
 
     supplier = Supplier.query.get(data['supplier_id'])
     expense.supplier = supplier
+
+    expense.user = g.current_user
 
     expense.save()
     return expense_schema.jsonify(expense), 201 #Created

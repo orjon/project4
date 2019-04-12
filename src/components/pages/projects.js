@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import { Link } from 'react-router-dom'
 
 class Projects extends React.Component {
   constructor() {
@@ -60,11 +61,12 @@ class Projects extends React.Component {
         </div>
         <div>
           {this.state.projects && this.state.projects.map(project => (
-            <div key={project.id}>
+            <Link to={`/project/${project.id}`} key={project.id}>
               <div>{project.id} : {project.code} : {project.name} : {project.client.name} : {project.invoices.id}</div>
-            </div>
+            </Link>
           ))}
         </div>
+
 
         <form className="update" onSubmit={this.handleSubmit}>
           <h3 className="title">New Project</h3>

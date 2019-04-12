@@ -2,27 +2,19 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 
-class Expenses extends React.Component {
+class ExpenseShow extends React.Component {
   constructor() {
     super()
     this.state = {
       data: {
-        amount: '',
-        description: ''
       },
       error: ''
     }
-    this.default = 'default'
+
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChangeDropDown = this.handleChangeDropDown.bind(this)
-    this.clearState = this.clearState.bind(this)
-  }
 
-  clearState() {
-    const data = { amount: '',description: ''}
-    this.setState({ data })
   }
 
   handleChange({ target: { name, value }}) {
@@ -147,4 +139,4 @@ class Expenses extends React.Component {
   }
 }
 
-export default Expenses
+export default ExpenseShow
