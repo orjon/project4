@@ -8,7 +8,7 @@ from marshmallow import validates_schema, ValidationError, fields, validate
 
 class User(db.Model, BaseModel):
 
-    __tablename__: 'users'
+    __tablename__ = 'users'
 
     username = db.Column(db.String(28), nullable=False, unique=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
@@ -43,11 +43,11 @@ class User(db.Model, BaseModel):
 
 class UserSchema(mllo.ModelSchema, BaseSchema):
 
-    # @validates_schema
-    #
-    # def check_passwords_match(self, data):
-    #     if data.get('password') != data.get('password_confirmation'):
-    #         raise ValidationError('Passwords do not match', 'password_confirmation')
+    @validates_schema
+
+    def check_passwords_match(self, data):
+        if data.get('password') != data.get('password_confirmation'):
+            raise ValidationError('Passwords do not match', 'password_confirmation')
 
     password = fields.String(
         required=True,
@@ -58,7 +58,11 @@ class UserSchema(mllo.ModelSchema, BaseSchema):
         required=True
     )
 
-    # created_projects = fields.Nested('ProjectSchema', many=True)
+    projects = fields.Nested('ProjectSchema', many=True)
+    suppliers = fields.Nested('SupplierSchema', many=True)
+    invoices = fields.Nested('InvoiceSchema', many=True)
+    expenses = fields.Nested('ExpenseSchema', many=True)
+    clients = fields.Nested('ClientSchema', many=True)
 
     class Meta:
         model = User

@@ -1,5 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
 from models.client import Client, ClientSchema
+from lib.secure_route import secure_route
 
 client_schema = ClientSchema()
 
@@ -16,10 +17,14 @@ def show(client_id):
     return client_schema.jsonify(client), 200 #OK
 
 @api.route('/clients', methods=['POST'])
+@secure_route
 def create():
     client, errors = client_schema.load(request.get_json())
     if errors:
         return jsonify(errors), 422 #Unprocessable Entity
+
+    client.user = g.current_user
+
     client.save()
     return client_schema.jsonify(client), 201 #Created
 

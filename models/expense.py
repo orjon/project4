@@ -3,11 +3,16 @@ from marshmallow import fields
 from models.base import BaseModel, BaseSchema
 from models.project import Project
 from models.supplier import Supplier
+from models.user import User, UserSchema
+
 
 
 class Expense(db.Model, BaseModel):
 
     __tablename__ = 'expenses'
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', backref='expenses')
 
     description = db.Column(db.String(100), nullable=False)
     # date_issued = db.Column(db.DateTime, default=datetime.utcnow)
@@ -24,6 +29,7 @@ class Expense(db.Model, BaseModel):
 
 
 class ExpenseSchema(mllo.ModelSchema, BaseSchema):
+    user = fields.Nested('UserSchema', only=('id', 'username'))
     project = fields.Nested('ProjectSchema', only=('id', 'code'))
     supplier = fields.Nested('SupplierSchema', only=('id', 'name'))
 

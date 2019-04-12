@@ -1,1 +1,43 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+}
 
+* {
+  box-sizing: border-box;
+}
+
+.siteWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+}
+
+nav {
+  color: white;
+  font-weight: lighter;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+  background-color: #444;
+  height: 50px;
+  border: 1px solid blue;
+
+  .menuItem {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+}
+
+.bodyWrapper {
+  padding: 5px;
+}

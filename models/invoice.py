@@ -3,11 +3,15 @@ from marshmallow import fields
 from models.base import BaseModel, BaseSchema
 from models.project import Project
 from models.client import Client
+from models.user import User, UserSchema
 
 
 class Invoice(db.Model, BaseModel):
 
     __tablename__ = 'invoices'
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', backref='invoices')
 
     number = db.Column(db.String(10), nullable=False)
 
@@ -24,6 +28,8 @@ class Invoice(db.Model, BaseModel):
     client = db.relationship('Client', backref='invoices')
 
 class InvoiceSchema(mllo.ModelSchema, BaseSchema):
+    user = fields.Nested('UserSchema', only=('id', 'username'))
+
     project = fields.Nested('ProjectSchema', only=('id', 'code'))
     client = fields.Nested('ClientSchema', only=('id', 'name'))
     class Meta:

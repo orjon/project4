@@ -26,7 +26,7 @@ def register():
 @api.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    user = User.query.filter_by(email=data.get('email')).first()
+    user = User.query.filter_by(username=data.get('username')).first()
 
     if not user or not user.validate_password(data.get('password', '')):
         return jsonify({'message' : 'Unauthorized'}), 401

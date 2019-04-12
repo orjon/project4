@@ -8,8 +8,8 @@ class Project(db.Model, BaseModel):
 
     __tablename__ = 'projects'
 
-    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    # user = db.relationship('User', backref='user_projects')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', backref='projects')
 
     code = db.Column(db.String(10), nullable=False)
     name = db.Column(db.String(40), nullable=False)
@@ -23,7 +23,7 @@ class Project(db.Model, BaseModel):
 
 class ProjectSchema(mllo.ModelSchema):
 
-    # user = fields.Nested('UserSchema', only=('id', 'username'))
+    user = fields.Nested('UserSchema', only=('id', 'username'))
 
     client = fields.Nested('ClientSchema', only=('id', 'name'))
     invoices = fields.Nested('InvoiceSchema', many=True, only=('id', 'number'))
