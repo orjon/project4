@@ -1,6 +1,8 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
 from models.invoice import Invoice, InvoiceSchema
 from models.project import Project
+from models.client import Client
+# from lib.secure_route import secure_route
 
 invoice_schema = InvoiceSchema()
 
@@ -17,6 +19,7 @@ def show(invoice_id):
     return invoice_schema.jsonify(invoice), 200 #OK
 
 @api.route('/invoices', methods=['POST'])
+# @secure_route
 def create():
     data = request.get_json()
 
@@ -26,6 +29,11 @@ def create():
 
     project = Project.query.get(data['project_id'])
     invoice.project = project
+
+    client = Client.query.get(data['client_id'])
+    invoice.client = client
+
+    invoice.user = g.current_user
 
     invoice.save()
     return invoice_schema.jsonify(invoice), 201 #Created
@@ -37,7 +45,7 @@ def update(invoice_id):
     invoice, errors = invoice_schema.load(data, instance=invoice, partial=True)
     if errors:
         return jsonify(errors), 422 #Unprocessable Entity
-        
+
     project = Project.query.get(data['project_id'])
     invoice.project = project
 

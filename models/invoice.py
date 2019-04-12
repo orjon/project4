@@ -30,7 +30,7 @@ class Invoice(db.Model, BaseModel):
 class InvoiceSchema(mllo.ModelSchema, BaseSchema):
     user = fields.Nested('UserSchema', only=('id', 'username'))
 
-    project = fields.Nested('ProjectSchema', only=('id', 'code'))
+    project = fields.Nested('ProjectSchema', only=('id', 'code', 'name'))
     client = fields.Nested('ClientSchema', only=('id', 'name'))
     class Meta:
         model = Invoice

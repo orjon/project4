@@ -25,20 +25,23 @@ class Clients extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    axios.post('/api/clients', this.state.data)
-    // axios.post('/api/client', this.state.data, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+    axios.post('/api/clients', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.getData())
       .catch((err) => {
         console.log('the error is', err)
         this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
       })
   }
 
+  getData(){
+    axios.get('/api/user', { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(res => this.setState({ clients: res.data.clients }, () => console.log(this.state.clients)))
+  }
+
   componentDidMount() {
     axios.get(`/api/user/${Auth.getPayload().sub}`)
       .then(res => this.userCurrent = res.data)
-
-    axios.get('/api/user', { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(res => this.setState({ clients: res.data.clients }, () => console.log(this.state.clients)))
+      .then(() => this.getData())
   }
 
   render() {
@@ -56,16 +59,9 @@ class Clients extends React.Component {
         </div>
 
 
-        <form
-          className="update"
-          onSubmit={this.handleSubmit}
-        >
-          <div className="columns">
-            <div className="column">
-              <h3 className="title is-4">New Client</h3>
-            </div>
-          </div>
-          <div className="control has-icons-left has-icons-right">
+        <form className="update" onSubmit={this.handleSubmit}>
+          <h3 className="title">New Client</h3>
+          <div>
             <input
               className={`input ${this.state.error ? 'is-danger': ''}`}
               name="name"
@@ -77,9 +73,7 @@ class Clients extends React.Component {
           <br />
           {this.state.error && <small className="help is-danger">{this.state.error} </small>}
           <div>
-            <button
-              className="button is-success is-pulled-right"
-            >New Client &#x3E;</button>
+            <button className="button">New Client &#x3E;</button>
           </div>
         </form>
 
