@@ -15,9 +15,10 @@ class Invoice(db.Model, BaseModel):
 
     number = db.Column(db.String(10), nullable=False)
     description = db.Column(db.String(100), nullable=False)
-    # date_issued = db.Column(db.DateTime, default=datetime.utcnow)
-    # date_due = db.Column(db.DateTime, default=datetime.utcnow)
-    # date_paid = db.Column(db.DateTime, default=datetime.utcnow)
+
+    date_issued = db.Column(db.String(10), nullable=False)
+    date_due = db.Column(db.String(10), nullable=False)
+    date_paid = db.Column(db.String(10))
     # pdf_link = db.Column(db.Text)
     amount = db.Column(db.Integer, nullable=False)
     # vat - = db.Column(db.Integer, nullable=False)

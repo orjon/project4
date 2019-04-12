@@ -57,33 +57,49 @@ with app.app_context():
     playstation = Project(user=orjon, name='PlayStation - Xtreme', code='19-012', client=clientC)
 
     inv1 = Invoice(user=orjon, number='INV-001', amount=100,
-    description='3D visualisation', client=clientC, project=samsung)
+        date_issued='2019-02-11', date_due='2019-03-10', date_paid='2019-03-21',
+        description='3D visualisation', client=clientC, project=samsung)
     inv2 = Invoice(user=orjon, number='INV-002', amount=200,
-    description='Technical Documentation', client=clientB, project=aspire)
+        date_issued='2019-02-25', date_due='2019-03-24', date_paid='2019-03-11',
+        description='Technical Documentation', client=clientB, project=aspire)
     inv3 = Invoice(user=orjon, number='INV-003', amount=300,
-    description='3D visualisation & printing', client=clientC, project=playstation)
+        date_issued='2019-03-02', date_due='2019-04-01', date_paid='2019-03-21',
+        description='3D visualisation & printing', client=clientC, project=playstation)
     inv4 = Invoice(user=orjon, number='INV-004', amount=400,
-    description='3D model', client=clientB, project=heathrow)
+        date_issued='2019-03-11', date_due='2019-04-10', date_paid='',
+        description='3D model', client=clientB, project=heathrow)
     inv5 = Invoice(user=orjon, number='INV-005', amount=750,
-    description='3D animation', client=clientA, project=deloitte)
+        date_issued='2019-04-03', date_due='2019-05-02', date_paid='',
+        description='3D animation', client=clientA, project=deloitte)
     inv6 = Invoice(user=orjon, number='INV-006', amount=120,
-    description='3D visualisation & detailing', client=clientA, project=deloitte)
+        date_issued='2019-04-10', date_due='2019-05-09', date_paid='',
+        description='3D visualisation & detailing', client=clientA, project=deloitte)
 
     permier_inn = Supplier(user=orjon, name='Permier Inn')
     uber = Supplier(user=orjon, name='Uber')
     j_kemp = Supplier(user=orjon, name='Justin Kemp')
     apple = Supplier(user=orjon, name='Apple Inc')
 
-    expense1 = Expense(user=orjon, description='Contractor expense', amount=100, project=samsung, supplier=j_kemp)
-    expense2 = Expense(user=orjon, description='Accomodation', amount=200, project=aspire, supplier=permier_inn)
-    expense3 = Expense(user=orjon, description='Travel', amount=30.00, project=playstation, supplier=uber)
-    expense4 = Expense(user=orjon, description='Equipment', amount=400, project=heathrow, supplier=apple)
-    expense5 = Expense(user=orjon, description='Contractor expense', amount=150, project=samsung, supplier=j_kemp)
-    expense6 = Expense(user=orjon, description='Accomodation', amount=250, project=deloitte, supplier=permier_inn)
-    expense7 = Expense(user=orjon, description='Travel', amount=35.50, project=aspire, supplier=uber)
-    expense8 = Expense(user=orjon, description='Equipment', amount=450, project=playstation, supplier=apple)
-    expense9 = Expense(user=orjon, description='Travel', amount=42.50, project=aspire, supplier=uber)
-    expense10 = Expense(user=orjon, description='Equipment', amount=60, project=heathrow, supplier=apple)
+    expense1 = Expense(user=orjon, description='Contractor expense',
+        amount=100, project=samsung, supplier=j_kemp)
+    expense2 = Expense(user=orjon, description='Accomodation',
+        amount=200, project=aspire, supplier=permier_inn)
+    expense3 = Expense(user=orjon, description='Travel',
+        amount=30.00, project=playstation, supplier=uber)
+    expense4 = Expense(user=orjon, description='Equipment',
+        amount=400, project=heathrow, supplier=apple)
+    expense5 = Expense(user=orjon, description='Contractor expense',
+        amount=150, project=samsung, supplier=j_kemp)
+    expense6 = Expense(user=orjon, description='Accomodation',
+        amount=250, project=deloitte, supplier=permier_inn)
+    expense7 = Expense(user=orjon, description='Travel',
+        amount=35.50, project=aspire, supplier=uber)
+    expense8 = Expense(user=orjon, description='Equipment',
+        amount=450, project=playstation, supplier=apple)
+    expense9 = Expense(user=orjon, description='Travel',
+        amount=42.50, project=aspire, supplier=uber)
+    expense10 = Expense(user=orjon, description='Equipment',
+        amount=60, project=heathrow, supplier=apple)
 
     db.session.add(clientA)
     db.session.add(clientB)
@@ -131,27 +147,38 @@ with app.app_context():
     photo5 = Project(user=bill, name='NatWest Conference', code='BP-05', client=clientH)
 
     inv7 = Invoice(user=bill, number='BILL-#01', amount=100,
-    description='Wedding photoshoot', client=clientD, project=photo1)
+        date_issued='2019-01-13', date_due='2019-02-12', date_paid='2019-02-01',
+        description='Wedding photoshoot', client=clientD, project=photo1)
     inv8 = Invoice(user=bill, number='BILL-#02', amount=200,
-    description='Family reunion photoshoot', client=clientE, project=photo2)
+        date_issued='2019-01-14', date_due='2019-02-13', date_paid='2019-02-10',
+        description='Family reunion photoshoot', client=clientE, project=photo2)
     inv9 = Invoice(user=bill, number='BILL-#03', amount=300,
-    description='Love Celebration photoshoot', client=clientF, project=photo3)
+        date_issued='2019-01-23', date_due='2019-02-22', date_paid='2019-02-05',
+        description='Love Celebration photoshoot', client=clientF, project=photo3)
     inv10 = Invoice(user=bill, number='BILL-#04', amount=400,
-    description='Mother & Baby photoshoot', client=clientG, project=photo4)
+        date_issued='2019-02-10', date_due='2019-03-09', date_paid='',
+        description='Mother & Baby photoshoot', client=clientG, project=photo4)
     inv11 = Invoice(user=bill, number='BILL-#05', amount=750,
-    description='Christmas party photoshoot', client=clientH, project=photo5)
+        date_issued='2019-03-25', date_due='2019-04-24', date_paid='',
+        description='Christmas party photoshoot', client=clientH, project=photo5)
 
     ramada = Supplier(user=bill, name='Ramada Hotel')
     uber1 = Supplier(user=bill, name='Uber')
     costa = Supplier(user=bill, name='Costa Coffee')
     leylands = Supplier(user=bill, name='Leylands')
 
-    expense11 = Expense(user=bill, description='Travel', amount=135.50, project=photo1, supplier=uber1)
-    expense12 = Expense(user=bill, description='Equipment', amount=45.0, project=photo1, supplier=leylands)
-    expense13 = Expense(user=bill, description='Travel', amount=420.50, project=photo2, supplier=uber1)
-    expense14 = Expense(user=bill, description='Equipment', amount=160, project=photo3, supplier=leylands)
-    expense15 = Expense(user=bill, description='Sustenance', amount=4.58, project=photo4, supplier=costa)
-    expense16 = Expense(user=bill, description='Accomodation', amount=60, project=photo4, supplier=ramada)
+    expense11 = Expense(user=bill, description='Travel',
+        amount=135.50, project=photo1, supplier=uber1)
+    expense12 = Expense(user=bill, description='Equipment',
+        amount=45.0, project=photo1, supplier=leylands)
+    expense13 = Expense(user=bill, description='Travel',
+        amount=420.50, project=photo2, supplier=uber1)
+    expense14 = Expense(user=bill, description='Equipment',
+        amount=160, project=photo3, supplier=leylands)
+    expense15 = Expense(user=bill, description='Sustenance',
+        amount=4.58, project=photo4, supplier=costa)
+    expense16 = Expense(user=bill, description='Accomodation',
+        amount=60, project=photo4, supplier=ramada)
 
     db.session.add(clientD)
     db.session.add(clientE)

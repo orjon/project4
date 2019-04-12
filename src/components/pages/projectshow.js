@@ -52,22 +52,10 @@ class ProjectShow extends React.Component {
   render() {
     return (
       <main className="section">
-        <div className="container">
+        <div className="subHeader2">
           <h3>{this.state.project.code} : {this.state.project.name}</h3>
         </div>
-        <Plot
-          data={[
-            {
-              x: [1, 2, 3],
-              y: [2, 6, 3],
-              type: 'scatter',
-              mode: 'lines+points',
-              marker: {color: 'red'}
-            },
-            {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]}
-          ]}
-          layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
-        />
+
         <div>
           <div className="subHeader3">Invoices</div>
           {this.state.project.invoices && this.state.project.invoices.map(invoice => (
@@ -81,6 +69,23 @@ class ProjectShow extends React.Component {
 }
 
 export default ProjectShow
+
+
+// <Plot
+//   data={[
+//     {
+//       x: [1, 2, 3],
+//       y: [2, 6, 3],
+//       type: 'scatter',
+//       mode: 'lines+points',
+//       marker: {color: 'red'}
+//     },
+//     {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]}
+//   ]}
+//   layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
+// />
+
+
 
 // <div>
 //   {this.state.projects && this.state.projects.map(project => (
