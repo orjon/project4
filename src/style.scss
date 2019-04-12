@@ -14,13 +14,26 @@ html, body {
 
 .subHeader2 {
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .subHeader3 {
   text-decoration: underline;
-  font-size: 16px;
+  font-size: 18px;
 }
+
+.lineItem {
+  text-decoration: none;
+  font-size: 16px;
+  color: #222;
+  letter-spacing: 1px;
+  line-height: 25px;
+}
+
+.lineItem {
+  text-decoration: none;
+}
+
 
 .siteWrapper {
   width: 100vw;

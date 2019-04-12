@@ -61,8 +61,8 @@ class Projects extends React.Component {
         </div>
         <div>
           {this.state.projects && this.state.projects.map(project => (
-            <Link to={`/project/${project.id}`} key={project.id}>
-              <div>{project.id} : {project.code} : {project.name} : {project.client.name} : {project.invoices.id}</div>
+            <Link to={`/project/${project.id}`} key={project.id} className="lineItem">
+              <div >{project.id} : {project.code} : {project.name} : {project.client.name} : {project.invoices.id}</div>
             </Link>
           ))}
         </div>
