@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
+import Plot from 'react-plotly.js'
 
 class ProjectShow extends React.Component {
   constructor() {
@@ -54,6 +55,19 @@ class ProjectShow extends React.Component {
         <div className="container">
           <h3>{this.state.project.code} : {this.state.project.name}</h3>
         </div>
+        <Plot
+          data={[
+            {
+              x: [1, 2, 3],
+              y: [2, 6, 3],
+              type: 'scatter',
+              mode: 'lines+points',
+              marker: {color: 'red'}
+            },
+            {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]}
+          ]}
+          layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
+        />
         <div>
           <div className="subHeader3">Invoices</div>
           {this.state.project.invoices && this.state.project.invoices.map(invoice => (

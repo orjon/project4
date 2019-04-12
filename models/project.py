@@ -26,7 +26,7 @@ class ProjectSchema(mllo.ModelSchema):
     user = fields.Nested('UserSchema', only=('id', 'username'))
 
     client = fields.Nested('ClientSchema', only=('id', 'name'))
-    invoices = fields.Nested('InvoiceSchema', many=True, only=('id', 'number', 'amount'))
+    invoices = fields.Nested('InvoiceSchema', many=True, only=('id', 'number', 'amount', 'description'))
     expenses = fields.Nested('ExpenseSchema', many=True, only=('id', 'description', 'amount', 'supplier.name'))
     class Meta:
         model = Project

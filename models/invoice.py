@@ -14,7 +14,7 @@ class Invoice(db.Model, BaseModel):
     user = db.relationship('User', backref='invoices')
 
     number = db.Column(db.String(10), nullable=False)
-    # description = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(100), nullable=False)
     # date_issued = db.Column(db.DateTime, default=datetime.utcnow)
     # date_due = db.Column(db.DateTime, default=datetime.utcnow)
     # date_paid = db.Column(db.DateTime, default=datetime.utcnow)

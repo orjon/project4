@@ -75,7 +75,7 @@ class Invoices extends React.Component {
         <div>
           {this.state.invoices && this.state.invoices.map(invoice => (
             <div key={invoice.id}>
-              <div>{invoice.id} : {invoice.number} : ({invoice.client.name}) {invoice.project.name} : {invoice.amount} </div>
+              <div>{invoice.number} : {invoice.description} ({invoice.client.name}) {invoice.project.name} : {invoice.amount} </div>
             </div>
           ))}
         </div>
