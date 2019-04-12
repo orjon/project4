@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, g
 from models.invoice import Invoice, InvoiceSchema
 from models.project import Project
 from models.client import Client
-# from lib.secure_route import secure_route
+from lib.secure_route import secure_route
 
 invoice_schema = InvoiceSchema()
 
@@ -19,7 +19,7 @@ def show(invoice_id):
     return invoice_schema.jsonify(invoice), 200 #OK
 
 @api.route('/invoices', methods=['POST'])
-# @secure_route
+@secure_route
 def create():
     data = request.get_json()
 
