@@ -8,6 +8,7 @@ class Nav extends React.Component {
     super()
     this.state = {
     }
+    this.logout = this.logout.bind(this)
   }
 
 

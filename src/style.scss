@@ -5,6 +5,7 @@ html, body {
   font-family: 'Karla', sans-serif;
   font-size: 14px;
   text-decoration: none;
+  user-select: none; //make text unhighlightable
 }
 
 * {

@@ -1,5 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
 from models.supplier import Supplier, SupplierSchema
+from lib.secure_route import secure_route
 
 supplier_schema = SupplierSchema()
 
@@ -16,10 +17,14 @@ def show(supplier_id):
     return supplier_schema.jsonify(supplier), 200 #OK
 
 @api.route('/suppliers', methods=['POST'])
+@secure_route
 def create():
     supplier, errors = supplier_schema.load(request.get_json())
     if errors:
         return jsonify(errors), 422 #Unprocessable Entity
+
+    supplier.user = g.current_user
+
     supplier.save()
     return supplier_schema.jsonify(supplier), 201 #Created
 

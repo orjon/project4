@@ -11,11 +11,9 @@ class Clients extends React.Component {
       },
       error: ''
     }
-
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-
 
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value }
