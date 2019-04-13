@@ -6,7 +6,7 @@ const InvoiceList = (props) => {
 
 
   return (
-    <div>
+    <div className = {`${invoice.date_paid ? 'overDue' : 'notDue'}`}>
       {invoice.date_issued} : {invoice.number} : {invoice.description} ({invoice.client.name}) {invoice.project.name} : {invoice.amount} ({invoice.date_due}
       {invoice.date_paid})
     </div>

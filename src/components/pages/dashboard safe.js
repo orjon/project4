@@ -3,7 +3,6 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
-import MaterialTable from 'material-table'
 
 class Dashboard extends React.Component {
   constructor() {
@@ -62,31 +61,18 @@ class Dashboard extends React.Component {
   render() {
     return (
       <main className="section">
-        <div className="subHeader2">Dashboard</div>
-        <MaterialTable
-          columns={[
-            { title: 'Issued', field: 'date_issued' },
-            { title: 'No.', field: 'number' },
-            { title: 'Client', field: 'client.name'},
-            { title: 'Project', field: 'project.code'},
-            { title: '', field: 'project.name'},
-            { title: 'Amount', field: 'amount', type: 'numeric' }
-          ]}
-          data={this.state.invoices}
-          title="Invoices due"
-        />
-        <br />
-        <div className="subHeader3">Invoices due</div>
-        <div>
-          {this.state.invoices && this.state.invoices.map(invoice => (
-            <div key={invoice.id} className="lineItem">
-
-              {invoice.date_paid && <InvoiceList
-                invoice={invoice}
-                today={this.today}
-              />}
-            </div>
-          ))}
+        <div className="container">
+          <h3>Dashboard</h3>
+          <div>
+            {this.state.invoices && this.state.invoices.map(invoice => (
+              <div key={invoice.id} className="lineItem">
+                  {invoice.date_paid && <InvoiceList
+                    invoice={invoice}
+                    today={this.today}
+                  />}
+              </div>
+            ))}
+          </div>
         </div>
       </main>
     )
@@ -94,3 +80,37 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard
+
+  //
+  //
+  // {this.state.clients && this.state.clients.map(client => (
+  //   <option key={client.id} value={client.id}>{client.name}</option>
+  //
+
+
+/*
+  axios.get('/api/loans')
+    .then(res => {
+      const loanedFromMe = res.data.filter(loans => loans.book && loans.book.owner._id === Auth.getPayload().sub)
+
+      loanedFromMe.sort((a, b) => new Date(a.start) - new Date(b.start))
+
+      const loans = {...this.state.loans, loanedFromMe, borrowedByMe}
+      this.setState({ loans })
+    })
+
+
+
+
+  {this.state.invoices && this.state.invoices.map(invoice => (
+    <div key={invoice.id} className="lineItem">
+      <div>
+        <InvoiceList
+          invoice={invoice}
+          today={this.today}
+        />
+      </div>
+    </div>
+  ))}
+
+*/

@@ -13,8 +13,10 @@ html, body {
 }
 
 .subHeader2 {
+  font-weight: 600;
   text-decoration: none;
   font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .subHeader3 {
@@ -49,6 +51,9 @@ html, body {
 
 .container {
   border: 1px solid #888;
+}
+.overDue {
+  color: red;
 }
 
 nav {
