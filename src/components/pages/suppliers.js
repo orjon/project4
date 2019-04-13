@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import SupplierHeader from './lists/SupplierHeader'
+import SupplierList from './lists/SupplierList'
 
 class Suppliers extends React.Component {
   constructor() {
@@ -46,16 +48,18 @@ class Suppliers extends React.Component {
   render() {
     return (
       <main className="section">
-        <div className="container">
-          <h3>Suppliers</h3>
-        </div>
-        <div>
+        <div className="subHeader2">Suppliers</div>
+        <div className = 'dataTable'>
+          <SupplierHeader />
           {this.state.suppliers && this.state.suppliers.map(supplier => (
             <div key={supplier.id} className="lineItem">
-              <div>{supplier.id} : {supplier.name}</div>
+              <SupplierList
+                supplier={supplier}
+              />
             </div>
           ))}
         </div>
+
 
         <form className="update" onSubmit={this.handleSubmit}>
           <h3 className="title">New Supplier</h3>

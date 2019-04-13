@@ -71,6 +71,15 @@ class Invoices extends React.Component {
     return invoice.date_paid
   }
 
+  sumArray(array) {
+    const length = array.length
+    console.log(length)
+    let sum = 0
+    for (let i=0; i<length; i++) {
+      sum += array[i].amount
+    }
+    return sum
+  }
 
 
   componentDidMount() {
@@ -79,11 +88,13 @@ class Invoices extends React.Component {
       .then(() => this.getData())
       .then(console.log(this.today))
   }
-
   render() {
     return (
       <main className="section">
-        <div className="subHeader2">Invoices</div>
+        <div className="subHeader2 columns">
+          <div>Invoices</div>
+          <div>£&thinsp;{this.state.invoices && this.sumArray(this.state.invoices).toFixed(2)}</div>
+        </div>
         <div className = 'dataTable'>
           <InvoiceHeader />
           {this.state.invoices && this.state.invoices.map(invoice => (
@@ -92,10 +103,7 @@ class Invoices extends React.Component {
                 ${this.checkOverdue(invoice) ? 'overdue':''}
                 ${this.checkPaid(invoice) ? 'paid':''}
                 `}>
-              <InvoiceList
-                invoice={invoice}
-                today={this.today}
-              />
+              <InvoiceList invoice={invoice}/>
             </div>
           ))}
         </div>

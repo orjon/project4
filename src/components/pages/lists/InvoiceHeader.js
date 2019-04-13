@@ -10,9 +10,9 @@ const InvoiceHeader = () => {
         <div className = 'cellCode'>no.</div>
       </div>
       <div className = 'rowCentre'>
-        <div className = 'cellStringShort'>client</div>
-        <div className = 'cellStringShort'>project</div>
-        <div className = 'cellStringLong'>description</div>
+        <div className = 'cellQuarter'>client</div>
+        <div className = 'cellQuarter'>project</div>
+        <div className = 'cellHalf'>description</div>
       </div>
       <div className = 'rowRight'>
         <div className = 'cellCurrency'>amount</div>

@@ -17,7 +17,7 @@ class Expense(db.Model, BaseModel):
     description = db.Column(db.String(100), nullable=False)
     date = db.Column(db.String(10), nullable=False)
     # pdf_link = db.Column(db.Text)
-    amount = db.Column(db.Integer, nullable=False)
+    amount = db.Column(db.Float, nullable=False)
     # vat - = db.Column(db.Integer, nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
     project = db.relationship('Project', backref='expenses')

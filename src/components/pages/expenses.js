@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
-import ExpensesList from './lists/ExpensesList'
-import ExpensesHeader from './lists/ExpensesHeader'
+import ExpenseList from './lists/ExpenseList'
+import ExpenseHeader from './lists/ExpenseHeader'
 
-class Expenses extends React.Component {
+class Expense extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -73,34 +73,33 @@ class Expenses extends React.Component {
       .then(() => this.getData())
   }
 
+  sumArray(array) {
+    const length = array.length
+    console.log(length)
+    let sum = 0
+    for (let i=0; i<length; i++) {
+      sum += array[i].amount
+    }
+    return sum
+  }
+
 
   render() {
     return (
       <main className="section">
-        <div className="subHeader2">Expenses</div>
+        <div className="subHeader2 columns">
+          <div>Expenses</div>
+
+          <div>£&thinsp;{this.state.expenses && this.sumArray(this.state.expenses).toFixed(2)}</div>
+        </div>
         <div className = 'dataTable'>
-          <ExpensesHeader />
+          <ExpenseHeader />
           {this.state.expenses && this.state.expenses.map(expense => (
             <div key={expense.id}
               className='lineItem'>
-              <ExpensesList
+              <ExpenseList
                 expense={expense}
               />
-            </div>
-          ))}
-        </div>
-
-
-
-
-
-        <div className="container">
-          <h3>Expenses</h3>
-        </div>
-        <div>
-          {this.state.expenses && this.state.expenses.map(expense => (
-            <div key={expense.id} className="lineItem">
-              <div>{expense.id} : ({expense.supplier.name}){expense.description} : ({expense.project.client.name}) {expense.project.name} : {expense.amount}</div>
             </div>
           ))}
         </div>
@@ -165,4 +164,4 @@ class Expenses extends React.Component {
   }
 }
 
-export default Expenses
+export default Expense

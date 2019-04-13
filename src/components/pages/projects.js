@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
+import ProjectList from './lists/ProjectList'
+import ProjectHeader from './lists/ProjectHeader'
 
 class Projects extends React.Component {
   constructor() {
@@ -56,13 +58,15 @@ class Projects extends React.Component {
   render() {
     return (
       <main className="section">
-        <div className="container">
-          <h3>Projects</h3>
-        </div>
-        <div className="container">
+        <div className="subHeader2">Projects</div>
+        <div className = 'dataTable'>
+          <ProjectHeader />
           {this.state.projects && this.state.projects.map(project => (
-            <Link to={`/project/${project.id}`} key={project.id} className="lineItem">
-              <div >{project.id} : {project.code} : {project.name} : {project.client.name} : {project.invoices.id}</div>
+            <Link to={`/project/${project.id}`} key={project.id}
+              className='lineItem'>
+              <ProjectList
+                project={project}
+              />
             </Link>
           ))}
         </div>

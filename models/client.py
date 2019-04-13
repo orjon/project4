@@ -11,8 +11,7 @@ class Client(db.Model, BaseModel):
     user = db.relationship('User', backref='clients')
 
     name = db.Column(db.String(40), nullable=False)
-    # contact = db.Column(db.Srting)
-    # email
+
 
 
 class ClientSchema(mllo.ModelSchema, BaseSchema):

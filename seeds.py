@@ -56,22 +56,22 @@ with app.app_context():
     aspire = Project(user=orjon, name='Aspire Lounge - Luton', code='19-011', client=clientB)
     playstation = Project(user=orjon, name='PlayStation - Xtreme', code='19-012', client=clientC)
 
-    inv1 = Invoice(user=orjon, number='INV-001', amount=100,
+    inv1 = Invoice(user=orjon, number='INV-001', amount=1250,
         date_issued='2019-02-11', date_due='2019-03-10', date_paid='2019-03-21',
         description='3D visualisation', client=clientC, project=samsung)
-    inv2 = Invoice(user=orjon, number='INV-002', amount=200,
+    inv2 = Invoice(user=orjon, number='INV-002', amount=250,
         date_issued='2019-02-25', date_due='2019-03-24', date_paid='2019-03-11',
         description='Technical Documentation', client=clientB, project=aspire)
-    inv3 = Invoice(user=orjon, number='INV-003', amount=300,
+    inv3 = Invoice(user=orjon, number='INV-003', amount=1850,
         date_issued='2019-03-02', date_due='2019-04-01', date_paid='2019-03-21',
         description='3D visualisation & printing', client=clientC, project=playstation)
-    inv4 = Invoice(user=orjon, number='INV-004', amount=400,
+    inv4 = Invoice(user=orjon, number='INV-004', amount=750,
         date_issued='2019-03-11', date_due='2019-04-10', date_paid=None,
         description='3D model', client=clientB, project=heathrow)
-    inv5 = Invoice(user=orjon, number='INV-005', amount=750,
+    inv5 = Invoice(user=orjon, number='INV-005', amount=640,
         date_issued='2019-04-03', date_due='2019-05-02', date_paid=None,
         description='3D animation', client=clientA, project=deloitte)
-    inv6 = Invoice(user=orjon, number='INV-006', amount=120,
+    inv6 = Invoice(user=orjon, number='INV-006', amount=1200,
         date_issued='2019-04-10', date_due='2019-05-09', date_paid=None,
         description='3D visualisation & detailing', client=clientA, project=deloitte)
 
@@ -81,21 +81,21 @@ with app.app_context():
     apple = Supplier(user=orjon, name='Apple Inc')
 
     expense1 = Expense(user=orjon, description='Contractor expense',
-        date='2019-01-09', amount=100, project=samsung, supplier=j_kemp)
-    expense2 = Expense(user=orjon, description='Accomodation',
-        date='2019-02-16', amount=200, project=aspire, supplier=permier_inn)
+        date='2019-01-09', amount=123.10, project=samsung, supplier=j_kemp)
+    expense2 = Expense(user=orjon, description='Accommodation',
+        date='2019-02-16', amount=206.25, project=aspire, supplier=permier_inn)
     expense3 = Expense(user=orjon, description='Travel',
         date='2019-02-27', amount=30.00, project=playstation, supplier=uber)
     expense4 = Expense(user=orjon, description='Equipment',
-        date='2019-02-19', amount=400, project=heathrow, supplier=apple)
+        date='2019-02-19', amount=421.77, project=heathrow, supplier=apple)
     expense5 = Expense(user=orjon, description='Contractor expense',
-        date='2019-02-06', amount=150, project=samsung, supplier=j_kemp)
-    expense6 = Expense(user=orjon, description='Accomodation',
-        date='2019-03-29', amount=250, project=deloitte, supplier=permier_inn)
+        date='2019-02-06', amount=150.00, project=samsung, supplier=j_kemp)
+    expense6 = Expense(user=orjon, description='Accommodation',
+        date='2019-03-29', amount=250.50, project=deloitte, supplier=permier_inn)
     expense7 = Expense(user=orjon, description='Travel',
         date='2019-02-20', amount=35.50, project=aspire, supplier=uber)
     expense8 = Expense(user=orjon, description='Equipment',
-        date='2019-02-15', amount=450, project=playstation, supplier=apple)
+        date='2019-02-15', amount=450.00, project=playstation, supplier=apple)
     expense9 = Expense(user=orjon, description='Travel',
         date='2019-02-22', amount=42.50, project=aspire, supplier=uber)
     expense10 = Expense(user=orjon, description='Equipment',
@@ -146,19 +146,19 @@ with app.app_context():
     photo4 = Project(user=bill, name='Baby Jane', code='BP-04', client=clientG)
     photo5 = Project(user=bill, name='NatWest Conference', code='BP-05', client=clientH)
 
-    inv7 = Invoice(user=bill, number='BILL-#01', amount=100,
+    inv7 = Invoice(user=bill, number='BILL-#01', amount=850,
         date_issued='2019-01-13', date_due='2019-02-12', date_paid='2019-02-01',
         description='Wedding photoshoot', client=clientD, project=photo1)
-    inv8 = Invoice(user=bill, number='BILL-#02', amount=200,
+    inv8 = Invoice(user=bill, number='BILL-#02', amount=2200,
         date_issued='2019-01-14', date_due='2019-02-13', date_paid='2019-02-10',
         description='Family reunion photoshoot', client=clientE, project=photo2)
-    inv9 = Invoice(user=bill, number='BILL-#03', amount=300,
+    inv9 = Invoice(user=bill, number='BILL-#03', amount=935,
         date_issued='2019-01-23', date_due='2019-02-22', date_paid='2019-02-05',
         description='Love Celebration photoshoot', client=clientF, project=photo3)
-    inv10 = Invoice(user=bill, number='BILL-#04', amount=400,
+    inv10 = Invoice(user=bill, number='BILL-#04', amount=3250,
         date_issued='2019-02-10', date_due='2019-03-09', date_paid=None,
         description='Mother & Baby photoshoot', client=clientG, project=photo4)
-    inv11 = Invoice(user=bill, number='BILL-#05', amount=750,
+    inv11 = Invoice(user=bill, number='BILL-#05', amount=1150,
         date_issued='2019-03-25', date_due='2019-04-24', date_paid=None,
         description='Christmas party photoshoot', client=clientH, project=photo5)
 
@@ -177,7 +177,7 @@ with app.app_context():
         date='2019-01-20', amount=160, project=photo3, supplier=leylands)
     expense15 = Expense(user=bill, description='Sustenance',
         date='2019-02-06', amount=4.58, project=photo4, supplier=costa)
-    expense16 = Expense(user=bill, description='Accomodation',
+    expense16 = Expense(user=bill, description='Accommodation',
         date='2019-02-06', amount=60, project=photo4, supplier=ramada)
 
     db.session.add(clientD)

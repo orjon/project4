@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InvoiceHeader = () => {
+const ExpenseHeader = () => {
 
   return (
     <div className = 'rowHeader'>
@@ -8,9 +8,9 @@ const InvoiceHeader = () => {
         <div className = 'cellDate'>date</div>
       </div>
       <div className = 'rowCentre'>
-        <div className = 'cellStringShort'>project</div>
-        <div className = 'cellStringShort'>supplier</div>
-        <div className = 'cellStringLong'>description</div>
+        <div className = 'cellQuarter'>project</div>
+        <div className = 'cellQuarter'>supplier</div>
+        <div className = 'cellHalf'>description</div>
       </div>
       <div className = 'rowRight'>
         <div className = 'cellCurrency'>amount</div>
@@ -19,4 +19,4 @@ const InvoiceHeader = () => {
   )
 }
 
-export default InvoiceHeader
+export default ExpenseHeader

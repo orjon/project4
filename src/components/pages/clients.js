@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import ClientHeader from './lists/ClientHeader'
+import ClientList from './lists/ClientList'
 
 class Clients extends React.Component {
   constructor() {
@@ -45,13 +47,14 @@ class Clients extends React.Component {
   render() {
     return (
       <main className="section">
-        <div className="container">
-          <h3>Clients</h3>
-        </div>
-        <div>
+        <div className="subHeader2">Clients</div>
+        <div className = 'dataTable'>
+          <ClientHeader />
           {this.state.clients && this.state.clients.map(client => (
             <div key={client.id} className="lineItem">
-              <div>{client.id} : {client.name} (user: {client.user.id})</div>
+              <ClientList
+                client={client}
+              />
             </div>
           ))}
         </div>
