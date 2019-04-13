@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import moment from 'moment'
+import InvoiceList from './lists/InvoiceList'
 
 class Invoices extends React.Component {
   constructor() {
@@ -14,6 +15,7 @@ class Invoices extends React.Component {
       },
       error: ''
     }
+    this.today = moment()
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -65,6 +67,7 @@ class Invoices extends React.Component {
     axios.get(`/api/user/${Auth.getPayload().sub}`)
       .then(res => this.userCurrent = res.data.username)
       .then(() => this.getData())
+      .then(console.log(this.today))
   }
 
   render() {
@@ -73,10 +76,16 @@ class Invoices extends React.Component {
         <div className="container">
           <h3>Invoices</h3>
         </div>
+
         <div>
           {this.state.invoices && this.state.invoices.map(invoice => (
             <div key={invoice.id} className="lineItem">
-              <div>{invoice.number} : {invoice.description} ({invoice.client.name}) {invoice.project.name} : {invoice.amount} </div>
+              <div>
+                <InvoiceList
+                  invoice={invoice}
+                  today={this.today}
+                />
+              </div>
             </div>
           ))}
         </div>

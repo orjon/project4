@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "material-table": "^1.32.0",
     "moment": "^2.24.0",
     "plotly.js": "^1.47.1",
     "react": "^16.8.6",

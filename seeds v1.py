@@ -66,13 +66,13 @@ with app.app_context():
         date_issued='2019-03-02', date_due='2019-04-01', date_paid='2019-03-21',
         description='3D visualisation & printing', client=clientC, project=playstation)
     inv4 = Invoice(user=orjon, number='INV-004', amount=400,
-        date_issued='2019-03-11', date_due='2019-04-10', date_paid=None,
+        date_issued='2019-03-11', date_due='2019-04-10', date_paid='',
         description='3D model', client=clientB, project=heathrow)
     inv5 = Invoice(user=orjon, number='INV-005', amount=750,
-        date_issued='2019-04-03', date_due='2019-05-02', date_paid=None,
+        date_issued='2019-04-03', date_due='2019-05-02', date_paid='',
         description='3D animation', client=clientA, project=deloitte)
     inv6 = Invoice(user=orjon, number='INV-006', amount=120,
-        date_issued='2019-04-10', date_due='2019-05-09', date_paid=None,
+        date_issued='2019-04-10', date_due='2019-05-09', date_paid='',
         description='3D visualisation & detailing', client=clientA, project=deloitte)
 
     permier_inn = Supplier(user=orjon, name='Permier Inn')
@@ -156,10 +156,10 @@ with app.app_context():
         date_issued='2019-01-23', date_due='2019-02-22', date_paid='2019-02-05',
         description='Love Celebration photoshoot', client=clientF, project=photo3)
     inv10 = Invoice(user=bill, number='BILL-#04', amount=400,
-        date_issued='2019-02-10', date_due='2019-03-09', date_paid=None,
+        date_issued='2019-02-10', date_due='2019-03-09', date_paid='',
         description='Mother & Baby photoshoot', client=clientG, project=photo4)
     inv11 = Invoice(user=bill, number='BILL-#05', amount=750,
-        date_issued='2019-03-25', date_due='2019-04-24', date_paid=None,
+        date_issued='2019-03-25', date_due='2019-04-24', date_paid='',
         description='Christmas party photoshoot', client=clientH, project=photo5)
 
     ramada = Supplier(user=bill, name='Ramada Hotel')
