@@ -2,40 +2,24 @@ import React from 'react'
 
 const InvoiceList = (props) => {
   const invoice = props.invoice
-  const today = props.today
-
 
   return (
-    <div className = {`${invoice.date_paid ? 'overDue' : 'notDue'}`}>
-      {invoice.date_issued} : {invoice.number} : {invoice.description} ({invoice.client.name}) {invoice.project.name} : {invoice.amount} ({invoice.date_due}
-      {invoice.date_paid})
+    <div className = 'tableRow' >
+      <div className = 'rowLeft'>
+        <div className = 'cellDate'>{invoice.date_issued}</div>
+        <div className = 'cellDate'>{invoice.date_due}</div>
+        <div className = 'cellCode'>{invoice.number}</div>
+      </div>
+      <div className = 'rowCentre'>
+        <div className = 'cellStringShort'>{invoice.client.name}</div>
+        <div className = 'cellStringShort'>{invoice.project.name}</div>
+        <div className = 'cellStringLong'>{invoice.description}</div>
+      </div>
+      <div className = 'rowRight'>
+        <div className = 'cellCurrency'>{invoice.amount}</div>
+      </div>
     </div>
   )
 }
 
-
 export default InvoiceList
-
-// dueIn(date) {
-//   var x = new moment()
-//   var y = new moment()
-//   var duration = moment.duration(x.diff(y))
-//   console.log(duration)
-//
-//   const today = moment()
-//   const diff = today.diff(moment(date), 'days')// const temp = (this.state.invoices.date_due)
-//
-//   return diff
-// }
-
-
-
-// this.state.invoices && this.state.invoices.map(invoice => (
-//   <div key={invoice.id} className="lineItem">
-//     <div>
-//       {invoice.date_issued} : {invoice.number} : {invoice.description} ({invoice.client.name}) {invoice.project.name} : {invoice.amount} ({invoice.date_due}
-//       {invoice.date_paid})
-//       {this.dueIn(invoice.date_due)}
-//     </div>
-//   </div>
-// ))

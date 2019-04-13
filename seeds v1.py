@@ -81,25 +81,25 @@ with app.app_context():
     apple = Supplier(user=orjon, name='Apple Inc')
 
     expense1 = Expense(user=orjon, description='Contractor expense',
-        amount=100, project=samsung, supplier=j_kemp)
+        date='2019-01-09', amount=100, project=samsung, supplier=j_kemp)
     expense2 = Expense(user=orjon, description='Accomodation',
-        amount=200, project=aspire, supplier=permier_inn)
+        date='2019-02-16', amount=200, project=aspire, supplier=permier_inn)
     expense3 = Expense(user=orjon, description='Travel',
-        amount=30.00, project=playstation, supplier=uber)
+        date='2019-02-27', amount=30.00, project=playstation, supplier=uber)
     expense4 = Expense(user=orjon, description='Equipment',
-        amount=400, project=heathrow, supplier=apple)
+        date='2019-02-19', amount=400, project=heathrow, supplier=apple)
     expense5 = Expense(user=orjon, description='Contractor expense',
-        amount=150, project=samsung, supplier=j_kemp)
+        date='2019-02-06', amount=150, project=samsung, supplier=j_kemp)
     expense6 = Expense(user=orjon, description='Accomodation',
-        amount=250, project=deloitte, supplier=permier_inn)
+        date='2019-03-29', amount=250, project=deloitte, supplier=permier_inn)
     expense7 = Expense(user=orjon, description='Travel',
-        amount=35.50, project=aspire, supplier=uber)
+        date='2019-02-20', amount=35.50, project=aspire, supplier=uber)
     expense8 = Expense(user=orjon, description='Equipment',
-        amount=450, project=playstation, supplier=apple)
+        date='2019-02-15', amount=450, project=playstation, supplier=apple)
     expense9 = Expense(user=orjon, description='Travel',
-        amount=42.50, project=aspire, supplier=uber)
+        date='2019-02-22', amount=42.50, project=aspire, supplier=uber)
     expense10 = Expense(user=orjon, description='Equipment',
-        amount=60, project=heathrow, supplier=apple)
+        date='2019-03-02', amount=60, project=heathrow, supplier=apple)
 
     db.session.add(clientA)
     db.session.add(clientB)
@@ -168,17 +168,17 @@ with app.app_context():
     leylands = Supplier(user=bill, name='Leylands')
 
     expense11 = Expense(user=bill, description='Travel',
-        amount=135.50, project=photo1, supplier=uber1)
+        date='2019-01-10', amount=135.50, project=photo1, supplier=uber1)
     expense12 = Expense(user=bill, description='Equipment',
-        amount=45.0, project=photo1, supplier=leylands)
+        date='2019-01-10', amount=45.0, project=photo1, supplier=leylands)
     expense13 = Expense(user=bill, description='Travel',
-        amount=420.50, project=photo2, supplier=uber1)
+        date='2019-01-13', amount=420.50, project=photo2, supplier=uber1)
     expense14 = Expense(user=bill, description='Equipment',
-        amount=160, project=photo3, supplier=leylands)
+        date='2019-01-20', amount=160, project=photo3, supplier=leylands)
     expense15 = Expense(user=bill, description='Sustenance',
-        amount=4.58, project=photo4, supplier=costa)
+        date='2019-02-06', amount=4.58, project=photo4, supplier=costa)
     expense16 = Expense(user=bill, description='Accomodation',
-        amount=60, project=photo4, supplier=ramada)
+        date='2019-02-06', amount=60, project=photo4, supplier=ramada)
 
     db.session.add(clientD)
     db.session.add(clientE)

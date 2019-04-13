@@ -15,7 +15,7 @@ import Clients from './components/pages/clients'
 import Expenses from './components/pages/expenses'
 import Suppliers from './components/pages/suppliers'
 
-import './style.scss'
+import './scss/style.scss'
 
 class App extends React.Component {
   constructor() {

@@ -1,0 +1,35 @@
+@import 'colors.scss';
+@import 'nav.scss';
+@import 'headers.scss';
+
+@import 'tables.scss';
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: $colorBody;
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  user-select: none; //make text unhighlightable
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.siteWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  // border: 1px solid red;
+}
+
+.bodyWrapper {
+    padding: 15px;
+}
+
+.container {
+  border: 1px solid #888;
+}

@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import ExpensesList from './lists/ExpensesList'
+import ExpensesHeader from './lists/ExpensesHeader'
 
 class Expenses extends React.Component {
   constructor() {
@@ -75,6 +77,23 @@ class Expenses extends React.Component {
   render() {
     return (
       <main className="section">
+        <div className="subHeader2">Expenses</div>
+        <div className = 'dataTable'>
+          <ExpensesHeader />
+          {this.state.expenses && this.state.expenses.map(expense => (
+            <div key={expense.id}
+              className='lineItem'>
+              <ExpensesList
+                expense={expense}
+              />
+            </div>
+          ))}
+        </div>
+
+
+
+
+
         <div className="container">
           <h3>Expenses</h3>
         </div>

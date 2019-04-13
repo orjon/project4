@@ -3,6 +3,7 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
+import InvoiceHeader from './lists/InvoiceHeader'
 
 class Invoices extends React.Component {
   constructor() {
@@ -62,6 +63,15 @@ class Invoices extends React.Component {
       .catch(err => console.log(err))
   }
 
+  checkOverdue(invoice) {
+    return this.today > moment(invoice.date_due)
+  }
+
+  checkPaid(invoice) {
+    return invoice.date_paid
+  }
+
+
 
   componentDidMount() {
     axios.get(`/api/user/${Auth.getPayload().sub}`)
@@ -73,22 +83,28 @@ class Invoices extends React.Component {
   render() {
     return (
       <main className="section">
-        <div className="container">
-          <h3>Invoices</h3>
-        </div>
-
-        <div>
+        <div className="subHeader2">Invoices</div>
+        <div className = 'dataTable'>
+          <InvoiceHeader />
           {this.state.invoices && this.state.invoices.map(invoice => (
-            <div key={invoice.id} className="lineItem">
-              <div>
-                <InvoiceList
-                  invoice={invoice}
-                  today={this.today}
-                />
-              </div>
+            <div key={invoice.id}
+              className={`lineItem
+                ${this.checkOverdue(invoice) ? 'overdue':''}
+                ${this.checkPaid(invoice) ? 'paid':''}
+                `}>
+              <InvoiceList
+                invoice={invoice}
+                today={this.today}
+              />
             </div>
           ))}
         </div>
+
+
+
+
+
+
 
         <form className="update" onSubmit={this.handleSubmit}>
           <h3 className="title">New Invoice</h3>

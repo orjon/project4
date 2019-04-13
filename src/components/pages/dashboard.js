@@ -3,7 +3,7 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
-import MaterialTable from 'material-table'
+import InvoiceHeader from './lists/InvoiceHeader'
 
 class Dashboard extends React.Component {
   constructor() {
@@ -37,9 +37,6 @@ class Dashboard extends React.Component {
     }
   }
 
-  // {this.convertDates(invoice)}
-  // {this.checkPaid(invoice)}
-
   convertDates(invoice) {
     const dateDue = moment(invoice.date_due)
     const datePaid = invoice.date_paid ? moment(invoice.date_paid): 'not valid'
@@ -50,7 +47,6 @@ class Dashboard extends React.Component {
     // console.log()
   }
 
-    // <div className={`columns is-mobile  has-text-left is-vcentered loan-border-bottom ${isOverdue(loan) ? 'has-text-danger has-text-weight-bold' : ''}`}>
 
   componentDidMount() {
     console.log('DASHBOARD')
@@ -63,24 +59,11 @@ class Dashboard extends React.Component {
     return (
       <main className="section">
         <div className="subHeader2">Dashboard</div>
-        <MaterialTable
-          columns={[
-            { title: 'Issued', field: 'date_issued' },
-            { title: 'No.', field: 'number' },
-            { title: 'Client', field: 'client.name'},
-            { title: 'Project', field: 'project.code'},
-            { title: '', field: 'project.name'},
-            { title: 'Amount', field: 'amount', type: 'numeric' }
-          ]}
-          data={this.state.invoices}
-          title="Invoices due"
-        />
-        <br />
         <div className="subHeader3">Invoices due</div>
-        <div>
+        <div className = 'dataTable'>
+          <InvoiceHeader />
           {this.state.invoices && this.state.invoices.map(invoice => (
-            <div key={invoice.id} className="lineItem">
-
+            <div key={invoice.id} className='lineItem'>
               {invoice.date_paid && <InvoiceList
                 invoice={invoice}
                 today={this.today}

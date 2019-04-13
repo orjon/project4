@@ -1,0 +1,77 @@
+
+.overdue {
+  color: $colorDataOverdue;
+}
+
+.paid {
+  color: $colorDataPaid;
+}
+
+
+.dataTable {
+  // border: 1px solid yellow;
+  color: $colorFontMain;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  line-height: 25px;
+
+  .rowHeader {
+    border-bottom: 1px solid $colorTableHeaderLine;
+    margin: 5px 0;
+    padding: 5px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .tableRow, .rowHeader{
+    // border: 1px solid green;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .rowLeft{
+      // border: 1px solid orange;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .cellDate{
+        // border: 1px solid cyan;
+        width: 100px;
+        text-align: left;
+      }
+      .cellCode{
+        // border: 1px solid cyan;
+        width: 100px;
+      }
+    }
+    .rowCentre {
+      width: 100%;
+      // border: 1px solid orange;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .cellStringShort{
+        width: 25%;
+        // border: 1px solid cyan;
+      }
+      .cellStringLong{
+        // border: 1px solid cyan;
+        width: 50%;
+      }
+    }
+    .rowRight{
+      text-align: right;
+      // border: 1px solid orange;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .cellCurrency{
+        // border: 1px solid cyan;
+        width: 75px;
+      }
+    }
+  }
+}

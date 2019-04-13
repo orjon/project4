@@ -15,9 +15,7 @@ class Expense(db.Model, BaseModel):
     user = db.relationship('User', backref='expenses')
 
     description = db.Column(db.String(100), nullable=False)
-    # date_issued = db.Column(db.DateTime, default=datetime.utcnow)
-    # date_due = db.Column(db.DateTime, default=datetime.utcnow)
-    # date_paid = db.Column(db.DateTime, default=datetime.utcnow)
+    date = db.Column(db.String(10), nullable=False)
     # pdf_link = db.Column(db.Text)
     amount = db.Column(db.Integer, nullable=False)
     # vat - = db.Column(db.Integer, nullable=False)

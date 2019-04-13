@@ -1,0 +1,38 @@
+nav {
+  color: $colorNavLogo;
+  font-weight: lighter;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: $colorNavBar;
+  height: 50px;
+
+
+  .menuItem {
+    color: $colorNavItem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: 100;
+    text-transform: uppercase;
+  }
+  .menuItem:hover{
+    color: $colorNavItemHover;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: 300;
+
+  }
+
+  .nowDate {
+    color: $colorDate;
+  }
+  .nowTime {
+    margin-left: 7px;
+    color: $colorTime;
+  }
+}
