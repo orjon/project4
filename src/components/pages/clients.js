@@ -5,7 +5,7 @@ import ClientHeader from './lists/ClientHeader'
 import ClientList from './lists/ClientList'
 import ModalCentered from './modals/clientModal'
 
-import { Button, ButtonToolbar, Modal } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 
 class Clients extends React.Component {
@@ -63,8 +63,13 @@ class Clients extends React.Component {
       .then(() => this.getData())
   }
 
+
+
   render() {
-    const modalClose = () => this.setState({ modalShow: false })
+    const modalClose = () => {
+      this.setState({ modalShow: false })
+      this.getData()
+    }
 
     return (
       <main className="section">
@@ -79,41 +84,13 @@ class Clients extends React.Component {
             </div>
           ))}
         </div>
-        <button onClick={this.handleShow}>CLICK ME</button>
+        <button onClick={this.handleShow}>Add Client</button>
 
-        <ButtonToolbar>
-          <Button
-            variant="primary"
-            onClick={this.handleShow}
-          >
-            Launch vertically centered modal
-          </Button>
+        <Button variant="primary" onClick={this.handleShow}>
+          Also Add Client
+        </Button>
 
-          <ModalCentered
-            show={this.state.modalShow}
-            onHide={modalClose}
-          />
-        </ButtonToolbar>
-
-
-
-        <form className="update" onSubmit={this.handleSubmit}>
-          <h3 className="title">New Client</h3>
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="name"
-              placeholder="Client name"
-              value={this.state.data.name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <br />
-          {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-          <div>
-            <button className="button">New Client &#x3E;</button>
-          </div>
-        </form>
+        <ModalCentered show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
       </main>
     )
