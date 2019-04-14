@@ -3,44 +3,34 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import ClientHeader from './lists/ClientHeader'
 import ClientList from './lists/ClientList'
-import ModalCentered from './modals/clientModal'
-
-import { Button, ButtonToolbar, Modal } from 'react-bootstrap'
 
 
 class Clients extends React.Component {
-  constructor(...args) {
-      super(...args)
-
+  constructor() {
+    super()
     this.state = {
       data: {
         name: ''
       },
       error: '',
-      modalShow: false
+      showModal: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
-    this.handleShow = this.handleShow.bind(this)
-    this.handleClose = this.handleClose.bind(this)
+    this.handleOpenModal = this.handleOpenModal.bind(this)
+    this.handleCloseModal = this.handleCloseModal.bind(this)
+  }
+
+  handleOpenModal () {
+    this.setState({ showModal: true })
+  }
+
+  handleCloseModal () {
+    this.setState({ showModal: false })
   }
 
 
-  handleClose() {
-    this.setState({ modalShow: false })
-  }
-
-  handleShow() {
-    this.setState({ modalShow: true })
-  }
-
-
-  handleChange({ target: { name, value }}) {
-    const data = {...this.state.data, [name]: value }
-    const error = ''
-    this.setState({ data, error })
-  }
 
   handleSubmit(e) {
     e.preventDefault()
@@ -64,8 +54,6 @@ class Clients extends React.Component {
   }
 
   render() {
-    const modalClose = () => this.setState({ modalShow: false })
-
     return (
       <main className="section">
         <div className="subHeader2">Clients</div>
@@ -79,23 +67,6 @@ class Clients extends React.Component {
             </div>
           ))}
         </div>
-        <button onClick={this.handleShow}>CLICK ME</button>
-
-        <ButtonToolbar>
-          <Button
-            variant="primary"
-            onClick={this.handleShow}
-          >
-            Launch vertically centered modal
-          </Button>
-
-          <ModalCentered
-            show={this.state.modalShow}
-            onHide={modalClose}
-          />
-        </ButtonToolbar>
-
-
 
         <form className="update" onSubmit={this.handleSubmit}>
           <h3 className="title">New Client</h3>
