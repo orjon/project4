@@ -3,8 +3,9 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import ExpenseList from './lists/ExpenseList'
 import ExpenseHeader from './lists/ExpenseHeader'
+import ModalExpense from './modals/ExpenseModal'
 
-class Expense extends React.Component {
+class Expenses extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -14,13 +15,24 @@ class Expense extends React.Component {
       },
       error: ''
     }
-    this.default = 'default'
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this)
     this.handleChangeDropDown = this.handleChangeDropDown.bind(this)
     this.clearState = this.clearState.bind(this)
   }
+
+  handleClose() {
+    this.setState({ modalShow: false })
+  }
+
+  handleShow() {
+    this.setState({ modalShow: true })
+  }
+
 
   clearState() {
     const data = { amount: '',description: ''}
@@ -35,8 +47,6 @@ class Expense extends React.Component {
 
   handleChangeDropDown({ target: { value }}) {
     const [ project, client ] = value.split('-')
-    console.log(project)
-    console.log(client)
     const data = {...this.state.data, project_id: project, client_id: client }
     const error = ''
     this.setState({ data, error })
@@ -59,10 +69,6 @@ class Expense extends React.Component {
         expenses: res.data.expenses,
         suppliers: res.data.suppliers,
         projects: res.data.projects
-      }, () => {
-        console.log(this.state.expenses),
-        console.log(this.state.suppliers),
-        console.log(this.state.projects)
       }))
       .catch(err => console.log(err))
   }
@@ -75,7 +81,6 @@ class Expense extends React.Component {
 
   sumArray(array) {
     const length = array.length
-    console.log(length)
     let sum = 0
     for (let i=0; i<length; i++) {
       sum += array[i].amount
@@ -85,6 +90,11 @@ class Expense extends React.Component {
 
 
   render() {
+    const modalClose = () => {
+      this.setState({ modalShow: false })
+      this.getData()
+    }
+
     return (
       <main className="section">
         <div className="subHeader2 columns">
@@ -104,64 +114,13 @@ class Expense extends React.Component {
           ))}
         </div>
 
-        <form className="update" onSubmit={this.handleSubmit}>
-          <h3 className="title">New Expense</h3>
+        <button onClick={this.handleShow}>Add Expense</button>
 
-          <div className="select">
-            <select
-              name="supplier_id"
-              defaultValue={this.default}
-              onChange={this.handleChange}>
-              <option disabled value="default">Select supplier</option>
-              {this.state.suppliers && this.state.suppliers.map(supplier => (
-                <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
-              ))}
-            </select>
-          </div>
-
-
-          <div className="select">
-            <select
-              name="project_id"
-              defaultValue={this.default}
-              onChange={this.handleChangeDropDown}>
-              <option disabled value="default">Select client: project</option>
-              {this.state.projects && this.state.projects.map(project => (
-                <option key={project.id} value={`${project.id}-${project.client.id}`}>{project.client.name}: {project.name}</option>
-              ))}
-            </select>
-          </div>
-          <br />
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="description"
-              placeholder="Expense decription"
-              value={this.state.data.description}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="amount"
-              placeholder="Amount"
-              value={this.state.data.amount}
-              onChange={this.handleChange}
-            />
-          </div>
-          <br />
-          {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-          <div>
-            <button className="button">New Project &#x3E;</button>
-          </div>
-        </form>
-
-
+        <ModalExpense show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
       </main>
     )
   }
 }
 
-export default Expense
+export default Expenses

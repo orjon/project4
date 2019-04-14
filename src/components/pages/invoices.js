@@ -44,8 +44,6 @@ class Invoices extends React.Component {
 
   handleChangeDropDown({ target: { value }}) {
     const [ project, client ] = value.split('-')
-    console.log(project)
-    console.log(client)
     const data = {...this.state.data, project_id: project, client_id: client }
     const error = ''
     this.setState({ data, error })
@@ -68,10 +66,6 @@ class Invoices extends React.Component {
         invoices: res.data.invoices,
         projects: res.data.projects,
         clients: res.data.clients
-      }, () => {
-        console.log(res.data.invoices,)
-        console.log(this.state.clients)
-        console.log(this.state.projects)
       }))
       .catch(err => console.log(err))
   }
@@ -86,7 +80,6 @@ class Invoices extends React.Component {
 
   sumArray(array) {
     const length = array.length
-    console.log(length)
     let sum = 0
     for (let i=0; i<length; i++) {
       sum += array[i].amount

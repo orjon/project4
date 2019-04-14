@@ -3524,6 +3524,13 @@ filestack-loader@^3.0.4:
   resolved "https://registry.yarnpkg.com/filestack-loader/-/filestack-loader-3.0.4.tgz#f387d14b4b85329f67361f314fa04b5ae41a57a0"
   integrity sha512-b6uOCWHd1gM0+5KBA1rA4qfEgTqyTr5umLM4bBWT4z98WUwxa6KzCiq+z0VnR4rN+NCx6kyZ/wLXjGcPU32TxQ==
 
+filestack-react@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/filestack-react/-/filestack-react-2.0.3.tgz#ca390150674b15919b2c7d7560f6b9027fd3404c"
+  integrity sha512-OsdLkFIzrKdSm/qJwoK8F6ukyez7tYzP1/Wh6fz01icHHMjxZPkkPe+2bQJQ93KkweSYvX8qOWaEKC6S0IiHBg==
+  dependencies:
+    filestack-js "^2.0.5"
+
 fill-range@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-4.0.0.tgz#d544811d428f98eb06a63dc402d2403c328c38f7"

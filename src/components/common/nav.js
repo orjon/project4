@@ -36,7 +36,7 @@ class Nav extends React.Component {
           {Auth.isAuthenticated() && <a className="menuItem" onClick={this.logout}>logout</a>}
         </div>
         <div className = "rightSide">
-          <Clock className = "nowDate" format={'YYYY.MM.DD'} ticking={true}/>
+          <Clock className = "nowDate" format={'YYYY-MM-DD'} ticking={true}/>
           <Clock className = "nowTime"format={'HH:mm'} ticking={true}/>
         </div>
       </nav>

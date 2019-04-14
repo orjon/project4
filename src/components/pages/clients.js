@@ -20,20 +20,16 @@ class Clients extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-
     this.handleShow = this.handleShow.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }
 
-
   handleClose() {
     this.setState({ modalShow: false })
   }
-
   handleShow() {
     this.setState({ modalShow: true })
   }
-
 
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value }

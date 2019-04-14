@@ -119,22 +119,3 @@ class Projects extends React.Component {
 }
 
 export default Projects
-
-// <div>{project.client.name} (id: {project.client.id})</div>
-// <div>{project.invoices.number} {project.invoices.amount}</div>
-
-
-//
-// <div className="select">
-//   <select
-//     name="client"
-//     defaultValue={this.state.data.clients.id || 'default'}
-//     onChange={this.handleChange}>
-//
-//     <option disabled value="default">Choose a genre</option>
-//     {this.state.clients && this.state.clients.map(client => (
-//       <option key={client.id} value={client.id}>{client.name}</option>
-//     ))}
-//   </select>
-//   {errors.genre && <small className="help is-danger">Please choose a genre</small> }
-// </div>

@@ -16,7 +16,7 @@ const ProjectList = (props) => {
             </div>
           ))}
         </div>
-        <div className='cellTemp'>
+        <div className='cellCurrency'>
           {project.invoices && project.invoices.map(invoice => (
             <div key={invoice.id} className="lineItem">
               <div>£&thinsp;{invoice.amount.toFixed(2)}</div>
@@ -30,7 +30,7 @@ const ProjectList = (props) => {
             </div>
           ))}
         </div>
-        <div className='cellTemp'>
+        <div className='cellCurrency'>
           {project.expenses && project.expenses.map(expense => (
             <div key={expense.id} className="lineItem">
               <div>£&thinsp;{expense.amount.toFixed(2)}</div>
