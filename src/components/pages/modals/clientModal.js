@@ -1,11 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../../lib/auth'
-import { Button } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
 
 
-class ModalCentered extends React.Component {
+class ModalClient extends React.Component {
   constructor(...args) {
     super(...args)
 
@@ -77,4 +76,4 @@ class ModalCentered extends React.Component {
   }
 }
 
-export default ModalCentered
+export default ModalClient

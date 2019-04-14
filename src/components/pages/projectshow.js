@@ -13,7 +13,6 @@ class ProjectShow extends React.Component {
         name: ''
       },
 
-
       error: ''
     }
     this.userCurrent = ''

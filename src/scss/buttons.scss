@@ -1,4 +1,10 @@
+button:focus {
+    outline: none;
+}
+
 button {
+  border-radius: 0px;
+  margin-top: 10px;
   border: 0px solid $colorButtonText;
   background-color: $colorButton;
   color: $colorButtonText;

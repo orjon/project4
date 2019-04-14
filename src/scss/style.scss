@@ -2,6 +2,8 @@
 @import 'nav.scss';
 @import 'headers.scss';
 @import 'buttons.scss';
+@import 'modals.scss';
+@import 'dropDown.scss';
 
 @import 'tables.scss';
 
@@ -18,6 +20,8 @@ html, body {
 * {
   box-sizing: border-box;
 }
+
+textarea, select, input, button { outline: none; }
 
 .siteWrapper {
   width: 100vw;

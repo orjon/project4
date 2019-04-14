@@ -4,6 +4,7 @@ import Auth from '../../lib/auth'
 import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
 import InvoiceHeader from './lists/InvoiceHeader'
+import ModalInvoice from './modals/InvoiceModal'
 
 class Invoices extends React.Component {
   constructor() {
@@ -20,8 +21,20 @@ class Invoices extends React.Component {
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this)
     this.handleChangeDropDown = this.handleChangeDropDown.bind(this)
   }
+
+  handleClose() {
+    this.setState({ modalShow: false })
+  }
+
+  handleShow() {
+    this.setState({ modalShow: true })
+  }
+
 
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value }
@@ -86,9 +99,14 @@ class Invoices extends React.Component {
     axios.get(`/api/user/${Auth.getPayload().sub}`)
       .then(res => this.userCurrent = res.data.username)
       .then(() => this.getData())
-      .then(console.log(this.today))
   }
+
   render() {
+    const modalClose = () => {
+      this.setState({ modalShow: false })
+      this.getData()
+    }
+
     return (
       <main className="section">
         <div className="subHeader2 columns">
@@ -108,52 +126,9 @@ class Invoices extends React.Component {
           ))}
         </div>
 
+        <button onClick={this.handleShow}>Add Invoice</button>
 
-
-
-
-
-
-        <form className="update" onSubmit={this.handleSubmit}>
-          <h3 className="title">New Invoice</h3>
-
-          <div className="select">
-            <select
-              name="project_id"
-              defaultValue="default"
-              onChange={this.handleChangeDropDown}>
-              <option disabled value="default">Select client: project</option>
-              {this.state.projects && this.state.projects.map(project => (
-                <option key={project.id} value={`${project.id}-${project.client.id}`}>{project.client.name}: {project.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="number"
-              placeholder="Invoice number"
-              value={this.state.data.number}
-              onChange={this.handleChange}
-            />
-          </div>
-          <br />
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="amount"
-              placeholder="Amount"
-              value={this.state.data.amount}
-              onChange={this.handleChange}
-            />
-          </div>
-          <br />
-          {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-          <div>
-            <button className="button">New Invoice &#x3E;</button>
-          </div>
-        </form>
+        <ModalInvoice show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
       </main>
     )
@@ -161,19 +136,3 @@ class Invoices extends React.Component {
 }
 
 export default Invoices
-
-
-
-//
-//
-// <div className="select">
-//   <select
-//     name="client_id"
-//     defaultValue="default"
-//     onChange={this.handleChange}>
-//     <option disabled value="default">Select client</option>
-//     {this.state.clients && this.state.clients.map(client => (
-//       <option key={client.id} value={client.id}>{client.name}</option>
-//     ))}
-//   </select>
-// </div>

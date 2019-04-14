@@ -3,14 +3,13 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import ClientHeader from './lists/ClientHeader'
 import ClientList from './lists/ClientList'
-import ModalCentered from './modals/clientModal'
+import ModalClient from './modals/clientModal'
 
-import { Button } from 'react-bootstrap'
 
 
 class Clients extends React.Component {
   constructor(...args) {
-      super(...args)
+    super(...args)
 
     this.state = {
       data: {
@@ -86,9 +85,7 @@ class Clients extends React.Component {
         </div>
         <button onClick={this.handleShow}>Add Client</button>
 
-
-
-        <ModalCentered show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
+        <ModalClient show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
       </main>
     )
