@@ -15,7 +15,7 @@ const InvoiceHeader = () => {
         <div className = 'cellHalf'>description</div>
       </div>
       <div className = 'rowRight'>
-        <div className = 'cellCurrency'>amount</div>
+        <div className = 'cellDateRight'>amount</div>
       </div>
     </div>
   )

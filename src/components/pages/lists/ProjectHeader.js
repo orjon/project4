@@ -5,18 +5,15 @@ const ProjectHeader = () => {
   return (
     <div className = 'rowHeader'>
       <div className = 'rowLeft'>
-        <div className = 'cellDate'>code</div>
+        <div className = 'cellCode'>code</div>
       </div>
       <div className = 'rowCentre'>
         <div className = 'cellQuarter'>project</div>
         <div className = 'cellQuarter'>client</div>
-        <div className = 'cellQuarter'>invoices</div>
-        <div className = 'cellDate'>amount</div>
-        <div className = 'cellQuarter'>expenses</div>
-        <div className = 'cellDate'>amount</div>
-      </div>
-      <div className = 'rowRight'>
-        <div className = 'cellCurrency'>kkkk</div>
+        <div className = 'cellQuarterRight'>expenses</div>
+        <div className = 'cellCurrency'>amount</div>
+        <div className = 'cellCodeRight'>invoices</div>
+        <div className = 'cellCurrency'>amount</div>
       </div>
     </div>
   )

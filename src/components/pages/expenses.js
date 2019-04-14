@@ -33,7 +33,6 @@ class Expenses extends React.Component {
     this.setState({ modalShow: true })
   }
 
-
   clearState() {
     const data = { amount: '',description: ''}
     this.setState({ data })

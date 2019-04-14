@@ -2,11 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../../lib/auth'
 import Modal from 'react-bootstrap/Modal'
-import DayPickerInput from 'react-day-picker/DayPickerInput'
-import 'react-day-picker/lib/style.css'
-import moment from 'moment'
 
-class ModalExpense extends React.Component {
+class ModalProject extends React.Component {
   constructor(...args) {
     super(...args)
 
@@ -38,11 +35,6 @@ class ModalExpense extends React.Component {
     this.setState({ data, error })
   }
 
-  dateConvert(day){
-    return moment(day).format('YYYY-MM-DD')
-  }
-
-
   clearState() {
     const data = {
       description: '',
@@ -64,7 +56,7 @@ class ModalExpense extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    axios.post('/api/expenses', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+    axios.post('/api/projects', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(this.props.onHide)
       .then(() => this.clearState())
       .catch((err) => {
@@ -85,7 +77,7 @@ class ModalExpense extends React.Component {
   getData() {
     axios.get('/api/user', { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => this.setState({
-        suppliers: res.data.suppliers,
+        invoices: res.data.invoices,
         projects: res.data.projects,
         clients: res.data.clients
       }))
@@ -109,16 +101,13 @@ class ModalExpense extends React.Component {
 
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            <div className="subHeader2">New Expense</div>
+            <div className="subHeader2">New Project</div>
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <form id="expenseNew" className="update" onSubmit={this.handleSubmit}>
+          <form id="projectNew" className="update" onSubmit={this.handleSubmit}>
 
-            <div>
-              <DayPickerInput onDayChange={this.handleDate} format={'YYYY-MM-DD'}/>
-            </div>
 
             <div className="select">
               <select
@@ -132,23 +121,12 @@ class ModalExpense extends React.Component {
               </select>
             </div>
 
-            <div className="select">
-              <select
-                name="supplier_id"
-                defaultValue="default"
-                onChange={this.handleChange}>
-                <option disabled value="default">Select client: project</option>
-                {this.state.suppliers && this.state.suppliers.map(supplier => (
-                  <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
-                ))}
-              </select>
-            </div>
 
             <div>
               <input
                 className={`input ${this.props.error ? 'is-danger': ''}`}
                 name="description"
-                placeholder="Expense description"
+                placeholder="Project description"
                 value={this.state.data.description}
                 onChange={this.handleChange}
               />
@@ -169,7 +147,7 @@ class ModalExpense extends React.Component {
 
             {this.state.error && <small className="help is-danger">{this.state.error} </small>}
             <div>
-              <button form="expenseNew" className="button">Add new expense</button>
+              <button form="projectNew" className="button">Add new project</button>
             </div>
           </form>
 
@@ -182,4 +160,46 @@ class ModalExpense extends React.Component {
   }
 }
 
-export default ModalExpense
+export default ModalProject
+
+
+        // <form className="update container" onSubmit={this.handleSubmit}>
+        //   <h3 className="title">New Project</h3>
+        //
+        //   <div className="select">
+        //     <select
+        //       name="client_id"
+        //       defaultValue="default"
+        //       onChange={this.handleChange}>
+        //       <option disabled value="default">Select client</option>
+        //       {this.state.clients && this.state.clients.map(client => (
+        //         <option key={client.id} value={client.id}>{client.name}</option>
+        //       ))}
+        //     </select>
+        //   </div>
+        //
+        //   <div>
+        //     <input
+        //       className={`input ${this.state.error ? 'is-danger': ''}`}
+        //       name="code"
+        //       placeholder="Project code"
+        //       value={this.state.data.code}
+        //       onChange={this.handleChange}
+        //     />
+        //   </div>
+        //   <br />
+        //   <div>
+        //     <input
+        //       className={`input ${this.state.error ? 'is-danger': ''}`}
+        //       name="name"
+        //       placeholder="Project name"
+        //       value={this.state.data.name}
+        //       onChange={this.handleChange}
+        //     />
+        //   </div>
+        //   <br />
+        //   {this.state.error && <small className="help is-danger">{this.state.error} </small>}
+        //   <div>
+        //     <button className="button">New Project &#x3E;</button>
+        //   </div>
+        // </form>

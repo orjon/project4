@@ -14,7 +14,7 @@ const ExpenseList = (props) => {
         <div className='cellHalf'>{expense.description}</div>
       </div>
       <div className = 'rowRight'>
-        <div className = 'cellCurrency'>£&thinsp;{expense.amount.toFixed(2)}</div>
+        <div className ='cellDateRight'>£&thinsp;{expense.amount.toFixed(2)}</div>
       </div>
     </div>
   )

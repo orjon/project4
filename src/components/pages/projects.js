@@ -4,6 +4,7 @@ import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import ProjectList from './lists/ProjectList'
 import ProjectHeader from './lists/ProjectHeader'
+import ModalProject from './modals/projectModal'
 
 class Projects extends React.Component {
   constructor() {
@@ -19,6 +20,17 @@ class Projects extends React.Component {
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  handleClose() {
+    this.setState({ modalShow: false })
+  }
+
+  handleShow() {
+    this.setState({ modalShow: true })
   }
 
   handleChange({ target: { name, value }}) {
@@ -56,6 +68,11 @@ class Projects extends React.Component {
   }
 
   render() {
+    const modalClose = () => {
+      this.setState({ modalShow: false })
+      this.getData()
+    }
+
     return (
       <main className="section">
         <div className="subHeader2">Projects</div>
@@ -71,47 +88,10 @@ class Projects extends React.Component {
           ))}
         </div>
 
+        <button onClick={this.handleShow}>Add Project</button>
 
-        <form className="update container" onSubmit={this.handleSubmit}>
-          <h3 className="title">New Project</h3>
+        <ModalProject show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
-          <div className="select">
-            <select
-              name="client_id"
-              defaultValue="default"
-              onChange={this.handleChange}>
-              <option disabled value="default">Select client</option>
-              {this.state.clients && this.state.clients.map(client => (
-                <option key={client.id} value={client.id}>{client.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="code"
-              placeholder="Project code"
-              value={this.state.data.code}
-              onChange={this.handleChange}
-            />
-          </div>
-          <br />
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="name"
-              placeholder="Project name"
-              value={this.state.data.name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <br />
-          {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-          <div>
-            <button className="button">New Project &#x3E;</button>
-          </div>
-        </form>
 
       </main>
     )
