@@ -4,7 +4,7 @@ import Auth from '../../../lib/auth'
 import Modal from 'react-bootstrap/Modal'
 
 
-class ModalClient extends React.Component {
+class ModalSupplier extends React.Component {
   constructor(...args) {
     super(...args)
 
@@ -29,7 +29,7 @@ class ModalClient extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    axios.post('/api/clients', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+    axios.post('/api/suppliers', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(this.props.onHide)
       .then(() => this.clearState())
       .catch((err) => {
@@ -42,6 +42,7 @@ class ModalClient extends React.Component {
     const data = { name: ''}
     this.setState({ data })
   }
+
 
   render() {
     const cancelForm = () => {
@@ -58,17 +59,17 @@ class ModalClient extends React.Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            <div className="subHeader2">New Client</div>
+            <div className="subHeader2">New Supplier</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
-          <form id="clientNew" className="update" onSubmit={this.handleSubmit}>
+          <form id="supplierNew" className="update" onSubmit={this.handleSubmit}>
             <div>
               <input
                 className={`input ${this.props.error ? 'is-danger': ''}`}
                 name="name"
-                placeholder="Client name"
+                placeholder="Supplier name"
                 value={this.state.data.name}
                 onChange={this.handleChange}
               />
@@ -76,7 +77,7 @@ class ModalClient extends React.Component {
             <br />
             {this.state.error && <small className="help is-danger">{this.state.error} </small>}
             <div>
-              <button form="clientNew" className="button">Add new client</button>
+              <button form="supplierNew" className="button">Add new supplier</button>
             </div>
           </form>
         </Modal.Body>
@@ -88,4 +89,4 @@ class ModalClient extends React.Component {
   }
 }
 
-export default ModalClient
+export default ModalSupplier

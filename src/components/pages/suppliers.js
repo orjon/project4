@@ -3,6 +3,7 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import SupplierHeader from './lists/SupplierHeader'
 import SupplierList from './lists/SupplierList'
+import ModalSupplier from './modals/supplierModal'
 
 class Suppliers extends React.Component {
   constructor() {
@@ -11,12 +12,21 @@ class Suppliers extends React.Component {
       data: {
         name: ''
       },
-      error: ''
+      error: '',
+      modalShow: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
+  handleClose() {
+    this.setState({ modalShow: false })
+  }
+  handleShow() {
+    this.setState({ modalShow: true })
+  }
 
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value }
@@ -46,6 +56,11 @@ class Suppliers extends React.Component {
   }
 
   render() {
+    const modalClose = () => {
+      this.setState({ modalShow: false })
+      this.getData()
+    }
+
     return (
       <main className="section">
         <div className="subHeader2">Suppliers</div>
@@ -59,27 +74,9 @@ class Suppliers extends React.Component {
             </div>
           ))}
         </div>
+        <button onClick={this.handleShow}>Add Supplier</button>
 
-
-        <form className="update" onSubmit={this.handleSubmit}>
-          <h3 className="title">New Supplier</h3>
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="name"
-              placeholder="Supplier name"
-              value={this.state.data.name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <br />
-          {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-          <div>
-            <button className="button">New Supplier &#x3E;</button>
-          </div>
-        </form>
-
-
+        <ModalSupplier show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
       </main>
     )
