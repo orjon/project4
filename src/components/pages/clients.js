@@ -4,6 +4,7 @@ import Auth from '../../lib/auth'
 import ClientHeader from './lists/ClientHeader'
 import ClientList from './lists/ClientList'
 
+
 class Clients extends React.Component {
   constructor() {
     super()
@@ -11,10 +12,22 @@ class Clients extends React.Component {
       data: {
         name: ''
       },
-      error: ''
+      error: '',
+      showModal: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.handleOpenModal = this.handleOpenModal.bind(this)
+    this.handleCloseModal = this.handleCloseModal.bind(this)
+  }
+
+  handleOpenModal () {
+    this.setState({ showModal: true })
+  }
+
+  handleCloseModal () {
+    this.setState({ showModal: false })
   }
 
   handleChange({ target: { name, value }}) {
@@ -58,7 +71,6 @@ class Clients extends React.Component {
             </div>
           ))}
         </div>
-
 
         <form className="update" onSubmit={this.handleSubmit}>
           <h3 className="title">New Client</h3>

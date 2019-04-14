@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.css'
 
 import Nav from './components/common/nav'
 
 import Register from './components/auth/register'
 import Login from './components/auth/login'
+
 import Home from './components/pages/home'
 import Dashboard from './components/pages/dashboard'
 import Projects from './components/pages/projects'
