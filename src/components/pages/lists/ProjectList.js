@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ProjectList = (props) => {
   const project = props.project
@@ -6,11 +7,23 @@ const ProjectList = (props) => {
   return (
     <div className='tableRow'>
       <div className='rowLeft'>
-        <div className='cellCode'>{project.code}</div>
+        <div className='cellCode'>
+          <Link to={`/project/${project.id}`} className='cell'>
+            {project.code}
+          </Link>
+        </div>
       </div>
       <div className='rowCentre'>
-        <div className='cellQuarter'>{project.name}</div>
-        <div className='cellQuarter'>{project.client.name}</div>
+        <div className='cellQuarter'>
+          <Link to={`/project/${project.id}`} className='cell'>
+            {project.name}
+          </Link>
+        </div>
+        <div className='cellQuarter'>
+          <Link to={`/clients/${project.client.id}`} className='cell'>
+            {project.client.name}
+          </Link>
+        </div>
         <div className='cellQuarterRight'>
           {project.expenses && project.expenses.map(expense => (
             <div key={expense.id} className="lineItem">

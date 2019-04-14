@@ -1,3 +1,14 @@
+.cell {
+  color: $colorFontMain;
+  text-decoration: none;
+
+}
+
+.cell:hover {
+  color: $colorFontHover;
+  text-decoration: none;
+}
+
 
 .overdue {
   color: $colorDataOverdue;
@@ -22,11 +33,10 @@
   font-size: 15px;
   letter-spacing: 0.5px;
   line-height: 25px;
+  margin-bottom: 25px;
 
   .rowHeader {
     border-bottom: 1px solid $colorTableHeaderLine;
-    margin: 5px 0;
-    padding: 5px 0;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -104,7 +114,7 @@
       background-color: $colorBody;
       white-space:nowrap;
       // border: 1px solid cyan;
-      // width: 50%;
+      width: 50%;
     }
 
 

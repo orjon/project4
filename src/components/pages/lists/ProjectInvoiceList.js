@@ -1,19 +1,16 @@
 import React from 'react'
 
-const InvoiceList = (props) => {
+const ProjectInvoiceList = (props) => {
   const invoice = props.invoice
 
   return (
     <div className = 'tableRow' >
       <div className = 'rowLeft'>
         <div className = 'cellDate'>{invoice.date_issued}</div>
-        <div className = 'cellDate'>{invoice.date_due}</div>
-        <div className = 'cellDate'>{invoice.date_paid}</div>
+        <div className = 'cellDate'>{invoice.date_paid ? 'PAID' : invoice.date_due}</div>
         <div className = 'cellCode'>{invoice.number}</div>
       </div>
       <div className = 'rowCentre'>
-        <div className = 'cellQuarter'>{invoice.project.name}</div>
-        <div className = 'cellQuarter'>{invoice.client.name}</div>
         <div className = 'cellHalf'>{invoice.description}</div>
       </div>
       <div className = 'rowRight'>
@@ -23,7 +20,4 @@ const InvoiceList = (props) => {
   )
 }
 
-export default InvoiceList
-
-
-        // {invoice.date_paid ? 'PAID' : invoice.date_due}
+export default ProjectInvoiceList

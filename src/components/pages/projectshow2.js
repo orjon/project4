@@ -3,9 +3,6 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import ProjectInvoiceHeader from './lists/ProjectInvoiceHeader'
-import ProjectInvoiceList from './lists/ProjectInvoiceList'
-import ProjectExpenseHeader from './lists/ProjectExpenseHeader'
-import ProjectExpenseList from './lists/ProjectExpenseList'
 import moment from 'moment'
 
 
@@ -20,7 +17,6 @@ class ProjectShow extends React.Component {
 
       error: ''
     }
-    this.today = moment()
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -73,19 +69,14 @@ class ProjectShow extends React.Component {
   }
 
   render() {
-    const invoiceSum = this.state.project.invoices && this.sumArray(this.state.project.invoices).toFixed(2)
-    const expenseSum =this.state.project.expenses && this.sumArray(this.state.project.expenses).toFixed(2)
-
-
     return (
       <main className="section">
-        <div className="subHeader1 columns">
-          <div>{this.state.project.code} {this.state.project.name}</div>
-          <div>£&thinsp;{(invoiceSum-expenseSum).toFixed(2)}</div>
+        <div className="subHeader2">
+          ORIGN {this.state.project.code} : {this.state.project.name}
         </div>
         <div className="subHeader2 columns">
           <div>Invoices</div>
-          <div>£&thinsp;{invoiceSum}</div>
+          <div>£&thinsp;{this.state.invoices && this.sumArray(this.state.invoices).toFixed(2)}</div>
         </div>
         <div className = 'dataTable'>
           <ProjectInvoiceHeader />
@@ -95,27 +86,39 @@ class ProjectShow extends React.Component {
                 ${this.checkOverdue(invoice) ? 'overdue':''}
                 ${this.checkPaid(invoice) ? 'paid':''}
                 `}>
-              <ProjectInvoiceList invoice={invoice} />
+
+              <div className = 'tableRow' >
+                <div className = 'rowLeft'>
+                  <div className = 'cellDate'>{invoice.date_issued}</div>
+                  <div className = 'cellDate'>{invoice.date_paid ? 'PAID' : invoice.date_due}</div>
+                  <div className = 'cellCode'>{invoice.number}</div>
+                </div>
+                <div className = 'rowCentre'>
+                  <div className = 'cellHalf'>{invoice.description}</div>
+                </div>
+                <div className = 'rowRight'>
+                  <div className = 'cellDateRight'>£&thinsp;{invoice.amount.toFixed(2)}</div>
+                </div>
+              </div>
+
+
+
+
+
             </div>
           ))}
         </div>
 
 
-        <div className="subHeader2 columns">
-          <div>Expenses</div>
-          <div>£&thinsp;{expenseSum}</div>
-        </div>
-        <div className = 'dataTable'>
-          <ProjectExpenseHeader />
-          {this.state.project.expenses && this.state.project.expenses.map(expense => (
-            <div key={expense.id}
-              className='lineItem'>
-              <ProjectExpenseList expense={expense} />
-            </div>
+
+
+
+        <div>
+          <div className="subHeader3">Invoices</div>
+          {this.state.project.invoices && this.state.project.invoices.map(invoice => (
+            <div key={invoice.id} className="lineItem">{invoice.id} : {invoice.number} : {invoice.amount}</div>
           ))}
         </div>
-
-
 
       </main>
     )

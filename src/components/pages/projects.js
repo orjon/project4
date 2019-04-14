@@ -79,12 +79,11 @@ class Projects extends React.Component {
         <div className = 'dataTable'>
           <ProjectHeader />
           {this.state.projects && this.state.projects.map(project => (
-            <Link to={`/project/${project.id}`} key={project.id}
-              className='lineItem'>
+            <div key={project.id} className='lineItem'>
               <ProjectList
                 project={project}
               />
-            </Link>
+            </div>
           ))}
         </div>
 

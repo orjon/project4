@@ -1,18 +1,15 @@
 import React from 'react'
 
-const InvoiceHeader = () => {
+const ProejctInvoiceHeader = () => {
 
   return (
     <div className = 'rowHeader'>
       <div className = 'rowLeft'>
         <div className = 'cellDate'>issued</div>
         <div className = 'cellDate'>due</div>
-        <div className = 'cellDate'>paid</div>
         <div className = 'cellCode'>no.</div>
       </div>
       <div className = 'rowCentre'>
-        <div className = 'cellQuarter'>project</div>
-        <div className = 'cellQuarter'>client</div>
         <div className = 'cellHalf'>description</div>
       </div>
       <div className = 'rowRight'>
@@ -22,4 +19,4 @@ const InvoiceHeader = () => {
   )
 }
 
-export default InvoiceHeader
+export default ProejctInvoiceHeader

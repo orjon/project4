@@ -17,7 +17,7 @@ class Client(db.Model, BaseModel):
 class ClientSchema(mllo.ModelSchema, BaseSchema):
 
     user = fields.Nested('UserSchema', only=('id', 'username'))
-    projects = fields.Nested('ProjectSchema', many=True, only=('id', 'name'))
+    projects = fields.Nested('ProjectSchema', many=True, only=('id', 'code', 'name'))
     invoices = fields.Nested('InvoiceSchema', many=True, only=('id', 'number'))
     class Meta:
         model = Client
