@@ -15,6 +15,7 @@ class ModalClient extends React.Component {
       error: '',
       modalShow: false
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
@@ -30,10 +31,16 @@ class ModalClient extends React.Component {
     e.preventDefault()
     axios.post('/api/clients', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(this.props.onHide)
+      .then(() => this.clearState())
       .catch((err) => {
         console.log('the error is', err)
         this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
       })
+  }
+
+  clearState() {
+    const data = { name: ''}
+    this.setState({ data })
   }
 
   render() {

@@ -10,7 +10,10 @@ const ProjectHeader = () => {
       <div className = 'rowCentre'>
         <div className = 'cellQuarter'>project</div>
         <div className = 'cellQuarter'>client</div>
-        <div className = 'cellHalf'>invoices</div>
+        <div className = 'cellQuarter'>invoices</div>
+        <div className = 'cellDate'>amount</div>
+        <div className = 'cellQuarter'>expenses</div>
+        <div className = 'cellDate'>amount</div>
       </div>
       <div className = 'rowRight'>
         <div className = 'cellCurrency'>kkkk</div>

@@ -16,6 +16,7 @@ class ModalInvoice extends React.Component {
         date_issued: '',
         date_due: '',
         date_paid: '',
+        client_id: '',
         project_id: ''
       },
       error: '',
@@ -30,6 +31,20 @@ class ModalInvoice extends React.Component {
 
   }
 
+  clearState() {
+    const data = {
+      number: '',
+      description: '',
+      amount: '',
+      date_issued: '',
+      date_due: '',
+      date_paid: '',
+      client_id: '',
+      project_id: ''
+    }
+    this.setState({ data })
+  }
+
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value }
     const error = ''
@@ -40,6 +55,7 @@ class ModalInvoice extends React.Component {
     e.preventDefault()
     axios.post('/api/invoices', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(this.props.onHide)
+      .then(() => this.clearState())
       .catch((err) => {
         console.log('the error is', err)
         this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
@@ -138,9 +154,11 @@ class ModalInvoice extends React.Component {
             </div>
 
             <br />
+
             <div>
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
+                type="date"
                 name="date_issued"
                 placeholder="issued YYYY-MMM-DD"
                 value={this.state.data.date_issued}
@@ -152,6 +170,7 @@ class ModalInvoice extends React.Component {
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
                 name="date_due"
+                type="date"
                 placeholder="due YYYY-MMM-DD"
                 value={this.state.data.date_due}
                 onChange={this.handleChange}
@@ -162,6 +181,7 @@ class ModalInvoice extends React.Component {
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
                 name="date_paid"
+                type="date"
                 placeholder="paid YYYY-MMM-DD"
                 value={this.state.data.date_paid}
                 onChange={this.handleChange}
