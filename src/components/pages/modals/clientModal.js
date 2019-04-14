@@ -70,7 +70,7 @@ class ModalCentered extends React.Component {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Cancel</Button>
+          <button onClick={this.props.onHide}>Cancel</button>
         </Modal.Footer>
       </Modal>
     )

@@ -86,9 +86,7 @@ class Clients extends React.Component {
         </div>
         <button onClick={this.handleShow}>Add Client</button>
 
-        <Button variant="primary" onClick={this.handleShow}>
-          Also Add Client
-        </Button>
+
 
         <ModalCentered show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
@@ -98,3 +96,8 @@ class Clients extends React.Component {
 }
 
 export default Clients
+
+//
+// <Button variant="primary" onClick={this.handleShow}>
+//   Also Add Client
+// </Button>
