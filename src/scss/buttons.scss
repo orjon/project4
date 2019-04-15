@@ -5,7 +5,7 @@ button:focus {
 button {
   border-radius: 0px;
   margin-top: 10px;
-  border: 0px solid $colorButtonText;
+  border: 1px solid $colorButton;
   background-color: $colorButton;
   color: $colorButtonText;
   text-decoration: none;
@@ -22,5 +22,7 @@ button {
 
 button:hover{
   // background-color: $colorButtonHover;
+  border: 1px solid $colorButtonText;
+  background-color: $colorButton;
   color: $colorButtonTextHover;
 }

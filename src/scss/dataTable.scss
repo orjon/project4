@@ -1,7 +1,6 @@
 .cell {
   color: $colorFontMain;
   text-decoration: none;
-
 }
 
 .cell:hover {
@@ -11,6 +10,7 @@
 
 
 .overdue {
+  text-decoration: none;
   color: $colorDataOverdue;
 }
 
@@ -24,6 +24,7 @@
   // text-decoration: underline;
 }
 
+
 .dataTable {
   // border: 1px solid yellow;
   color: $colorFontMain;
@@ -36,7 +37,7 @@
   margin-bottom: 25px;
 
   .rowHeader {
-    border-bottom: 1px solid $colorTableHeaderLine;
+    border-bottom: 1px solid $colorFontMain;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -70,10 +71,6 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      .cellCurrency{
-        // border: 1px solid cyan;
-        width: 75px;
-      }
     }
 
     .columnHalf {

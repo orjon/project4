@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ExpenseList = (props) => {
   const expense = props.expense
@@ -9,8 +10,15 @@ const ExpenseList = (props) => {
         <div className= 'cellDate'>{expense.date}</div>
       </div>
       <div className='rowCentre'>
-        <div className='cellQuarter'>{expense.project.name}</div>
-        <div className='cellQuarter'>{expense.supplier.name}</div>
+        <Link to={expense.project && `/project/${expense.project.id}`} className='cellCode cell'>
+          {(expense.project && expense.project.code) || 'UNASSIGNED'}
+        </Link>
+        <Link to={expense.project && `/project/${expense.project.id}`} className='cellQuarter cell'>
+          {(expense.project && expense.project.name) || 'UNASSIGNED'}
+        </Link>
+        <div className='cellQuarter'>
+          {(expense.supplier && expense.supplier.name) || 'UNASSIGNED'}
+        </div>
         <div className='cellHalf'>{expense.description}</div>
       </div>
       <div className = 'rowRight'>

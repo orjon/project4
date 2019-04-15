@@ -19,6 +19,7 @@ import Suppliers from './components/pages/suppliers'
 
 import './scss/style.scss'
 
+
 class App extends React.Component {
   constructor() {
     super()

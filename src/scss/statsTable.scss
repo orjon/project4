@@ -1,0 +1,131 @@
+
+
+
+.statsTable {
+  // border: 1px solid yellow;
+  color: $colorFontMain;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  line-height: 25px;
+  margin: 10px 0;
+
+  .rowStats {
+    // border-bottom: 1px solid $colorTableHeaderLine;
+    // font-weight: bold;
+    // text-transform: uppercase;
+  }
+  .tableRow {
+    // border-bottom: 1px solid $colorTableLine;
+    justify-content: flex-end;
+  }
+  .tableRow, .rowHeader{
+    // border: 1px solid green;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    .rowLeft{
+      // border: 1px solid orange;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+    }
+    .rowCentre {
+      width: 100%;
+      // border: 1px solid orange;
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+
+    }
+    .rowRight{
+      text-align: right;
+      // border: 1px solid orange;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+    }
+
+    .columnHalf {
+      width: 50%;
+    }
+
+    .cellCode{
+      padding-left: 5px;
+      // border: 1px solid cyan;
+      width: 100px;
+    }
+    .cellCodeRight{
+      padding-right: 5px;
+      // border: 1px solid cyan;
+      width: 100px;
+      text-align: right;
+
+    }
+
+    .cellQuarter{
+      padding-left: 5px;
+      background-color: $colorBody;
+      white-space:nowrap;
+      width: 25%;
+      // border: 1px solid cyan;
+    }
+    .cellQuarterRight{
+      padding-right: 10px;
+      background-color: $colorBody;
+      white-space:nowrap;
+      width: 25%;
+      text-align: right;
+      // border: 1px solid cyan;
+    }
+
+    .cellHalf{
+      padding-left: 5px;
+      background-color: $colorBody;
+      white-space:nowrap;
+      // border: 1px solid cyan;
+      width: 50%;
+    }
+
+
+    .cellDate{
+      padding-left: 5px;
+      // border: 1px solid cyan;
+      width: 100px;
+      text-align: left;
+    }
+
+    .cellDateRight{
+      padding-right: 5px;
+      // border: 1px solid cyan;
+      width: 100px;
+      text-align: right;
+    }
+
+
+    .cellCurrency{
+      padding-right: 5px;
+      // border: 1px solid yellow;
+      width: 125px;
+      text-align: right;
+    }
+
+    .cellCurrencyLeft{
+      padding-left: 5px;
+      // border: 1px solid yellow;
+      width: 125px;
+      text-align: left;
+    }
+    .cellTemp{
+      padding-left: 5px;
+      // border: 1px solid cyan;
+      width: 150px;
+      text-align: left;
+    }
+  }
+}

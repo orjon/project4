@@ -17,7 +17,7 @@ class Supplier(db.Model, BaseModel):
 class SupplierSchema(mllo.ModelSchema, BaseSchema):
     user = fields.Nested('UserSchema', only=('id', 'username'))
 
-    expenses = fields.Nested('ExpenseSchema', many=True, only=('id', 'description', 'project.code'))
+    expenses = fields.Nested('ExpenseSchema', many=True, only=('id', 'description', 'project.code', 'amount', 'project.name', 'project.id', 'project.client.name'))
     class Meta:
         model = Supplier
         exclude = ('created', 'updated')

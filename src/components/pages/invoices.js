@@ -4,6 +4,7 @@ import Auth from '../../lib/auth'
 import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
 import InvoiceHeader from './lists/InvoiceHeader'
+import InvoiceStats from './lists/InvoiceStats'
 import ModalInvoice from './modals/InvoiceModal'
 
 class Invoices extends React.Component {
@@ -87,6 +88,28 @@ class Invoices extends React.Component {
     return sum
   }
 
+  sumDue(array) {
+    const length = array.length
+    let sum = 0
+    for (let i=0; i<length; i++) {
+      if (!(array[i].date_paid)) {
+        sum += array[i].amount
+      }
+    }
+    return sum
+  }
+
+  sumOverdue(array) {
+    const length = array.length
+    let sum = 0
+    for (let i=0; i<length; i++) {
+      if (!(array[i].date_paid) && (this.today > moment(array[i].date_due))) {
+        sum += array[i].amount
+      }
+    }
+    return sum
+  }
+
 
   componentDidMount() {
     axios.get(`/api/user/${Auth.getPayload().sub}`)
@@ -99,12 +122,21 @@ class Invoices extends React.Component {
       this.setState({ modalShow: false })
       this.getData()
     }
+    const totalDue = this.state.invoices && this.sumDue(this.state.invoices)
+    const totalOverdue= this.state.invoices && this.sumOverdue(this.state.invoices)
 
     return (
-      <main className="section">
-        <div className="subHeader2 columns">
+      <main className='section'>
+        <div className='subHeader2 columns'>
           <div>Invoices</div>
-          <div>£&thinsp;{this.state.invoices && this.sumArray(this.state.invoices).toFixed(2)}</div>
+          <div className='columns'>
+            <div className='subHeader2Label'>Total invoiced:</div>
+            <div className='subHeader2Currency'>£&thinsp;{this.state.invoices && this.sumArray(this.state.invoices).toFixed(2)}</div>
+          </div>
+        </div>
+
+        <div className = 'statsTable'>
+          <InvoiceStats totalDue={totalDue} totalOverdue={totalOverdue}/>
         </div>
         <div className = 'dataTable'>
           <InvoiceHeader />
@@ -114,9 +146,14 @@ class Invoices extends React.Component {
                 ${this.checkOverdue(invoice) ? 'overdue':''}
                 ${this.checkPaid(invoice) ? 'paid':''}
                 `}>
-              <InvoiceList invoice={invoice}/>
+              <InvoiceList
+                invoice={invoice}
+                overdue={this.checkOverdue(invoice)}
+                paid={this.checkPaid(invoice)}/>
             </div>
           ))}
+
+
         </div>
 
         <button onClick={this.handleShow}>Add Invoice</button>

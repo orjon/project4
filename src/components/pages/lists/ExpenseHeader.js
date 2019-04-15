@@ -8,6 +8,7 @@ const ExpenseHeader = () => {
         <div className = 'cellDate'>date</div>
       </div>
       <div className = 'rowCentre'>
+        <div className = 'cellCode'>no.</div>
         <div className = 'cellQuarter'>project</div>
         <div className = 'cellQuarter'>supplier</div>
         <div className = 'cellHalf'>description</div>

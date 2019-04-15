@@ -99,7 +99,7 @@ class Expenses extends React.Component {
         <div className="subHeader2 columns">
           <div>Expenses</div>
 
-          <div>£&thinsp;{this.state.expenses && this.sumArray(this.state.expenses).toFixed(2)}</div>
+          <div className='subHeader2Right' >£&thinsp;{this.state.expenses && this.sumArray(this.state.expenses).toFixed(2)}</div>
         </div>
         <div className = 'dataTable'>
           <ExpenseHeader />
