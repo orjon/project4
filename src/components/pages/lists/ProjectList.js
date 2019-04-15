@@ -38,6 +38,11 @@ const ProjectList = (props) => {
             </div>
           ))}
         </div>
+        <div className='cellComparator'>
+          <div className='lineItem summary'>
+            <div>&#32;</div>
+          </div>
+        </div>
         <div className='cellCodeRight'>
           {project.invoices && project.invoices.map(invoice => (
             <div key={invoice.id} className="lineItem">

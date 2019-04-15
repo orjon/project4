@@ -63,7 +63,7 @@ with app.app_context():
         date_issued='2019-02-25', date_due='2019-03-24', date_paid='2019-03-11',
         description='Technical Documentation', client=clientB, project=aspire)
     inv3 = Invoice(user=orjon, number='INV-003', amount=1850,
-        date_issued='2019-03-02', date_due='2019-04-01', date_paid='2019-03-21',
+        date_issued='2019-03-02', date_due='2019-04-01', date_paid=None,
         description='3D visualisation & printing', client=clientC, project=playstation)
     inv4 = Invoice(user=orjon, number='INV-004', amount=750,
         date_issued='2019-03-11', date_due='2019-04-10', date_paid=None,

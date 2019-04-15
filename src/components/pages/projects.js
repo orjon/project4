@@ -3,6 +3,7 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import ProjectList from './lists/ProjectList'
+import ProjectSummary from './lists/ProjectSummary'
 import ProjectHeader from './lists/ProjectHeader'
 import ModalProjectAdd from './modals/projectAdd'
 
@@ -67,6 +68,26 @@ class Projects extends React.Component {
       .then(() => this.getData())
   }
 
+
+  sumArray(array) {
+    const length = array.length
+    let sum = 0
+    for (let i=0; i<length; i++) {
+      sum += array[i].amount
+    }
+    return sum
+  }
+
+  comparator(array1, array2){
+    const diff =this.sumArray(array1)-this.sumArray(array2)
+    if (diff>0) return '>'
+    if (diff<0) return '<'
+    else return '='
+  }
+
+
+
+
   render() {
     const modalClose = () => {
       this.setState({ modalShow: false })
@@ -80,8 +101,15 @@ class Projects extends React.Component {
           <ProjectHeader />
           {this.state.projects && this.state.projects.map(project => (
             <div key={project.id} className='lineItem'>
+
               <ProjectList
                 project={project}
+              />
+
+              <ProjectSummary
+                totalExpenses={this.sumArray(project.expenses)}
+                comparator={this.comparator(project.expenses,project.invoices)}
+                totalInvoiced={this.sumArray(project.invoices)}
               />
             </div>
           ))}

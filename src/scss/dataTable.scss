@@ -25,6 +25,7 @@
 }
 
 
+
 .dataTable {
   // border: 1px solid yellow;
   color: $colorFontMain;
@@ -33,7 +34,7 @@
   text-decoration: none;
   font-size: 15px;
   letter-spacing: 0.5px;
-  line-height: 25px;
+  line-height: 30px;
   margin-bottom: 25px;
 
   .rowHeader {
@@ -148,6 +149,29 @@
       // border: 1px solid cyan;
       width: 150px;
       text-align: left;
+    }
+
+
+
+    .cellComparator {
+      text-align: right;
+      width: 30px;
+      .negative {
+        font-size: 20px;
+        font-weight: 800;
+        color: $colorNegative;
+      }
+      .equal {
+        font-size: 20px;
+        font-weight: 800;
+        color: $colorEqual;
+      }
+
+      .positive {
+        font-size: 20px;
+        font-weight: 800;
+        color: $colorPositive;
+      }
     }
   }
 }
