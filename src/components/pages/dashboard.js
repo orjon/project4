@@ -4,7 +4,10 @@ import Auth from '../../lib/auth'
 import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
 import InvoiceHeader from './lists/InvoiceHeader'
-import Chart from './charts/chart'
+import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
+import Chart from 'chart.js'
+
+ReactChartkick.addAdapter(Chart)
 
 class Dashboard extends React.Component {
   constructor() {
@@ -16,8 +19,7 @@ class Dashboard extends React.Component {
     }
     this.today = moment()
     this.userCurrent = ''
-    this.chartLabels ={}
-    this.chartData={}
+    this.chartData=[]
   }
 
   getData() {
@@ -47,38 +49,19 @@ class Dashboard extends React.Component {
   }
 
   collectChartData(array){
+    const data = []
     const labels =[]
-    let values =[]
+    const values =[]
     for (let i=0; i<array.length; i++) {
       labels[i]=array[i].name
       values[i]=0
       for (let j=0; j<array[i].invoices.length; j++ ){
         values[i]+=array[i].invoices[j].amount
       }
+      data[i]=[labels[i],values[i]]
     }
-    console.log(values)
-    values = JSON.parse(values)-
-    console.log(values)
-    this.setState({
-      chartData: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Population',
-            data: [],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)'
-            ]
-          }
-        ]
-      }
-    })
+    console.log(data)
+    this.setState({chartData: data})
   }
 
 
@@ -96,7 +79,7 @@ class Dashboard extends React.Component {
         <div className="subHeader2">Dashboard</div>
         <div className="subHeader3">Invoices due</div>
         <div className = 'dataTable'>
-          <Chart chartData={this.state.chartData} />
+          <PieChart data={this.state.chartData} donut={true}/>
           <InvoiceHeader />
           {this.state.invoices && this.state.invoices.map(invoice => (
             <div key={invoice.id} className='lineItem'>

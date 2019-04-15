@@ -9,25 +9,6 @@ class Chart extends React.Component {
     }
   }
 
-  
-  //   this.chartData = this.state.charData
-  //
-  //
-  // }
-  //
-  // handleChange({ target: { name, value }}) {
-  //   const chartData = {...this.state.chartData, this.props.chartData, this.props.chartVlaues}
-  //   const error = ''
-  //   this.setState({ data, error })
-  // }
-  //
-  //
-  //
-  // handleChange({ target: { name, value }}) {
-  //   const data = {...this.state.data, [name]: value }
-  //   const error = ''
-  //   this.setState({ data, error })
-  // }
 
 
   render(){
