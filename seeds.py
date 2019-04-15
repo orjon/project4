@@ -50,11 +50,11 @@ with app.app_context():
     clientB = Client(user=orjon, name='Swissport')
     clientC = Client(user=orjon, name='George P. Johnson')
 
-    deloitte = Project(user=orjon, name='Deloitte - Berlin', code='19-008', client=clientA)
+    deloitte = Project(user=orjon, name='Deloitte, Berlin', code='19-008', client=clientA)
     samsung = Project(user=orjon, name='Samsung Summer2019', code='19-009', client=clientC)
     heathrow = Project(user=orjon, name='HeathrowT4', code='19-010', client=clientB)
-    aspire = Project(user=orjon, name='Aspire Lounge - Luton', code='19-011', client=clientB)
-    playstation = Project(user=orjon, name='PlayStation - Xtreme', code='19-012', client=clientC)
+    aspire = Project(user=orjon, name='Aspire Lounge, Luton', code='19-011', client=clientB)
+    playstation = Project(user=orjon, name='PlayStation, Xtreme', code='19-012', client=clientC)
 
     inv1 = Invoice(user=orjon, number='INV-001', amount=1250,
         date_issued='2019-02-11', date_due='2019-03-10', date_paid='2019-03-21',

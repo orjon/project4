@@ -42,14 +42,13 @@ def create():
 
 
 @api.route('/projects/<int:project_id>', methods=['PUT'])
-
+@secure_route
 def update(project_id):
     data = request.get_json()
     project = Project.query.get(project_id)
     project, errors = project_schema.load(data, instance=project, partial=True)
     if errors:
         return jsonify(errors), 422 #Unprocessable Entity
-
     client = Client.query.get(data['client_id'])
     project.client = client
 
@@ -61,7 +60,7 @@ def update(project_id):
 
 
 @api.route('/projects/<int:project_id>', methods=['DELETE'])
-
+@secure_route
 def delete(project_id):
     project = Project.query.get(project_id)
     project.remove()

@@ -81,6 +81,7 @@ class Clients extends React.Component {
         </div>
         <button onClick={this.handleShow}>Add Client</button>
 
+
         <ModalClient show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
       </main>

@@ -79,7 +79,7 @@ class Dashboard extends React.Component {
         <div className="subHeader2">Dashboard</div>
         <div className="subHeader3">Invoices due</div>
         <div className = 'dataTable'>
-          <PieChart data={this.state.chartData} donut={true}/>
+          <PieChart data={this.state.chartData} legend={'right'} />
           <InvoiceHeader />
           {this.state.invoices && this.state.invoices.map(invoice => (
             <div key={invoice.id} className='lineItem'>

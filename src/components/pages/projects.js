@@ -4,7 +4,7 @@ import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import ProjectList from './lists/ProjectList'
 import ProjectHeader from './lists/ProjectHeader'
-import ModalProject from './modals/projectModal'
+import ModalProjectAdd from './modals/projectAdd'
 
 class Projects extends React.Component {
   constructor() {
@@ -89,7 +89,7 @@ class Projects extends React.Component {
 
         <button onClick={this.handleShow}>Add Project</button>
 
-        <ModalProject show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
+        <ModalProjectAdd show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
 
       </main>

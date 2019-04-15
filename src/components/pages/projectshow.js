@@ -6,6 +6,7 @@ import ProjectInvoiceHeader from './lists/ProjectInvoiceHeader'
 import ProjectInvoiceList from './lists/ProjectInvoiceList'
 import ProjectExpenseHeader from './lists/ProjectExpenseHeader'
 import ProjectExpenseList from './lists/ProjectExpenseList'
+import ModalProjectUpdate from './modals/projectUpdate'
 import moment from 'moment'
 
 
@@ -17,13 +18,27 @@ class ProjectShow extends React.Component {
         code: '',
         name: ''
       },
-
-      error: ''
+      client_id: '',
+      error: '',
+      modalShow: false
     }
     this.today = moment()
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+
+    this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  handleClose() {
+    this.setState({ modalShow: false }, this.getData())
+  }
+
+
+  handleShow() {
+    this.setState({ modalShow: true })
   }
 
   handleChange({ target: { name, value }}) {
@@ -42,16 +57,35 @@ class ProjectShow extends React.Component {
       })
   }
 
+
+  handleDelete(e) {
+    e.preventDefault()
+    axios.delete(`/api/projects/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => {
+        this.props.history.push('/projects')
+
+      })
+      .catch((err) => {
+        console.log('the error is', err)
+        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+      })
+  }
+
+
   getData() {
     axios.get(`/api/project/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(res => this.setState({project: res.data}))
-      .catch(err => this.setState({errors: err.response.data.errors}))
+      .then(res => {
+        this.setState({ project: res.data })
+      })
+      .then(() => this.setState({ client_name: this.state.project.client.name}))
+      // .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
   componentDidMount() {
     axios.get(`/api/user/${Auth.getPayload().sub}`)
       .then(res => this.userCurrent = res.data.username)
       .then(() => this.getData())
+
   }
 
 
@@ -73,6 +107,10 @@ class ProjectShow extends React.Component {
   }
 
   render() {
+    const modalClose = () => {
+      this.setState({ modalShow: false })
+      this.getData()
+    }
     const invoiceSum = this.state.project.invoices && this.sumArray(this.state.project.invoices).toFixed(2)
     const expenseSum =this.state.project.expenses && this.sumArray(this.state.project.expenses).toFixed(2)
 
@@ -80,7 +118,7 @@ class ProjectShow extends React.Component {
     return (
       <main className="section">
         <div className="subHeader1 columns">
-          <div>{this.state.project.code} {this.state.project.name}</div>
+          <div>{this.state.project.code} {this.state.project.name} : {this.state.client_name}</div>
           <div>£&thinsp;{(invoiceSum-expenseSum).toFixed(2)}</div>
         </div>
         <div className="subHeader2 columns">
@@ -115,8 +153,21 @@ class ProjectShow extends React.Component {
           ))}
         </div>
 
+        <button onClick={this.handleShow}>Update Project</button>
+        <div>
+          <button className="button delete" onClick={this.handleDelete}>Delete Project</button>
+        </div>
 
-
+        <ModalProjectUpdate
+          show={this.state.modalShow}
+          error={this.state.error}
+          onHide={modalClose}
+          client_id={this.state.client_id}
+          code={this.state.project.code}
+          name={this.state.project.name}
+          id={this.props.match.params.id}
+          closeModal={this.handleClose}
+        />
       </main>
     )
   }

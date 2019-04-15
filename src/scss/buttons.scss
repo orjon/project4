@@ -12,9 +12,15 @@ button {
   font-size: 15px;
   letter-spacing: 0.5px;
   line-height: 25px;
+
+}
+
+.delete {
+  color: white;
+  background-color: $colorButtonDelete;
 }
 
 button:hover{
-  background-color: $colorButtonHover;
-  // color: $colorButtonTextHover;
+  // background-color: $colorButtonHover;
+  color: $colorButtonTextHover;
 }
