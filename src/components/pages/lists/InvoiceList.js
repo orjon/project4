@@ -7,8 +7,7 @@ const InvoiceList = (props) => {
     <div className = 'tableRow' >
       <div className = 'rowLeft'>
         <div className = 'cellDate'>{invoice.date_issued}</div>
-        <div className = 'cellDate'>{invoice.date_due}</div>
-        <div className = 'cellDate'>{invoice.date_paid}</div>
+        <div className = 'cellDate'>{invoice.date_paid ? 'PAID' : invoice.date_due}</div>
         <div className = 'cellCode'>{invoice.number}</div>
       </div>
       <div className = 'rowCentre'>
@@ -25,5 +24,5 @@ const InvoiceList = (props) => {
 
 export default InvoiceList
 
-
-        // {invoice.date_paid ? 'PAID' : invoice.date_due}
+// <div className = 'cellDate'>{invoice.date_due}</div>
+// <div className = 'cellDate'>{invoice.date_paid}</div>

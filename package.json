@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
     "filestack-js": "^2.0.5",
     "filestack-react": "^2.0.3",
     "material-table": "^1.32.0",
@@ -35,6 +36,7 @@
     "plotly.js": "^1.47.1",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
+    "react-chartjs-2": "^2.7.6",
     "react-day-picker": "^7.3.0",
     "react-dom": "^16.7.0",
     "react-live-clock": "^3.1.0",

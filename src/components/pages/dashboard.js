@@ -4,6 +4,7 @@ import Auth from '../../lib/auth'
 import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
 import InvoiceHeader from './lists/InvoiceHeader'
+import Chart from './charts/chart'
 
 class Dashboard extends React.Component {
   constructor() {
@@ -15,6 +16,8 @@ class Dashboard extends React.Component {
     }
     this.today = moment()
     this.userCurrent = ''
+    this.chartLabels ={}
+    this.chartData={}
   }
 
   getData() {
@@ -23,11 +26,7 @@ class Dashboard extends React.Component {
         invoices: res.data.invoices,
         projects: res.data.projects,
         clients: res.data.clients
-      }, () => {
-        console.log(this.state.invoices,)
-        console.log(this.state.clients)
-        console.log(this.state.projects)
-      },))
+      }, () => this.collectChartData(this.state.projects)))
       .catch(err => console.log(err))
   }
 
@@ -47,6 +46,42 @@ class Dashboard extends React.Component {
     // console.log()
   }
 
+  collectChartData(array){
+    const labels =[]
+    let values =[]
+    for (let i=0; i<array.length; i++) {
+      labels[i]=array[i].name
+      values[i]=0
+      for (let j=0; j<array[i].invoices.length; j++ ){
+        values[i]+=array[i].invoices[j].amount
+      }
+    }
+    console.log(values)
+    values = JSON.parse(values)-
+    console.log(values)
+    this.setState({
+      chartData: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Population',
+            data: [],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)'
+            ]
+          }
+        ]
+      }
+    })
+  }
+
+
 
   componentDidMount() {
     console.log('DASHBOARD')
@@ -61,13 +96,14 @@ class Dashboard extends React.Component {
         <div className="subHeader2">Dashboard</div>
         <div className="subHeader3">Invoices due</div>
         <div className = 'dataTable'>
+          <Chart chartData={this.state.chartData} />
           <InvoiceHeader />
           {this.state.invoices && this.state.invoices.map(invoice => (
             <div key={invoice.id} className='lineItem'>
-              {invoice.date_paid && <InvoiceList
+              <InvoiceList
                 invoice={invoice}
                 today={this.today}
-              />}
+              />
             </div>
           ))}
         </div>
