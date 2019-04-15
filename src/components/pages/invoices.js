@@ -4,7 +4,7 @@ import Auth from '../../lib/auth'
 import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
 import InvoiceHeader from './lists/InvoiceHeader'
-import InvoiceStats from './lists/InvoiceStats'
+import TableStats from './lists/TableStats'
 import ModalInvoice from './modals/InvoiceModal'
 
 class Invoices extends React.Component {
@@ -136,7 +136,7 @@ class Invoices extends React.Component {
         </div>
 
         <div className = 'statsTable'>
-          <InvoiceStats totalDue={totalDue} totalOverdue={totalOverdue}/>
+          <TableStats totalDue={totalDue} totalOverdue={totalOverdue}/>
         </div>
         <div className = 'dataTable'>
           <InvoiceHeader />

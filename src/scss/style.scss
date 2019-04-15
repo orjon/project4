@@ -29,12 +29,21 @@ textarea, select, input, button { outline: none; }
   height: 100vh;
   display: flex;
   flex-direction: column;
-  // border: 1px solid red;
 }
 
 .bodyWrapper {
-    padding: 15px;
+  padding: 15px;
+  overflow-y: auto;
+  border: 1px solid red;
+  height: 100%;
 }
+
+.overflowFooter {
+  height: 1vh;
+  background-color: rgba(0,0,0,0);
+  box-shadow: 0 0 10px black;
+}
+
 
 .container {
   border: 1px solid #888;

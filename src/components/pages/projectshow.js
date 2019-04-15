@@ -7,6 +7,7 @@ import ProjectInvoiceList from './lists/ProjectInvoiceList'
 import ProjectExpenseHeader from './lists/ProjectExpenseHeader'
 import ProjectExpenseList from './lists/ProjectExpenseList'
 import ModalProjectUpdate from './modals/projectUpdate'
+import TableStats from './lists/TableStats'
 import moment from 'moment'
 
 
@@ -117,13 +118,15 @@ class ProjectShow extends React.Component {
 
     return (
       <main className="section">
-        <div className="subHeader1 columns">
+        <div className="subHeader2 columns">
           <div>{this.state.project.code} {this.state.project.name} : {this.state.client_name}</div>
-          <div>£&thinsp;{(invoiceSum-expenseSum).toFixed(2)}</div>
         </div>
         <div className="subHeader2 columns">
           <div>Invoices</div>
-          <div>£&thinsp;{invoiceSum}</div>
+          <div className='cellCurrency'>£&thinsp;{invoiceSum}</div>
+        </div>
+        <div className = 'statsTable'>
+          <TableStats totalDue={123} totalOverdue={321}/>
         </div>
         <div className = 'dataTable'>
           <ProjectInvoiceHeader />
@@ -143,6 +146,7 @@ class ProjectShow extends React.Component {
           <div>Expenses</div>
           <div>£&thinsp;{expenseSum}</div>
         </div>
+
         <div className = 'dataTable'>
           <ProjectExpenseHeader />
           {this.state.project.expenses && this.state.project.expenses.map(expense => (

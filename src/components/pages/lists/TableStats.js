@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InvoiceStats = (props) => {
+const TableStats = (props) => {
   const totalDue = props.totalDue
   const totalOverdue = props.totalOverdue
 
@@ -12,10 +12,12 @@ const InvoiceStats = (props) => {
       </div>
       <div className = 'tableRow'>
         <div className = 'cellQuarterRight'>of which overdue:</div>
-        <div className = 'cellCurrency'>£&thinsp;{(totalOverdue && totalOverdue.toFixed(2)) || '0.00'}</div>
+        <div className = 'cellCurrency overdue'>
+          £&thinsp;{(totalOverdue && totalOverdue.toFixed(2)) || '0.00'}
+        </div>
       </div>
     </div>
   )
 }
 
-export default InvoiceStats
+export default TableStats
