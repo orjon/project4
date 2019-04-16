@@ -6,7 +6,7 @@ import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 import moment from 'moment'
 
-class ModalInvoice extends React.Component {
+class ModalInvoiceAdd extends React.Component {
   constructor(...args) {
     super(...args)
 
@@ -22,7 +22,7 @@ class ModalInvoice extends React.Component {
         project_id: ''
       },
       error: '',
-      modalShow: false,
+      modalAddShow: false,
       selectedDay: undefined
     }
 
@@ -204,4 +204,4 @@ class ModalInvoice extends React.Component {
   }
 }
 
-export default ModalInvoice
+export default ModalInvoiceAdd

@@ -77,7 +77,6 @@ class Dashboard extends React.Component {
     return (
       <main className="section">
         <div className="subHeader2">Dashboard</div>
-        <div className="subHeader3">Invoices due</div>
         <div className = 'dataTable'>
           <PieChart data={this.state.chartData} legend={'right'} />
           <InvoiceHeader />

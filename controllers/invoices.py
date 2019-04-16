@@ -9,11 +9,13 @@ invoice_schema = InvoiceSchema()
 api = Blueprint('invoices', __name__)
 
 @api.route('/invoices', methods=['GET'])
+@secure_route
 def index():
     invoices = Invoice.query.all()
     return invoice_schema.jsonify(invoices, many=True), 200 #OK
 
-@api.route('/invoices/<int:invoice_id>', methods=['GET'])
+@api.route('/invoice/<int:invoice_id>', methods=['GET'])
+@secure_route
 def show(invoice_id):
     invoice = Invoice.query.get(invoice_id)
     return invoice_schema.jsonify(invoice), 200 #OK

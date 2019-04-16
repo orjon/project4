@@ -7,6 +7,7 @@ const InvoiceHeader = () => {
       <div className = 'rowLeft'>
         <div className = 'cellDate'>issued</div>
         <div className = 'cellDate'>due</div>
+        <div className = 'cellDate'>paid</div>
         <div className = 'cellCode'>no.</div>
       </div>
       <div className = 'rowCentre'>

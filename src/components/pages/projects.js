@@ -53,11 +53,9 @@ class Projects extends React.Component {
   getData() {
     axios.get('/api/user', { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => this.setState({
-        projects: res.data.projects,
-        clients: res.data.clients
+        projects: res.data.projects
       }, () => {
-        console.log(this.state.clients)
-        console.log(this.state.projects)
+
       }))
       .catch(err => console.log(err))
   }

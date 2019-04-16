@@ -24,14 +24,10 @@ const InvoiceList = (props) => {
         <div className = 'cellHalf'>{invoice.description}</div>
       </div>
       <div className = 'rowRight'>
-        <div className = 'cellDateRight'>£&thinsp;{invoice.amount.toFixed(2)}</div>
+        <div className = 'cellCurrency'>£&thinsp;{invoice.amount.toFixed(2)}</div>
       </div>
     </div>
   )
 }
 
 export default InvoiceList
-
-
-// <div className = 'cellDate'>{invoice.date_due}</div>
-// <div className = 'cellDate'>{invoice.date_paid}</div>

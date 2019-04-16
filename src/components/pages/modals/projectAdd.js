@@ -14,12 +14,10 @@ class ModalProjectAdd extends React.Component {
         name: ''
       },
       error: '',
-      modalShow: false
+      modalAddShow: false
     }
 
     this.userCurrent = ''
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   clearState() {
@@ -31,11 +29,7 @@ class ModalProjectAdd extends React.Component {
     this.setState({ data })
   }
 
-  handleChange({ target: { name, value }}) {
-    const data = {...this.state.data, [name]: value }
-    const error = ''
-    this.setState({ data, error })
-  }
+
 
   handleSubmit(e) {
     e.preventDefault()

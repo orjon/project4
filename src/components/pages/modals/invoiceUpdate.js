@@ -2,20 +2,24 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../../lib/auth'
 import Modal from 'react-bootstrap/Modal'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import 'react-day-picker/lib/style.css'
+import moment from 'moment'
 
 
 class ModalInvoiceUpdate extends React.Component {
-  constructor(...args) {
-    super(...args)
+  constructor(...props) {
+    super(...props)
 
     this.state = {
       data: {
-        client_id: '',
-        code: '',
-        name: ''
+        project_id: '',
+        amount: 0,
+        number: '',
+        client_id: ''
       },
       error: '',
-      modalShow: false,
+      modalShow: true,
       selectedDay: undefined
     }
 
@@ -28,6 +32,33 @@ class ModalInvoiceUpdate extends React.Component {
   handleClose() {
     this.setState({ modalShow: false }, this.getData())
   }
+
+  handleDateIssued(day)  {
+    const date = this.dateConvert(day)
+    const data = {...this.state.data, date_issued: date }
+    const error = ''
+    this.setState({ data, error })
+  }
+
+  handleDateDue(day) {
+    const date = this.dateConvert(day)
+    const data = {...this.state.data, date_due: date }
+    const error = ''
+    this.setState({ data, error })
+  }
+
+  handleDatePaid(day)  {
+    const date = this.dateConvert(day)
+    const data = {...this.state.data, date_paid: date }
+    const error = ''
+    this.setState({ data, error })
+  }
+
+
+  dateConvert(day){
+    return moment(day).format('YYYY-MM-DD')
+  }
+
 
 
   handleChange({ target: { name, value }}) {
@@ -42,7 +73,8 @@ class ModalInvoiceUpdate extends React.Component {
     this.getData()
     axios.get(`/api/invoice/${this.props.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => {
-        this.setState({ data: {...res.data, client_id: res.data.client.id }})
+        this.setState({
+          data: {...res.data, project_id: res.data.project.id}})
       })
   }
 
@@ -57,6 +89,7 @@ class ModalInvoiceUpdate extends React.Component {
         this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
       })
   }
+
 
 
 
@@ -75,14 +108,14 @@ class ModalInvoiceUpdate extends React.Component {
     axios.get('/api/user', { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => this.setState({
         invoices: res.data.invoices,
+        projects: res.data.projects,
         clients: res.data.clients
       }))
       .catch(err => console.log(err))
   }
 
   render() {
-    if(!this.state.data.client) return null
-    console.log('modal state', this.state)
+    console.log(this.state.data)
     return (
       <Modal
         {...this.props}
@@ -98,47 +131,86 @@ class ModalInvoiceUpdate extends React.Component {
         </Modal.Header>
 
         <Modal.Body>
-          <form id="InvoiceUpdate" className="update" onSubmit={this.handleSubmit}>
+
+          <form id="invoiceUpdate" className="update" onSubmit={this.handleSubmit}>
 
             <div className="select">
               <select
-                name="client_id"
-                defaultValue={this.state.data.client.id}
-                onChange={this.handleChange}>
-                {this.state.clients && this.state.clients.map(client => (
-                  <option key={client.id} value={client.id}>
-                    {client.name}
+                name="project_id"
+                value={`${this.state.data.project_id}-${this.props.client_id}`}
+                onChange={this.handleChangeDropDown}>
+                {this.state.projects && this.state.projects.map(project => (
+                  <option
+                    key={project.id}
+                    value={`${project.id}-${project.client.id}`}>
+                    {project.client.name}: {project.name}
                   </option>
                 ))}
               </select>
             </div>
-            <br />
+
             <div>
               <input
-                className={`input ${this.props.error ? 'is-danger': ''}`}
-                name="code"
-                placeholder="Project code"
-                value={this.state.data.code || this.props.code}
+                className={`input ${this.state.error ? 'is-danger': ''}`}
+                name="number"
+                placeholder="Invoice number"
+                value={this.state.data.number}
                 onChange={this.handleChange}
               />
             </div>
-            <br />
+
             <div>
               <input
                 className={`input ${this.props.error ? 'is-danger': ''}`}
-                name="name"
-                placeholder="Project Title"
-                value={this.state.data.name || this.props.name}
+                name="description"
+                placeholder="Invoice description"
+                value={this.state.data.description}
                 onChange={this.handleChange}
               />
             </div>
 
             <br />
+            <div>
+              <input
+                className={`input ${this.state.error ? 'is-danger': ''}`}
+                name="amount"
+                placeholder="Amount"
+                value={this.state.data.amount}
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <br />
+
+            <div>
+              <DayPickerInput
+
+                onDayChange={this.handleDateIssued}
+                format={'YYYY-MM-DD'}/>
+            </div>
+            <div>
+              <DayPickerInput
+
+                onDayChange={this.handleDateDue}
+                format={'YYYY-MM-DD'}/>
+            </div>
+            <div>
+              <DayPickerInput
+
+                onDayChange={this.handleDatePaid}
+                format={'YYYY-MM-DD'}/>
+            </div>
+            <br />
             {this.state.error && <div className="help is-danger">{this.state.error} </div>}
             <div>
-              <button form="InvoiceUpdate" className="button">Update invoice</button>
+              <button form="invoiceUpdate" className="button">Update invoice</button>
             </div>
           </form>
+
+
+
+
+
 
         </Modal.Body>
         <Modal.Footer>
@@ -149,4 +221,10 @@ class ModalInvoiceUpdate extends React.Component {
   }
 }
 
+
 export default ModalInvoiceUpdate
+
+
+// value={this.state.data.date_issued}
+// value={this.state.data.date_due}
+// value={this.state.data.date_paid}

@@ -12,6 +12,7 @@ import Home from './components/pages/home'
 import Dashboard from './components/pages/dashboard'
 import Projects from './components/pages/projects'
 import ProjectShow from './components/pages/projectshow'
+import InvoiceShow from './components/pages/invoiceshow'
 import Invoices from './components/pages/invoices'
 import Clients from './components/pages/clients'
 import Expenses from './components/pages/expenses'
@@ -38,6 +39,7 @@ class App extends React.Component {
               <Route exact path="/" component={Home} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/projects" component={Projects} />
+              <Route path="/invoice/:id" component={InvoiceShow}/>
               <Route path="/project/:id" component={ProjectShow}/>
               <Route path="/invoices" component={Invoices} />
               <Route path="/clients" component={Clients} />

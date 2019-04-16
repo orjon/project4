@@ -5,8 +5,7 @@ import moment from 'moment'
 import InvoiceList from './lists/InvoiceList'
 import InvoiceHeader from './lists/InvoiceHeader'
 import TableStats from './lists/TableStats'
-import ModalInvoice from './modals/InvoiceModal'
-import ModalProjectUpdate from './modals/projectUpdate'
+import ModalInvoiceAdd from './modals/InvoiceAdd'
 
 class Invoices extends React.Component {
   constructor() {
@@ -17,24 +16,37 @@ class Invoices extends React.Component {
         amount: '',
         project_id: ''
       },
-      error: ''
+      error: '',
+      modalAddShow: false,
+      modalUpdateShow: false
     }
     this.today = moment()
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
-    this.handleShow = this.handleShow.bind(this)
-    this.handleClose = this.handleClose.bind(this)
+    this.handleAddShow = this.handleAddShow.bind(this)
+    this.handleAddClose = this.handleAddClose.bind(this)
+
+    this.handleUpdateShow = this.handleUpdateShow.bind(this)
+    this.handleUpdateClose = this.handleUpdateClose.bind(this)
     this.handleChangeDropDown = this.handleChangeDropDown.bind(this)
   }
 
-  handleClose() {
-    this.setState({ modalShow: false })
+  handleAddClose() {
+    this.setState({ modalAddShow: false })
   }
 
-  handleShow() {
-    this.setState({ modalShow: true })
+  handleAddShow() {
+    this.setState({ modalAddShow: true })
+  }
+
+  handleUpdateClose() {
+    this.setState({ modalUpdateShow: false })
+  }
+
+  handleUpdateShow() {
+    this.setState({ modalUpdateShow: true })
   }
 
 
@@ -65,9 +77,7 @@ class Invoices extends React.Component {
   getData() {
     axios.get('/api/user', { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => this.setState({
-        invoices: res.data.invoices,
-        projects: res.data.projects,
-        clients: res.data.clients
+        invoices: res.data.invoices
       }))
       .catch(err => console.log(err))
   }
@@ -120,9 +130,10 @@ class Invoices extends React.Component {
 
   render() {
     const modalClose = () => {
-      this.setState({ modalShow: false })
+      this.setState({ modalAddShow: false })
       this.getData()
     }
+
     const totalDue = this.state.invoices && this.sumDue(this.state.invoices)
     const totalOverdue= this.state.invoices && this.sumOverdue(this.state.invoices)
 
@@ -157,10 +168,8 @@ class Invoices extends React.Component {
 
         </div>
 
-        <button onClick={this.handleShow}>Add Invoice</button>
-
-        <ModalInvoice show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
-
+        <button onClick={this.handleAddShow}>Add Invoice</button>
+        <ModalInvoiceAdd show={this.state.modalAddShow} error={this.state.error} onHide={modalClose}/>
       </main>
     )
   }
