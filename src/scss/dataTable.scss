@@ -24,6 +24,32 @@
   // text-decoration: underline;
 }
 
+.iconsxx {
+  margin: 0 3px;
+  text-align: center;
+  // border: 1px solid magenta;
+  vertical-align: top;
+  transform: -5px 0;
+}
+
+.icon {
+  border-radius: 20px;
+  border: 1 solid rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0);
+  color: $colorButtonText;
+  line-height: 25px;
+  padding: 0;
+}
+
+icon:focus {
+    outline: none;
+}
+
+.iconTitle {
+  text-align: center;
+  // border: 1px solid lime;
+}
+
 
 
 .dataTable {

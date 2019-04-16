@@ -12,7 +12,7 @@ const ProjectExpenseHeader = () => {
         <div className = 'cellHalf'>description</div>
       </div>
       <div className = 'rowRight'>
-        <div className = 'cellDateRight'>amount</div>
+        <div className = 'cellCurrency'>amount</div>
       </div>
     </div>
   )

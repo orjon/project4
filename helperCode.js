@@ -10,6 +10,25 @@ console.log(amountWhole)
 
 £&thinsp;{sterling.toFixed(2)}
 
+<CreateProfile
+  onFirstNameChange={this.firstNameChange}
+  onHide={close}
+  show={this.state.showModal}
+/>
+and then in the CreateProfile component you can either do
+
+const CreateProfile = ({onFirstNameChange, onHide, show }) => {...}
+with destructuring it will assign the matching property names/values to the passed in variables. The names just have to match with the properties
+
+or just do
+
+const CreateProfile = (props) => {...}
+and in each place call props.onHide or whatever prop you are trying to access.
+
+
+
+
+
 
 chart colors
 --blue: #007bff;

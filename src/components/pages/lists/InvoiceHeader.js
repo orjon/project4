@@ -5,6 +5,9 @@ const InvoiceHeader = () => {
   return (
     <div className = 'rowHeader'>
       <div className = 'rowLeft'>
+        <div className = 'columns'>
+          <div className= 'iconsTitle'>action</div>
+        </div>
         <div className = 'cellDate'>issued</div>
         <div className = 'cellDate'>due</div>
         <div className = 'cellCode'>no.</div>
@@ -15,7 +18,7 @@ const InvoiceHeader = () => {
         <div className = 'cellHalf'>description</div>
       </div>
       <div className = 'rowRight'>
-        <div className = 'cellDateRight'>amount</div>
+        <div className = 'cellCurrency'>amount</div>
       </div>
     </div>
   )

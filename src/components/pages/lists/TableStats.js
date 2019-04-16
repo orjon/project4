@@ -7,7 +7,7 @@ const TableStats = (props) => {
   return (
     <div className = 'rowStats'>
       <div className = 'tableRow'>
-        <div className = 'cellQuarterRight'>Total due:</div>
+        <div className = 'cellQuarterRight'>total due:</div>
         <div className = 'cellCurrency'>£&thinsp;{totalDue && totalDue.toFixed(2)}</div>
       </div>
       <div className = 'tableRow'>

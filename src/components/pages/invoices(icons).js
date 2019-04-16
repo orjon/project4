@@ -61,6 +61,20 @@ class Invoices extends React.Component {
       })
   }
 
+  handleDelete(e) {
+    console.log('deleting')
+    e.preventDefault()
+    axios.delete(`/api/invoices/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => {
+        this.props.history.push('/invoices')
+
+      })
+      .catch((err) => {
+        console.log('the error is', err)
+        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+      })
+  }
+
 
   getData() {
     axios.get('/api/user', { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
@@ -69,6 +83,7 @@ class Invoices extends React.Component {
         projects: res.data.projects,
         clients: res.data.clients
       }))
+      .then(() => console.log(this.invoices))
       .catch(err => console.log(err))
   }
 
@@ -131,7 +146,7 @@ class Invoices extends React.Component {
         <div className='subHeader2 columns'>
           <div>Invoices</div>
           <div className='columns'>
-            <div className='subHeader2Label'>Total invoiced:</div>
+            <div className='subHeader2Label'>total invoiced:</div>
             <div className='subHeader2Currency'>£&thinsp;{this.state.invoices && this.sumArray(this.state.invoices).toFixed(2)}</div>
           </div>
         </div>
@@ -148,6 +163,9 @@ class Invoices extends React.Component {
                 ${this.checkPaid(invoice) ? 'paid':''}
                 `}>
               <InvoiceList
+                handleDelete={this.handleDelete}
+                handleUpdate={this.handleUpdate}
+                test={this.tester}
                 invoice={invoice}
                 overdue={this.checkOverdue(invoice)}
                 paid={this.checkPaid(invoice)}/>

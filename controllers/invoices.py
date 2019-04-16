@@ -39,6 +39,7 @@ def create():
     return invoice_schema.jsonify(invoice), 201 #Created
 
 @api.route('/invoices/<int:invoice_id>', methods=['PUT'])
+@secure_route
 def update(invoice_id):
     data = request.get_json()
     invoice = Invoice.query.get(invoice_id)
@@ -53,6 +54,7 @@ def update(invoice_id):
     return invoice_schema.jsonify(invoice), 202 #Accepted
 
 @api.route('/invoices/<int:invoice_id>', methods=['DELETE'])
+@secure_route
 def delete(invoice_id):
     invoice = Invoice.query.get(invoice_id)
     invoice.remove()

@@ -64,13 +64,15 @@ with app.app_context():
         description='Technical Documentation', client=clientB, project=aspire)
     inv3 = Invoice(user=orjon, number='INV-003', amount=1850,
         date_issued='2019-03-02', date_due='2019-04-01', date_paid=None,
-        description='3D visualisation & printing', client=clientC, project=playstation)
+        description='3D visualisation & printing', client=clientC, project=playstation,
+        pdf='http://www.orjon.com/dev/project4/sampleInvoice.pdf')
     inv4 = Invoice(user=orjon, number='INV-004', amount=750,
         date_issued='2019-03-11', date_due='2019-04-10', date_paid=None,
         description='3D model', client=clientB, project=heathrow)
     inv5 = Invoice(user=orjon, number='INV-005', amount=640,
         date_issued='2019-04-03', date_due='2019-05-02', date_paid=None,
-        description='3D animation', client=clientA, project=deloitte)
+        description='3D animation', client=clientA, project=deloitte,
+        pdf='http://www.orjon.com/dev/project4/sampleInvoice.pdf')
     inv6 = Invoice(user=orjon, number='INV-006', amount=1200,
         date_issued='2019-04-10', date_due='2019-05-09', date_paid=None,
         description='3D visualisation & detailing', client=clientA, project=deloitte)
@@ -80,6 +82,8 @@ with app.app_context():
     j_kemp = Supplier(user=orjon, name='Justin Kemp')
     apple = Supplier(user=orjon, name='Apple Inc')
 
+    expense0 = Expense(user=orjon, description='Contractor expense',
+        date='2019-03-11', amount=976.90, project=samsung, supplier=j_kemp)
     expense1 = Expense(user=orjon, description='Contractor expense',
         date='2019-01-09', amount=123.10, project=samsung, supplier=j_kemp)
     expense2 = Expense(user=orjon, description='Accommodation',
@@ -111,11 +115,11 @@ with app.app_context():
     db.session.add(aspire)
     db.session.add(playstation)
 
+    db.session.add(inv4)
+    db.session.add(inv5)
     db.session.add(inv1)
     db.session.add(inv2)
     db.session.add(inv3)
-    db.session.add(inv4)
-    db.session.add(inv5)
     db.session.add(inv6)
 
     db.session.add(permier_inn)
@@ -123,15 +127,17 @@ with app.app_context():
     db.session.add(j_kemp)
     db.session.add(apple)
 
-    db.session.add(expense1)
-    db.session.add(expense2)
-    db.session.add(expense3)
-    db.session.add(expense4)
+    db.session.add(expense0)
+
     db.session.add(expense5)
     db.session.add(expense6)
     db.session.add(expense7)
     db.session.add(expense8)
     db.session.add(expense9)
+    db.session.add(expense1)
+    db.session.add(expense2)
+    db.session.add(expense3)
+    db.session.add(expense4)
     db.session.add(expense10)
 
     clientD = Client(user=bill, name='Simon Parker')

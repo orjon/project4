@@ -4,7 +4,6 @@ button:focus {
 
 button {
   border-radius: 0px;
-  margin-top: 10px;
   border: 1px solid $colorButton;
   background-color: $colorButton;
   color: $colorButtonText;
@@ -12,8 +11,10 @@ button {
   font-size: 15px;
   letter-spacing: 0.5px;
   line-height: 25px;
+  padding: 0;
 
 }
+
 
 .delete {
   color: white;

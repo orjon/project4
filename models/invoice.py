@@ -19,7 +19,7 @@ class Invoice(db.Model, BaseModel):
     date_issued = db.Column(db.String(10), nullable=False)
     date_due = db.Column(db.String(10), nullable=False)
     date_paid = db.Column(db.String(10))
-    # pdf_link = db.Column(db.Text)
+    pdf = db.Column(db.String(100))
     amount = db.Column(db.Float, nullable=False)
     # vat - = db.Column(db.Integer, nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
