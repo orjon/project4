@@ -57,8 +57,4 @@ const ClientSummary = (props) => {
   )
 }
 
-
-
-
-
 export default ClientSummary
