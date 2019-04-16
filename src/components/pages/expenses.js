@@ -1,9 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
-import ExpenseList from './lists/ExpenseList'
-import ExpenseHeader from './lists/ExpenseHeader'
-import ModalExpense from './modals/ExpenseModal'
+import ExpenseList from './lists/expenseList'
+import ExpenseHeader from './lists/expenseHeader'
+import ModalExpense from './modals/expenseModal'
 
 class Expenses extends React.Component {
   constructor() {

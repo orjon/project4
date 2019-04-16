@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
-import ClientHeader from './lists/ClientHeader'
-import ClientList from './lists/ClientList'
+import ClientHeader from './lists/clientHeader'
+import ClientList from './lists/clientList'
 import ModalClient from './modals/clientModal'
-import ClientSummary from './lists/ClientSummary'
+import ClientSummary from './lists/clientSummary'
 
 
 

@@ -2,10 +2,10 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import moment from 'moment'
-import InvoiceList from './lists/InvoiceList'
-import InvoiceHeader from './lists/InvoiceHeader'
-import TableStats from './lists/TableStats'
-import ModalInvoiceAdd from './modals/InvoiceAdd'
+import InvoiceList from './lists/invoiceList'
+import InvoiceHeader from './lists/invoiceHeader'
+import TableStats from './lists/tableStats'
+import ModalInvoiceAdd from './modals/invoiceAdd'
 
 class Invoices extends React.Component {
   constructor() {
