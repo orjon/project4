@@ -114,22 +114,24 @@ class InvoiceShow extends React.Component {
     }
 
     const invoice = this.state.invoice
-
+    const overdue = this.checkOverdue(invoice)
+    const paid = this.checkPaid(invoice)
 
 
     return (
       <main className="section">
         <div className="subHeader2 columns">
-          <div>Invoice : {this.state.invoice.number}</div>
+          <div><Link to="/invoices" className='headerLink'>Invoice</Link><span> : {this.state.invoice.number}</span></div>
+          <div className='columns'>
+            <div className='subHeader2Label'></div>
+            <div className='subHeader2Currency'>£&thinsp;{invoice && invoice.amount.toFixed(2)}</div>
+          </div>
         </div>
 
         <div className = 'dataTable'>
           <InvoiceItemHeader />
-          <div className={`lineItem
-                ${this.checkOverdue(this.state.invoice) ? 'overdue':''}
-                ${this.checkPaid(this.state.invoice) ? 'paid':''}
-                `}>
-            <InvoiceItem invoice={invoice}/>
+          <div className='lineItem'>
+            <InvoiceItem invoice={invoice} overdue={overdue} paid={paid}/>
           </div>
 
         </div>
@@ -140,6 +142,8 @@ class InvoiceShow extends React.Component {
         </div>
 
         <ModalInvoiceUpdate
+          overdue={overdue}
+          paid={paid}
           show={this.state.modalShow}
           error={this.state.error}
           onHide={modalClose}

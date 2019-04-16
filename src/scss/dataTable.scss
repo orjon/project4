@@ -33,7 +33,7 @@
 }
 
 .icon {
-  border-radius: 20px;
+  // border-radius: 20px;
   border: 1 solid rgba(0,0,0,0);
   background-color: rgba(0,0,0,0);
   color: $colorButtonText;
@@ -61,21 +61,28 @@ icon:focus {
   font-size: 15px;
   letter-spacing: 0.5px;
   line-height: 30px;
-  margin-bottom: 25px;
+
 
   .rowHeader {
     border-bottom: 1px solid $colorFontMain;
     font-weight: bold;
     text-transform: uppercase;
   }
+
+  .tableLastRow {
+    border-bottom: 0px solid $colorTableLine;
+  }
+
   .tableRow {
     border-bottom: 1px solid $colorTableLine;
   }
+
   .tableRow, .rowHeader{
     // border: 1px solid green;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
 
     .rowLeft{
       // border: 1px solid orange;

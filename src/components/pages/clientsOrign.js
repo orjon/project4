@@ -3,7 +3,10 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import ClientHeader from './lists/clientHeader'
 import ClientList from './lists/clientList'
+import ClientSummaryList from './lists/clientSummaryList'
 import ModalClient from './modals/clientModal'
+import ClientSummary from './lists/clientSummary'
+
 
 
 class Clients extends React.Component {
@@ -88,8 +91,16 @@ class Clients extends React.Component {
             <div key={client.id} className="lineItem">
               <ClientList
                 client={client}
+                sumArray={this.sumArray}
+                totalExpenses={this.sumArray(client.expenses)}
+                comparator={this.comparator(client.expenses, client.invoices)}
+                totalInvoiced={this.sumArray(client.invoices)}
               />
-              <div className="tableRow">&nbsp;</div>
+              <ClientSummary
+                totalExpenses={this.sumArray(client.expenses)}
+                comparator={this.comparator(client.expenses,client.invoices)}
+                totalInvoiced={this.sumArray(client.invoices)}
+              />
             </div>
           ))}
         </div>
@@ -104,3 +115,9 @@ class Clients extends React.Component {
 }
 
 export default Clients
+
+// <ClientSummary
+//   totalExpenses={this.sumArray(client.expenses)}
+//   comparator={this.comparator(project.expenses,project.invoices)}
+//   totalInvoiced={this.sumArray(project.invoices)}
+// />

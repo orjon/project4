@@ -8,7 +8,7 @@ $colorBody: #f0eff4;
 $colorFontMain: #555;
 $colorFontHover: #888;
 $colorTableHeaderLine: #CCCCCC;
-$colorTableLine: #DCDCDC;
+$colorTableLine: #D0D0D0;
 $acid: lime;
 
 $colorButtonHover: #CCCCCC;
@@ -27,3 +27,20 @@ $colorDataPaid: #BBB;
 $colorNegative: #C60000;
 $colorPositive: #1eb700;
 $colorEqual: dodgerblue;
+
+.negative {
+  font-size: 20px;
+  font-weight: 800;
+  color: $colorNegative;
+}
+.equal {
+  font-size: 23px;
+  font-weight: 600;
+  color: $colorEqual;
+}
+
+.positive {
+  font-size: 20px;
+  font-weight: 800;
+  color: $colorPositive;
+}
