@@ -21,6 +21,15 @@ const ClientList = (props) => {
               <div>{project.name}</div>
             </Link>
           ))}
+          <div className = 'cellQuarterRight'>expenses</div>
+          <div className = 'cellCurrency'>amount</div>
+          <div className='cellComparator'>
+            <div className='lineItem summary'>
+              <div>&#32;</div>
+            </div>
+          </div>
+          <div className = 'cellCodeRight'>invoices</div>
+          <div className = 'cellCurrency'>amount</div>
         </div>
       </div>
     </div>
