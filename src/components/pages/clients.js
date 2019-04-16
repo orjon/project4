@@ -1,9 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
-import ClientHeader from './lists/ClientHeader'
-import ClientList from './lists/ClientList'
+import ClientHeader from './lists/clientHeader'
+import ClientList from './lists/clientList'
 import ModalClient from './modals/clientModal'
+import ClientSummary from './lists/clientSummary'
 
 
 
@@ -67,6 +68,13 @@ class Clients extends React.Component {
     return sum
   }
 
+  comparator(array1, array2){
+    const diff =this.sumArray(array1)-this.sumArray(array2)
+    if (diff>0) return '>'
+    if (diff<0) return '<'
+    else return '='
+  }
+
   render() {
     const modalClose = () => {
       this.setState({ modalShow: false })
@@ -83,7 +91,11 @@ class Clients extends React.Component {
               <ClientList
                 client={client}
               />
-
+              <ClientSummary
+                totalExpenses={this.sumArray(client.expenses)}
+                comparator={this.comparator(client.expenses,client.invoices)}
+                totalInvoiced={this.sumArray(client.invoices)}
+              />
             </div>
           ))}
         </div>

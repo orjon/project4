@@ -2,9 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
-import ProjectList from './lists/ProjectList'
-import ProjectSummary from './lists/ProjectSummary'
-import ProjectHeader from './lists/ProjectHeader'
+import ProjectList from './lists/projectList'
+import ProjectSummary from './lists/projectSummary'
+import ProjectHeader from './lists/projectHeader'
 import ModalProjectAdd from './modals/projectAdd'
 
 class Projects extends React.Component {
