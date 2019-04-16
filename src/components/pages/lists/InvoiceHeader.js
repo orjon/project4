@@ -5,14 +5,16 @@ const InvoiceHeader = () => {
   return (
     <div className = 'rowHeader'>
       <div className = 'rowLeft'>
+        <div className = 'cellCode'>inv no.</div>
         <div className = 'cellDate'>issued</div>
         <div className = 'cellDate'>due</div>
-        <div className = 'cellCode'>no.</div>
+
       </div>
       <div className = 'rowCentre'>
-        <div className = 'cellQuarter'>project</div>
-        <div className = 'cellQuarter'>client</div>
-        <div className = 'cellHalf'>description</div>
+        <div className = 'cellCode'>code</div>
+        <div className = 'cellThird'>project</div>
+        <div className = 'cellThird'>client</div>
+        <div className = 'cellThird'>description</div>
       </div>
       <div className = 'rowRight'>
         <div className = 'cellCurrency'>amount</div>

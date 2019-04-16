@@ -120,10 +120,7 @@ class InvoiceShow extends React.Component {
     return (
       <main className="section">
         <div className="subHeader2 columns">
-          <div>{this.state.invoice.number} : {this.state.invoice.project && this.state.invoice.project.name} - {this.state.invoice.client && this.state.invoice.client.name}</div>
-        </div>
-        <div className="subHeader2 columns">
-          <div>Invoices SHOW</div>
+          <div>Invoice : {this.state.invoice.number}</div>
         </div>
 
         <div className = 'dataTable'>

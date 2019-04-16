@@ -25,6 +25,9 @@ class Expense(db.Model, BaseModel):
     supplier_id = db.Column(db.Integer, db.ForeignKey('suppliers.id'))
     supplier = db.relationship('Supplier', backref='expenses')
 
+    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
+    client = db.relationship('Client', backref='expenses')
+
 
 class ExpenseSchema(mllo.ModelSchema, BaseSchema):
     user = fields.Nested('UserSchema', only=('id', 'username'))

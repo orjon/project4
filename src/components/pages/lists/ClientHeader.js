@@ -6,7 +6,7 @@ const ClientHeader = () => {
     <div className = 'rowHeader'>
       <div className = 'rowCentre'>
         <div className = 'cellQuarter'>client</div>
-        <div className = 'cellCode'>No.</div>
+        <div className = 'cellCode'>code</div>
         <div className = 'cellQuarter'>projects</div>
       </div>
     </div>

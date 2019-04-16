@@ -18,7 +18,8 @@ class ClientSchema(mllo.ModelSchema, BaseSchema):
 
     user = fields.Nested('UserSchema', only=('id', 'username'))
     projects = fields.Nested('ProjectSchema', many=True, only=('id', 'code', 'name'))
-    invoices = fields.Nested('InvoiceSchema', many=True, only=('id', 'number'))
+    invoices = fields.Nested('InvoiceSchema', many=True, only=('id', 'number', 'amount'))
+    expenses = fields.Nested('ExpenseSchema', many=True, only=('id', 'amount'))
     class Meta:
         model = Client
         exclude = ('created', 'updated')

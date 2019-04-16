@@ -8,13 +8,6 @@ const SupplierList = (props) => {
     <div className = 'tableRow' >
       <div className = 'rowCentre'>
         <div className = 'cellQuarter'>{supplier.name}</div>
-        <div className = 'cellQuarter'>
-          {supplier.expenses && supplier.expenses.map(expense => (
-            <Link to={`/project/${expense.project.id}`} key={expense.id} className='cell'>
-              <div>{expense.project.client.name}</div>
-            </Link>
-          ))}
-        </div>
         <div className = 'cellCode'>
           {supplier.expenses && supplier.expenses.map(expense => (
             <Link to={`/project/${expense.project.id}`} key={expense.id} className="cell">
@@ -29,6 +22,14 @@ const SupplierList = (props) => {
             </Link>
           ))}
         </div>
+        <div className = 'cellQuarter'>
+          {supplier.expenses && supplier.expenses.map(expense => (
+            <Link to={`/project/${expense.project.id}`} key={expense.id} className='cell'>
+              <div>{expense.project.client.name}</div>
+            </Link>
+          ))}
+        </div>
+
         <div className = 'cellQuarter'>
           {supplier.expenses && supplier.expenses.map(expense => (
             <div key={expense.id}>

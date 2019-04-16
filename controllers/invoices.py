@@ -40,7 +40,7 @@ def create():
     invoice.save()
     return invoice_schema.jsonify(invoice), 201 #Created
 
-@api.route('/invoices/<int:invoice_id>', methods=['PUT'])
+@api.route('/invoice/<int:invoice_id>', methods=['PUT'])
 @secure_route
 def update(invoice_id):
     data = request.get_json()

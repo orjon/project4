@@ -99,11 +99,9 @@ class Projects extends React.Component {
           <ProjectHeader />
           {this.state.projects && this.state.projects.map(project => (
             <div key={project.id} className='lineItem'>
-
               <ProjectList
                 project={project}
               />
-
               <ProjectSummary
                 totalExpenses={this.sumArray(project.expenses)}
                 comparator={this.comparator(project.expenses,project.invoices)}

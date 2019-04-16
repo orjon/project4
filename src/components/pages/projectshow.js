@@ -119,7 +119,7 @@ class ProjectShow extends React.Component {
     return (
       <main className="section">
         <div className="subHeader2 columns">
-          <div>{this.state.project.code} {this.state.project.name} : {this.state.client_name}</div>
+          <div>{this.state.project.code} {this.state.project.name} - {this.state.client_name}</div>
         </div>
         <div className="subHeader2 columns">
           <div>Invoices</div>

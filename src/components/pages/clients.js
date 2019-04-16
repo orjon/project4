@@ -58,7 +58,14 @@ class Clients extends React.Component {
       .then(() => this.getData())
   }
 
-
+  sumArray(array) {
+    const length = array.length
+    let sum = 0
+    for (let i=0; i<length; i++) {
+      sum += array[i].amount
+    }
+    return sum
+  }
 
   render() {
     const modalClose = () => {
@@ -76,6 +83,7 @@ class Clients extends React.Component {
               <ClientList
                 client={client}
               />
+
             </div>
           ))}
         </div>
@@ -91,7 +99,8 @@ class Clients extends React.Component {
 
 export default Clients
 
-//
-// <Button variant="primary" onClick={this.handleShow}>
-//   Also Add Client
-// </Button>
+// <ClientSummary
+//   totalExpenses={this.sumArray(client.expenses)}
+//   comparator={this.comparator(project.expenses,project.invoices)}
+//   totalInvoiced={this.sumArray(project.invoices)}
+// />

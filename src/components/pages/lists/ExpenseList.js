@@ -13,13 +13,13 @@ const ExpenseList = (props) => {
         <Link to={expense.project && `/project/${expense.project.id}`} className='cellCode cell'>
           {(expense.project && expense.project.code) || 'UNASSIGNED'}
         </Link>
-        <Link to={expense.project && `/project/${expense.project.id}`} className='cellQuarter cell'>
+        <Link to={expense.project && `/project/${expense.project.id}`} className='cellThird cell'>
           {(expense.project && expense.project.name) || 'UNASSIGNED'}
         </Link>
-        <div className='cellQuarter'>
+        <div className='cellThird'>
           {(expense.supplier && expense.supplier.name) || 'UNASSIGNED'}
         </div>
-        <div className='cellHalf'>{expense.description}</div>
+        <div className='cellThird'>{expense.description}</div>
       </div>
       <div className = 'rowRight'>
         <div className ='cellDateRight'>£&thinsp;{expense.amount.toFixed(2)}</div>

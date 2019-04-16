@@ -117,6 +117,15 @@ icon:focus {
 
     }
 
+    .cellThird{
+      padding-left: 5px;
+      background-color: $colorBody;
+      white-space:nowrap;
+      width: 33%;
+      // border: 1px solid cyan;
+    }
+
+
     .cellQuarter{
       padding-left: 5px;
       background-color: $colorBody;

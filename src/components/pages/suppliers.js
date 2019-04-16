@@ -3,6 +3,7 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import SupplierHeader from './lists/SupplierHeader'
 import SupplierList from './lists/SupplierList'
+import SupplierSummary from './lists/SupplierSummary'
 import ModalSupplier from './modals/supplierModal'
 
 class Suppliers extends React.Component {
@@ -55,6 +56,18 @@ class Suppliers extends React.Component {
       .then(() => this.getData())
   }
 
+  sumArray(array) {
+    const length = array.length
+    let sum = 0
+    for (let i=0; i<length; i++) {
+      sum += array[i].amount
+    }
+    return sum
+  }
+
+
+
+
   render() {
     const modalClose = () => {
       this.setState({ modalShow: false })
@@ -71,6 +84,9 @@ class Suppliers extends React.Component {
               <SupplierList
                 supplier={supplier}
               />
+              <SupplierSummary
+                totalExpenses={this.sumArray(supplier.expenses)}
+              />
             </div>
           ))}
         </div>
@@ -84,3 +100,10 @@ class Suppliers extends React.Component {
 }
 
 export default Suppliers
+
+              //
+              // <ProjectSummary
+              //   totalExpenses={this.sumArray(project.expenses)}
+              //   comparator={this.comparator(project.expenses,project.invoices)}
+              //   totalInvoiced={this.sumArray(project.invoices)}
+              // />

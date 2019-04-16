@@ -26,6 +26,11 @@ class ModalInvoiceUpdate extends React.Component {
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.handleDateIssued = this.handleDateIssued.bind(this)
+    this.handleDatePaid = this.handleDatePaid.bind(this)
+    this.handleDateDue = this.handleDateDue.bind(this)
+    this.handleChangeDropDown = this.handleChangeDropDown.bind(this)
   }
 
 
@@ -34,6 +39,7 @@ class ModalInvoiceUpdate extends React.Component {
   }
 
   handleDateIssued(day)  {
+    console.log(day)
     const date = this.dateConvert(day)
     const data = {...this.state.data, date_issued: date }
     const error = ''
@@ -41,6 +47,7 @@ class ModalInvoiceUpdate extends React.Component {
   }
 
   handleDateDue(day) {
+    console.log(day)
     const date = this.dateConvert(day)
     const data = {...this.state.data, date_due: date }
     const error = ''
@@ -48,6 +55,7 @@ class ModalInvoiceUpdate extends React.Component {
   }
 
   handleDatePaid(day)  {
+    console.log(day)
     const date = this.dateConvert(day)
     const data = {...this.state.data, date_paid: date }
     const error = ''
@@ -91,12 +99,10 @@ class ModalInvoiceUpdate extends React.Component {
   }
 
 
-
-
   handleChangeDropDown({ target: { value }}) {
     const [ project, client ] = value.split('-')
-    console.log(project)
-    console.log(client)
+    console.log('project no: ' + project)
+    console.log('client no: '+client)
     const data = {...this.state.data, project_id: project, client_id: client }
     const error = ''
     this.setState({ data, error })
@@ -137,7 +143,7 @@ class ModalInvoiceUpdate extends React.Component {
             <div className="select">
               <select
                 name="project_id"
-                value={`${this.state.data.project_id}-${this.props.client_id}`}
+                defaultValue={`${this.state.data.project_id}-${this.props.client_id}`}
                 onChange={this.handleChangeDropDown}>
                 {this.state.projects && this.state.projects.map(project => (
                   <option
@@ -184,7 +190,7 @@ class ModalInvoiceUpdate extends React.Component {
 
             <div>
               <DayPickerInput
-
+                defaultValue={this.state.data.date_issued}
                 onDayChange={this.handleDateIssued}
                 format={'YYYY-MM-DD'}/>
             </div>

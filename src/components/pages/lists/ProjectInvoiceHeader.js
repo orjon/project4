@@ -7,7 +7,7 @@ const ProejctInvoiceHeader = () => {
       <div className = 'rowLeft'>
         <div className = 'cellDate'>issued</div>
         <div className = 'cellDate'>due</div>
-        <div className = 'cellCode'>no.</div>
+        <div className = 'cellCode'>inv no.</div>
       </div>
       <div className = 'rowCentre'>
         <div className = 'cellHalf'>description</div>
