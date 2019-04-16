@@ -1,9 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
-import SupplierHeader from './lists/SupplierHeader'
-import SupplierList from './lists/SupplierList'
-import SupplierSummary from './lists/SupplierSummary'
+import SupplierHeader from './lists/supplierHeader'
+import SupplierList from './lists/supplierList'
+import SupplierSummary from './lists/supplierSummary'
 import ModalSupplier from './modals/supplierModal'
 
 class Suppliers extends React.Component {
