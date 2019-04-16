@@ -6,7 +6,11 @@ const ClientHeader = () => {
   return (
     <div className = 'rowHeader'>
       <div className = 'rowCentre'>
-        <div className = 'cellQuarter'>client</div>
+        <div className = 'cellQuarter'>
+          <Link to='/clients' className='cell'>
+            client
+          </Link>
+        </div>
         <div className = 'cellCurrency'></div>
         <div className = 'cellCode'>
           <Link to="/projects" className='headerLink'>

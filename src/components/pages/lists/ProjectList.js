@@ -27,16 +27,21 @@ const ProjectList = (props) => {
         <div className='cellQuarterRight'>
           {project.expenses && project.expenses.map(expense => (
             <div key={expense.id} className="lineItem">
-              <div>{expense.description}</div>
+              <Link to={`/expenses/${expense.id}`} className='cell'>
+                {expense.description}
+              </Link>
             </div>
           ))}
         </div>
         <div className='cellCurrency'>
           {project.expenses && project.expenses.map(expense => (
             <div key={expense.id} className="lineItem">
-              <div>£&thinsp;{expense.amount.toFixed(2)}</div>
+              <Link to={`/expenses/${expense.id}`} className='cell'>
+                £&thinsp;{expense.amount.toFixed(2)}
+              </Link>
             </div>
           ))}
+
         </div>
         <div className='cellComparator'>
           <div className='lineItem summary'>
@@ -46,14 +51,18 @@ const ProjectList = (props) => {
         <div className='cellCodeRight'>
           {project.invoices && project.invoices.map(invoice => (
             <div key={invoice.id} className="lineItem">
-              <div>{invoice.number}</div>
+              <Link to={`/invoice/${invoice.id}`} className='cell'>
+                {invoice.number}
+              </Link>
             </div>
           ))}
         </div>
         <div className='cellCurrency'>
           {project.invoices && project.invoices.map(invoice => (
             <div key={invoice.id} className="lineItem">
-              <div>£&thinsp;{invoice.amount.toFixed(2)}</div>
+              <Link to={`/invoice/${invoice.id}`} className='cell'>
+                £&thinsp;{invoice.amount.toFixed(2)}
+              </Link>
             </div>
           ))}
         </div>
