@@ -29,7 +29,7 @@ const InvoiceSummary = (props) => {
         <div className='cellCurrency'>
           <div className='lineItem summary'>
             <div>
-              £&thinsp;{totalDue && totalDue.toFixed(2)}</div>
+              £&thinsp;{totalDue ? totalDue.toFixed(2) : '0.00'}</div>
             <div className={`lineItem ${totalOverdue ? 'overdue':''}`}>
               £&thinsp;{(totalOverdue && totalOverdue.toFixed(2)) || '0.00'}</div>
           </div>

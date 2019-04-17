@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
-import ExpenseList from './lists/expenseList'
+import ExpenseItem from './lists/expenseItem'
 import ExpenseHeader from './lists/expenseHeader'
 import ModalExpense from './modals/expenseModal'
 
@@ -106,7 +106,7 @@ class Expenses extends React.Component {
           {this.state.expenses && this.state.expenses.map(expense => (
             <div key={expense.id}
               className='lineItem'>
-              <ExpenseList
+              <ExpenseItem
                 expense={expense}
               />
             </div>

@@ -9,6 +9,7 @@ expense_schema = ExpenseSchema()
 api = Blueprint('expenses', __name__)
 
 @api.route('/expenses', methods=['GET'])
+@secure_route
 def index():
     expenses = Expense.query.all()
     return expense_schema.jsonify(expenses, many=True), 200 #OK
@@ -40,6 +41,7 @@ def create():
     return expense_schema.jsonify(expense), 201 #Created
 
 @api.route('/expenses/<int:expense_id>', methods=['PUT'])
+@secure_route
 def update(expense_id):
     data = request.get_json()
     expense = Expense.query.get(expense_id)
@@ -59,6 +61,7 @@ def update(expense_id):
     return expense_schema.jsonify(expense), 202 #Accepted
 
 @api.route('/expenses/<int:expense_id>', methods=['DELETE'])
+@secure_route
 def delete(expense_id):
     expense = Expense.query.get(expense_id)
     expense.remove()
