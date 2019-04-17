@@ -175,14 +175,31 @@ class ModalExpenseUpdate extends React.Component {
               />
             </div><br />
             {this.state.error && <div className='help is-danger'>{this.state.error} </div>}
-            <div>
-              <button form='invoiceUpdate' className='button'>Update Expense</button>
-            </div>
           </form>
 
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={this.props.onHide}>Cancel</button>
+
+          <div className = 'columns ticks'>
+            <div className= 'icons'>
+              <button className='icon' form="invoiceUpdate">
+                <img alt='edit'
+                  src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                  width='50'
+                  height='50'/>
+              </button>
+            </div>
+          </div>
+
+          <div className= 'icons'>
+            <button className='icon' onClick={this.props.onHide}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='50'
+                height='50'/>
+            </button>
+          </div>
+
         </Modal.Footer>
       </Modal>
     )

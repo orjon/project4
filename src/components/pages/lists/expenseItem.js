@@ -24,7 +24,7 @@ const ExpenseItem = (props) => {
           {(expense.project && expense.project.name) || 'UNASSIGNED'}
         </Link>
 
-        <Link to={expense.supplier && `/supplier/${expense.supplier.id}`}
+        <Link to={expense.supplier && `/suppliers/${expense.supplier.id}`}
           className='cellThird cell'>
           {(expense.supplier && expense.supplier.name) || 'UNASSIGNED'}
         </Link>

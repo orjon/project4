@@ -32,7 +32,7 @@ class Nav extends React.Component {
           {Auth.isAuthenticated() && <Link to="/invoices" className="menuItem">invoices</Link>}
           {Auth.isAuthenticated() && <Link to="/clients" className="menuItem">clients</Link>}
           {Auth.isAuthenticated() && <Link to="/suppliers" className="menuItem">suppliers</Link>}
-          {Auth.isAuthenticated() && <a className="menuItem" onClick={this.logout}>logout</a>}
+          {Auth.isAuthenticated() && <a className="menuItem" onClick={this.logout}>.</a>}
         </div>
         <div className = "rightSide">
           <Clock className = "nowDate" format={'YYYY-MM-DD'} ticking={true}/>

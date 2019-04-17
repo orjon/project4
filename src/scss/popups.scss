@@ -24,4 +24,11 @@
 
 .LoginContainer {
   max-width: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.LoginContainer .container{
+  padding: 15px;
 }

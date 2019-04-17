@@ -94,16 +94,7 @@ class Login extends React.Component {
                   </div>
                 </div>
 
-                <Link to="/register">
-                  <div className= 'icons'>
-                    <button className='icon' >
-                      <img alt='edit'
-                        src='http://www.orjon.com/dev/project4/iconEditCircle.png'
-                        width='50'
-                        height='50' />
-                    </button>
-                  </div>
-                </Link>
+
               </div>
             </div>
           </div>
@@ -120,3 +111,14 @@ class Login extends React.Component {
   }
 }
 export default Login
+
+// <Link to="/register">
+//   <div className= 'icons'>
+//     <button className='icon' >
+//       <img alt='edit'
+//         src='http://www.orjon.com/dev/project4/iconEditCircle.png'
+//         width='50'
+//         height='50' />
+//     </button>
+//   </div>
+// </Link>
