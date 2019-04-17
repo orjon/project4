@@ -49,9 +49,15 @@ const InvoiceList = (props) => {
           `}>
           {(invoice.project && invoice.project.name) || 'UNASSIGNED'}
         </Link>
-        <div className = 'cellThird'>
+
+        <Link to={invoice.client && `/client/${invoice.client.id}`}
+          className={`cellThird cell
+            ${overdue && !paid ? 'overdue':''}
+            ${paid ? 'paid':''}
+          `}>
           {(invoice.client && invoice.client.name) || 'UNASSIGNED'}
-        </div>
+        </Link>
+
 
         <Link to={invoice.project && `/invoice/${invoice.id}`}
           className={`cellThird cell

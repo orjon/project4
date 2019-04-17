@@ -7,6 +7,7 @@
 @import 'pieChart.scss';
 @import 'dataTable.scss';
 @import 'statsTable.scss';
+@import 'popups';
 
 html, body {
   margin: 0;
@@ -34,7 +35,7 @@ textarea, select, input, button { outline: none; }
 .bodyWrapper {
   padding: 15px;
   overflow-y: auto;
-  border: 1px solid red;
+  // border: 1px solid red;
   height: 100%;
   color: $colorFontMain;
 }

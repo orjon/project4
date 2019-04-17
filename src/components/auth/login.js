@@ -28,7 +28,7 @@ class Login extends React.Component {
     axios.post('/api/login', this.state.data)
       .then(res => {
         Auth.setToken(res.data.token)
-        this.props.history.push('/dashboard')
+        this.props.history.push('/projects')
       })
       .catch((err) => {
         console.log('the error is', err)
@@ -39,6 +39,76 @@ class Login extends React.Component {
 
   render() {
     return (
+      <main className="outsideBox">
+        <div className="section">
+          <div className="container">
+            <form
+              className="update"
+              onSubmit={this.handleSubmit}
+            >
+              <div className="columns">
+                <div className="column">
+                  <h3 className="title is-4">Login</h3>
+                </div>
+              </div>
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className={`input ${this.state.error ? 'is-danger': ''}`}
+                  name="username"
+                  placeholder="Username"
+                  value={this.state.data.username}
+                  onChange={this.handleChange}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope"></i>
+                </span>
+              </div>
+              <br />
+
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className={`input ${this.state.error ? 'is-danger': ''}`}
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={this.state.data.password}
+                  onChange={this.handleChange}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-key"></i>
+                </span>
+              </div>
+              <br />
+              {this.state.error && <small className="help is-danger">{this.state.error} </small>}
+              <div>
+                <button
+                  className="button is-success is-pulled-right"
+                >Login &#x3E;</button>
+              </div>
+            </form>
+            <div className="column">
+              <Link to="/register">
+                <button
+                  className="button is-warning is-pulled-right"
+                >New user?</button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+
+
+
+
+
+
+    )
+  }
+}
+export default Login
+
+/*
+
       <main className="main-container">
         <div className="section">
           <div className="container">
@@ -96,7 +166,4 @@ class Login extends React.Component {
           </div>
         </div>
       </main>
-    )
-  }
-}
-export default Login
+*/

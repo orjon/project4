@@ -100,7 +100,8 @@ class ModalExpenseUpdate extends React.Component {
       .then(res => this.setState({
         invoices: res.data.invoices,
         projects: res.data.projects,
-        clients: res.data.clients
+        clients: res.data.clients,
+        suppliers: res.data.suppliers
       }))
       .then(() => {
         const data = {...this.state.data,
@@ -133,6 +134,29 @@ class ModalExpenseUpdate extends React.Component {
 
           <form id="invoiceUpdate" className="update" onSubmit={this.handleSubmit}>
 
+            <div className="select">
+              <select
+                name="supplier_id"
+                defaultValue={this.props.supplier_id}
+                onChange={this.handleChange}>
+                <option disabled value="default">Select Supplier</option>
+                {this.state.suppliers && this.state.suppliers.map(supplier => (
+                  <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="select">
+              <select
+                name="project_id"
+                defaultValue="default"
+                onChange={this.handleChangeDropDown}>
+                <option disabled value="default">Select Client & Project</option>
+                {this.state.projects && this.state.projects.map(project => (
+                  <option key={project.id} value={`${project.id}-${project.client.id}`}>{project.client.name}: {project.name}</option>
+                ))}
+              </select>
+            </div>
 
             <div>
               <input
@@ -159,7 +183,7 @@ class ModalExpenseUpdate extends React.Component {
               className={`input ${this.state.error ? 'is-danger': ''}`}
               name="amount"
               placeholder="Amount"
-              value={this.props.amount}
+              defaultValue={this.props.amount}
               onChange={this.handleChange}
             />
           </div>

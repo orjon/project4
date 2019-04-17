@@ -2,21 +2,17 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
-import InvoiceItem from './lists/invoiceItem'
-import InvoiceItemHeader from './lists/invoiceItemHeader'
+import ClientItem from './lists/clientItem'
+import ClientHeader from './lists/clientHeader'
 import ModalInvoiceUpdate from './modals/invoiceUpdate'
-import TableStats from './lists/tableStats'
 import moment from 'moment'
 
-
-class InvoiceShow extends React.Component {
+class ClientShow extends React.Component {
   constructor() {
     super()
     this.state = {
-      invoice: {
-        number: '',
-        amount: 0,
-        project_id: ''
+      client: {
+        name: ''
       },
       error: '',
       modalShow: false
@@ -35,7 +31,6 @@ class InvoiceShow extends React.Component {
   handleClose() {
     this.setState({ modalShow: false }, this.getData())
   }
-
 
   handleShow() {
     this.setState({ modalShow: true })
@@ -73,13 +68,15 @@ class InvoiceShow extends React.Component {
 
 
   getData() {
-    axios.get(`/api/invoice/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+    axios.get(`/api/clients/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => {
-        this.setState({ invoice: res.data })
+        this.setState({ client: res.data })
+        console.log(this.state.client.id)
       })
-      .then(() => this.invoice = this.state.invoice)
-      .then(() => this.setState({ client_id: this.state.invoice.client.id}))
-      // .catch(err => this.setState({errors: err.response.data.errors}))
+
+      // .then(() => this.client = this.state.invoice)
+      // .then(() => this.setState({ client_id: this.state.invoice.client.id}))
+      .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
   componentDidMount() {
@@ -113,49 +110,58 @@ class InvoiceShow extends React.Component {
       this.getData()
     }
 
-    const invoice = this.state.invoice
-    const overdue = this.checkOverdue(invoice)
-    const paid = this.checkPaid(invoice)
+    const client= this.state.client
+
 
 
     return (
       <main className="section">
-        <div className="subHeader2 columns">
-          <div><Link to="/invoices" className='headerLink'>Invoice</Link><span> : {this.state.invoice.number}</span></div>
-          <div className='columns'>
-            <div className='subHeader2Label'></div>
-            <div className='subHeader2Currency'>£&thinsp;{invoice && invoice.amount.toFixed(2)}</div>
-          </div>
-        </div>
-
+        <div className="subHeader2">
+          <Link to='/clients' className='cellQuarter cell'>
+            Clients</Link> : {this.state.client.name}</div>
         <div className = 'dataTable'>
-          <InvoiceItemHeader />
-          <div className='lineItem'>
-            <InvoiceItem invoice={invoice} overdue={overdue} paid={paid}/>
+
+
+
+          <ClientHeader />
+
+          <div className="lineItem">
+            <ClientItem
+              client={client}
+            />
+            <div className="tableRow">&nbsp;</div>
           </div>
 
         </div>
 
-        <button onClick={this.handleShow}>Update Invoice</button>
-        <div>
-          <button className="button delete" onClick={this.handleDelete}>Delete Invoice</button>
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconEditCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleDelete}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
         </div>
 
         <ModalInvoiceUpdate
-          overdue={overdue}
-          paid={paid}
           show={this.state.modalShow}
           error={this.state.error}
           onHide={modalClose}
-          client_id={this.state.client_id}
-          id={this.props.match.params.id}
-          number={this.state.invoice.number}
-          amount={this.state.invoice.amount}
-          closeModal={this.handleClose}
+          client_id={this.props.match.params.id}
         />
       </main>
     )
   }
 }
 
-export default InvoiceShow
+export default ClientShow

@@ -51,7 +51,7 @@ class ExpenseShow extends React.Component {
       })
       .then(() => this.invoice = this.state.invoice)
       // .then(() => this.setState({ client_id: this.state.invoice.client.id}))
-      // .catch(err => this.setState({errors: err.response.data.errors}))
+      .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
   componentDidMount() {
@@ -92,14 +92,28 @@ class ExpenseShow extends React.Component {
         </div>
         <div className = 'dataTable'>
           <ExpenseHeader />
-          <div className='lineItem'>
+          <div className='lineItem tableLastRow'>
             <ExpenseItem expense={expense}/>
           </div>
         </div>
 
-        <button onClick={this.handleShow}>Update Expense</button>
-        <div>
-          <button className="button delete" onClick={this.handleDelete}>Delete Expense</button>
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconEditCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleDelete}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
         </div>
 
         <ModalExpenseUpdate
@@ -110,7 +124,8 @@ class ExpenseShow extends React.Component {
           description={this.state.expense.description}
           amount={this.state.expense.amount}
           closeModal={this.handleClose}
-          supplier={this.state.expense.supplier}
+          supplier_id={this.state.expense.supplier_id}
+          expense_id={this.state.expense_id}
         />
 
       </main>

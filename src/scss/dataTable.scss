@@ -24,21 +24,29 @@
   // text-decoration: underline;
 }
 
-.iconsxx {
-  margin: 0 3px;
-  text-align: center;
+.icons {
+  margin: 3px 3px 3px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
   // border: 1px solid magenta;
-  vertical-align: top;
-  transform: -5px 0;
+
+
 }
 
 .icon {
-  // border-radius: 20px;
+  border-radius: 50%;
   border: 1 solid rgba(0,0,0,0);
   background-color: rgba(0,0,0,0);
   color: $colorButtonText;
   line-height: 25px;
   padding: 0;
+}
+
+icon:hover {
+  border: 2px solid rgba(255,255,255,1);
+  background-color: rgba(255,255,255,1);
 }
 
 icon:focus {

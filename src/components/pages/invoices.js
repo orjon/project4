@@ -1,11 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 import InvoiceList from './lists/invoiceList'
 import InvoiceHeader from './lists/invoiceHeader'
 import InvoiceSummary from './lists/invoiceSummary'
-import TableStats from './lists/tableStats'
 import ModalInvoiceAdd from './modals/invoiceAdd'
 
 class Invoices extends React.Component {
@@ -141,7 +141,9 @@ class Invoices extends React.Component {
     return (
       <main className='section'>
         <div className='subHeader2 columns'>
-          <div>Invoices</div>
+          <Link to='/clients' className='cell'>
+            Invoices
+          </Link>
           <div className='columns'>
             <div className='subHeader2Label'></div>
             <div className='subHeader2Currency'>£&thinsp;{this.state.invoices && this.sumArray(this.state.invoices).toFixed(2)}</div>
@@ -165,10 +167,19 @@ class Invoices extends React.Component {
           <div className = 'summary'>
             <InvoiceSummary totalDue={totalDue} totalOverdue={totalOverdue}/>
           </div>
-
         </div>
 
-        <button onClick={this.handleAddShow}>Add Invoice</button>
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleAddShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+        </div>
+
         <ModalInvoiceAdd show={this.state.modalAddShow} error={this.state.error} onHide={modalClose}/>
       </main>
     )

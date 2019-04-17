@@ -18,6 +18,13 @@ class ModalProjectAdd extends React.Component {
     }
 
     this.userCurrent = ''
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  
+
+
+
   }
 
   clearState() {
@@ -27,6 +34,13 @@ class ModalProjectAdd extends React.Component {
       name: ''
     }
     this.setState({ data })
+  }
+
+
+  handleChange({ target: { name, value }}) {
+    const data = {...this.state.data, [name]: value }
+    const error = ''
+    this.setState({ data, error })
   }
 
 
@@ -78,6 +92,7 @@ class ModalProjectAdd extends React.Component {
 
             <div className="select">
               <select
+                label="get the"
                 name="client_id"
                 defaultValue="default"
                 onChange={this.handleChange}>
@@ -111,14 +126,31 @@ class ModalProjectAdd extends React.Component {
             </div>
             <br />
             {this.state.error && <div className="help is-danger">{this.state.error} </div>}
-            <div>
-              <button form="projectNew" className="button">Add new project</button>
-            </div>
+
           </form>
 
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={this.props.onHide}>Cancel</button>
+
+          <div className = 'columns ticks'>
+            <div className= 'icons'>
+              <button className='icon' form="projectNew">
+                <img alt='edit'
+                  src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                  width='50'
+                  height='50' />
+              </button>
+            </div>
+          </div>
+
+          <div className= 'icons'>
+            <button className='icon' onClick={this.props.onHide}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='50'
+                height='50' />
+            </button>
+          </div>
         </Modal.Footer>
       </Modal>
     )
@@ -126,3 +158,7 @@ class ModalProjectAdd extends React.Component {
 }
 
 export default ModalProjectAdd
+//
+// <div>
+//   <button form="projectNew" className="button">Add new project</button>
+// </div>

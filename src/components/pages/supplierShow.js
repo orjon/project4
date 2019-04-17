@@ -133,12 +133,25 @@ class InvoiceShow extends React.Component {
           <div className='lineItem'>
             <InvoiceItem invoice={invoice} overdue={overdue} paid={paid}/>
           </div>
-
         </div>
-
-        <button onClick={this.handleShow}>Update Invoice</button>
-        <div>
-          <button className="button delete" onClick={this.handleDelete}>Delete Invoice</button>
+        
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconEditCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleDelete}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
         </div>
 
         <ModalInvoiceUpdate

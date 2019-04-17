@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
 import ExpenseItem from './lists/expenseItem'
 import ExpenseHeader from './lists/expenseHeader'
@@ -97,8 +98,9 @@ class Expenses extends React.Component {
     return (
       <main className="section">
         <div className="subHeader2 columns">
-          <div>Expenses</div>
-
+          <Link to='/invoices' className='cell'>
+            Expenses
+          </Link>
           <div className='subHeader2Right' >£&thinsp;{this.state.expenses && this.sumArray(this.state.expenses).toFixed(2)}</div>
         </div>
         <div className = 'dataTable'>
@@ -113,7 +115,16 @@ class Expenses extends React.Component {
           ))}
         </div>
 
-        <button onClick={this.handleShow}>Add Expense</button>
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+        </div>
 
         <ModalExpense show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
