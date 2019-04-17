@@ -20,7 +20,7 @@ const SupplierSummary = (props) => {
         <div className='cellCurrency'></div>
         <div className='cellComparator'></div>
 
-        <div className='cellCodeRight'>
+        <div className='cellQuarterRight'>
           <div className='lineItem summary'>
             <div>Total:</div>
           </div>

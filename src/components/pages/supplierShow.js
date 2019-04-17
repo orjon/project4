@@ -2,21 +2,17 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
-import InvoiceItem from './lists/invoiceItem'
-import InvoiceItemHeader from './lists/invoiceItemHeader'
+import SupplierItem from './lists/supplierItem'
+import SupplierHeader from './lists/supplierHeader'
 import ModalInvoiceUpdate from './modals/invoiceUpdate'
-import TableStats from './lists/tableStats'
 import moment from 'moment'
 
-
-class InvoiceShow extends React.Component {
+class SupplierShow extends React.Component {
   constructor() {
     super()
     this.state = {
-      invoice: {
-        number: '',
-        amount: 0,
-        project_id: ''
+      client: {
+        name: ''
       },
       error: '',
       modalShow: false
@@ -36,7 +32,6 @@ class InvoiceShow extends React.Component {
     this.setState({ modalShow: false }, this.getData())
   }
 
-
   handleShow() {
     this.setState({ modalShow: true })
   }
@@ -48,10 +43,24 @@ class InvoiceShow extends React.Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault()
+    axios.post('/api/suppliers', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.getData())
+      .catch((err) => {
+        console.log('the error is', err)
+        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+      })
+  }
+
+
+  handleDelete(e) {
     if (window.confirm('Are you sure you want to do this?')) {
       e.preventDefault()
-      axios.post('/api/invoices', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-        .then(() => this.getData())
+      axios.delete(`/api/suppliers/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => {
+          this.props.history.push('/invoices')
+
+        })
         .catch((err) => {
           console.log('the error is', err)
           this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
@@ -60,28 +69,16 @@ class InvoiceShow extends React.Component {
   }
 
 
-  handleDelete(e) {
-    e.preventDefault()
-    axios.delete(`/api/invoices/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => {
-        this.props.history.push('/invoices')
-
-      })
-      .catch((err) => {
-        console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
-      })
-  }
-
-
   getData() {
-    axios.get(`/api/invoice/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+    axios.get(`/api/suppliers/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => {
-        this.setState({ invoice: res.data })
+        this.setState({ supplier: res.data })
+        console.log(this.state.client.id)
       })
-      .then(() => this.invoice = this.state.invoice)
-      .then(() => this.setState({ client_id: this.state.invoice.client.id}))
-      // .catch(err => this.setState({errors: err.response.data.errors}))
+
+      // .then(() => this.client = this.state.invoice)
+      // .then(() => this.setState({ client_id: this.state.invoice.client.id}))
+      .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
   componentDidMount() {
@@ -115,26 +112,28 @@ class InvoiceShow extends React.Component {
       this.getData()
     }
 
-    const invoice = this.state.invoice
-    const overdue = this.checkOverdue(invoice)
-    const paid = this.checkPaid(invoice)
+    const client= this.state.client
+
 
 
     return (
       <main className="section">
-        <div className="subHeader2 columns">
-          <div><Link to="/invoices" className='headerLink'>Invoice</Link><span> : {this.state.invoice.number}</span></div>
-          <div className='columns'>
-            <div className='subHeader2Label'></div>
-            <div className='subHeader2Currency'>£&thinsp;{invoice && invoice.amount.toFixed(2)}</div>
-          </div>
-        </div>
-
+        <div className="subHeader2">
+          <Link to='/clients' className='cellQuarter cell'>
+            Suppliers</Link> : {this.state.client.name}</div>
         <div className = 'dataTable'>
-          <InvoiceItemHeader />
-          <div className='lineItem'>
-            <InvoiceItem invoice={invoice} overdue={overdue} paid={paid}/>
+
+
+
+          <SupplierHeader />
+
+          <div className="lineItem">
+            <SupplierItem
+              client={client}
+            />
+            <div className="tableRow">&nbsp;</div>
           </div>
+
         </div>
 
         <div className = 'columns icons'>
@@ -157,20 +156,14 @@ class InvoiceShow extends React.Component {
         </div>
 
         <ModalInvoiceUpdate
-          overdue={overdue}
-          paid={paid}
           show={this.state.modalShow}
           error={this.state.error}
           onHide={modalClose}
-          client_id={this.state.client_id}
-          id={this.props.match.params.id}
-          number={this.state.invoice.number}
-          amount={this.state.invoice.amount}
-          closeModal={this.handleClose}
+          client_id={this.props.match.params.id}
         />
       </main>
     )
   }
 }
 
-export default InvoiceShow
+export default SupplierShow

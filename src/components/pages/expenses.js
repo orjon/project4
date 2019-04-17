@@ -35,7 +35,6 @@ class Expenses extends React.Component {
   }
 
 
-
   clearState() {
     const data = { amount: '',description: ''}
     this.setState({ data })

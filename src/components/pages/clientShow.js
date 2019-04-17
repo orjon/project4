@@ -44,7 +44,7 @@ class ClientShow extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    axios.post('/api/invoices', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+    axios.post('/api/clients', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(() => this.getData())
       .catch((err) => {
         console.log('the error is', err)
@@ -56,7 +56,7 @@ class ClientShow extends React.Component {
   handleDelete(e) {
     if (window.confirm('Are you sure you want to do this?')) {
       e.preventDefault()
-      axios.delete(`/api/invoices/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      axios.delete(`/api/clients/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
         .then(() => {
           this.props.history.push('/invoices')
 
