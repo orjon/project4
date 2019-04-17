@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import Auth from '../../lib/auth'
+import { Link } from 'react-router-dom'
 
 
 class Register extends React.Component {
@@ -36,15 +38,15 @@ class Register extends React.Component {
 
   render() {
     return (
-      <main className="section">
-        <div className='LoginContainer'>
-          <div className="container">
-            <h3>Register new user</h3>
+      <main>
+      <br /><br /><br /><br /><br /><br /><br /><br />
+        <div className= 'flex1'>
+
+            <h3>Register...</h3>
             <form onSubmit={this.handleSubmit} id='signup'>
 
-              <div className="columns">
-                <div className="column is-half">
-                  <div>
+
+                <div>
                     <input
                       className={`input ${this.state.errors.username ? 'is-danger': ''}`}
                       name="username"
@@ -52,31 +54,28 @@ class Register extends React.Component {
                       value={this.state.data.username}
                       onChange={this.handleChange}
                     />
-                  </div>
+
 
                   {this.state.errors.username && <small className="help is-danger">Username is Required</small> }
                 </div>
-                <div className="column is-half">
 
+                <div>
+                  <input
+                    className={`input ${this.state.errors.email ? 'is-danger': ''}`}
+                    name="email"
+                    placeholder="*Email address"
+                    value={this.state.data.email}
+                    onChange={this.handleChange}
+                  />
 
-                  <div>
-                    <input
-                      className={`input ${this.state.errors.email ? 'is-danger': ''}`}
-                      name="email"
-                      placeholder="*Email address"
-                      value={this.state.data.email}
-                      onChange={this.handleChange}
-                    />
-                  </div>
                   {this.state.errors.email && <small className="help is-danger">Email is Required</small> }
                 </div>
-                <div className="column is-half">
-              </div>
-              </div>
+
+
+
               <br />
 
-              <div className="columns">
-                <div className="column is-half">
+                <div>
                   <input
                     className={`input ${this.state.errors.password ? 'is-danger': ''}`}
                     name="password"
@@ -88,8 +87,8 @@ class Register extends React.Component {
 
                 {this.state.errors.password && <small className="help is-danger">Password is Required</small> }
                 </div>
+                <div>
 
-                <div className="column is-half">
                   <input
                     className={`input ${this.state.errors.password_confirmation ? 'is-danger': ''}`}
                     name="password_confirmation"
@@ -101,19 +100,25 @@ class Register extends React.Component {
 
                 {this.state.errors.password_confirmation && <small className="help is-danger">Passwords must match</small> }
                 </div>
-              </div>
             </form>
-
-              <div className= 'icons'>
+            <br />
+              <div className= 'regicon'>
+              <button className='icon'>
+                <Link to='/'>
+                <img alt='edit'
+                  src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                  width='50'
+                  height='50'/></Link>
+              </button>
                 <button className='icon' form='signup'>
                   <img alt='edit'
-                    src='http://www.orjon.com/dev/project4/iconEditCircle.png'
+                    src='http://www.orjon.com/dev/project4/iconLogin.png'
                     width='50'
                     height='50' />
                 </button>
+
               </div>
           </div>
-        </div>
       </main>
     )
   }

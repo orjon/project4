@@ -123,10 +123,7 @@ class SupplierShow extends React.Component {
             Suppliers</Link> : {this.state.client.name}</div>
         <div className = 'dataTable'>
 
-
-
           <SupplierHeader />
-
           <div className="lineItem">
             <SupplierItem
               client={client}

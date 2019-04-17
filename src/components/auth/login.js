@@ -39,64 +39,73 @@ class Login extends React.Component {
 
   render() {
     return (
-      <main className="outsideBox">
-         <div className='LoginContainer'>
-          <div className="section">
-            <div className="container">
-              <form id='loginForm'
-                className="update"
-                onSubmit={this.handleSubmit}
-              >
-                <div className="columns">
-                  <div className="column">
-                    <h3 className="title is-4">Login</h3>
-                  </div>
-                </div>
-                <div className="control has-icons-left has-icons-right">
-                  <input
-                    className={`input ${this.state.error ? 'is-danger': ''}`}
-                    name="username"
-                    placeholder="Username"
-                    value={this.state.data.username}
-                    onChange={this.handleChange}
-                  />
-                  <span className="icon is-small is-left">
-                    <i className="fas fa-envelope"></i>
-                  </span>
-                </div>
-                <br />
+      <main>
+      <br /><br /><br /><br /><br /><br /><br /><br />
+        <div className= 'flex1'>
 
-                <div className="control has-icons-left has-icons-right">
-                  <input
-                    className={`input ${this.state.error ? 'is-danger': ''}`}
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={this.state.data.password}
-                    onChange={this.handleChange}
-                  />
-                  <span className="icon is-small is-left">
-                    <i className="fas fa-key"></i>
-                  </span>
-                </div>
-                <br />
-                {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-              </form>
-              <div className='columns'>
-                <div className = 'ticks'>
-                  <div className= 'icons'>
-                    <button className='icon' form="loginForm">
-                      <img alt='edit'
-                        src='http://www.orjon.com/dev/project4/iconAddCircle.png'
-                        width='50'
-                        height='50' />
-                    </button>
-                  </div>
-                </div>
+          <form id='loginForm'
+            className="update"
+            onSubmit={this.handleSubmit}>
+
+            <h3 className="title is-4">Login</h3>
 
 
+            <div className="control has-icons-left has-icons-right">
+              <input
+                className={`input ${this.state.error ? 'is-danger': ''}`}
+                name="username"
+                placeholder="Username"
+                value={this.state.data.username}
+                onChange={this.handleChange}
+              />
+
+            </div>
+
+
+
+            <div className="control has-icons-left has-icons-right">
+              <input
+                className={`input ${this.state.error ? 'is-danger': ''}`}
+                name="password"
+                type="password"
+                placeholder="Password"
+                value={this.state.data.password}
+                onChange={this.handleChange}
+              />
+
+            </div>
+
+
+            {this.state.error && <small className="help is-danger">{this.state.error} </small>}
+          </form>
+<br />
+          <div className='columns'>
+            <Link to="/register">
+              <div className= 'icons'>
+                <button className='icon' >
+                  <img alt='edit'
+                    src='http://www.orjon.com/dev/project4/iconEditCircle.png'
+                    width='50'
+                    height='50' />
+                </button>
+              </div>
+            </Link>
+
+
+            <div className = 'ticks'>
+              <div className= 'icons'>
+                <button className='icon' form="loginForm">
+                  <img alt='edit'
+                    src='http://www.orjon.com/dev/project4/iconLogin.png'
+                    width='50'
+                    height='50' />
+                </button>
               </div>
             </div>
+
+
+
+
           </div>
         </div>
       </main>
@@ -111,14 +120,3 @@ class Login extends React.Component {
   }
 }
 export default Login
-
-// <Link to="/register">
-//   <div className= 'icons'>
-//     <button className='icon' >
-//       <img alt='edit'
-//         src='http://www.orjon.com/dev/project4/iconEditCircle.png'
-//         width='50'
-//         height='50' />
-//     </button>
-//   </div>
-// </Link>

@@ -25,6 +25,7 @@ class Nav extends React.Component {
       <nav className="navbar">
         <div className = "leftSide">
           project4
+          {Auth.isAuthenticated() && <a className="menuItem1" onClick={this.logout}>&nbsp;&nbsp;x</a>}
           {!Auth.isAuthenticated() && <Link to="/login" className="menuItem">login</Link>}
           {Auth.isAuthenticated() && <Link to="/dashboard" className="menuItem">.</Link>}
           {Auth.isAuthenticated() && <Link to="/projects" className="menuItem">projects</Link>}
@@ -32,7 +33,7 @@ class Nav extends React.Component {
           {Auth.isAuthenticated() && <Link to="/invoices" className="menuItem">invoices</Link>}
           {Auth.isAuthenticated() && <Link to="/clients" className="menuItem">clients</Link>}
           {Auth.isAuthenticated() && <Link to="/suppliers" className="menuItem">suppliers</Link>}
-          {Auth.isAuthenticated() && <a className="menuItem" onClick={this.logout}>.</a>}
+
         </div>
         <div className = "rightSide">
           <Clock className = "nowDate" format={'YYYY-MM-DD'} ticking={true}/>
