@@ -69,7 +69,7 @@ class ModalExpense extends React.Component {
       .then(() => this.clearState())
       .catch((err) => {
         console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        this.setState({ error: 'Something went wrong...'}, () => console.log('this.state', this.state))
       })
   }
 
@@ -115,34 +115,33 @@ class ModalExpense extends React.Component {
 
         <Modal.Body>
           <form id="expenseNew" className="update" onSubmit={this.handleSubmit}>
-
+            <label htmlFor='expDay'> Please select the day that the expense was incurred.</label>
             <div>
-              <DayPickerInput onDayChange={this.handleDate} format={'YYYY-MM-DD'}/>
-            </div>
+              <DayPickerInput id='expDay' onDayChange={this.handleDate} format={'YYYY-MM-DD'}/>
+            </div><br />
 
             <div className="select">
               <select
                 name="project_id"
                 defaultValue="default"
                 onChange={this.handleChangeDropDown}>
-                <option disabled value="default">Select client: project</option>
+                <option disabled value="default">Which client & project was this for?</option>
                 {this.state.projects && this.state.projects.map(project => (
                   <option key={project.id} value={`${project.id}-${project.client.id}`}>{project.client.name}: {project.name}</option>
                 ))}
               </select>
-            </div>
-
+            </div><br />
             <div className="select">
               <select
                 name="supplier_id"
                 defaultValue="default"
                 onChange={this.handleChange}>
-                <option disabled value="default">Select client: project</option>
+                <option disabled value="default">Select supplier / service provider</option>
                 {this.state.suppliers && this.state.suppliers.map(supplier => (
                   <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
                 ))}
               </select>
-            </div>
+            </div><br />
 
             <div>
               <input
@@ -152,30 +151,45 @@ class ModalExpense extends React.Component {
                 value={this.state.data.description}
                 onChange={this.handleChange}
               />
-            </div>
-
-            <br />
+            </div><br />
             <div>
               <input
+                id='expAmnt'
                 className={`input ${this.state.error ? 'is-danger': ''}`}
                 name="amount"
-                placeholder="Amount"
+                placeholder="Cost of good / service eg £ '175.50' "
                 value={this.state.data.amount}
                 onChange={this.handleChange}
               />
             </div>
 
-            <br />
-
             {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-            <div>
-              <button form="expenseNew" className="button">Add new expense</button>
-            </div>
           </form>
 
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={this.props.onHide}>Cancel</button>
+
+          <div className = 'columns ticks'>
+            <div className= 'icons'>
+              <button className='icon' form="expenseNew">
+                <img alt='edit'
+                  src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                  width='50'
+                  height='50'/>
+              </button>
+            </div>
+          </div>
+
+          <div className= 'icons'>
+            <button className='icon' onClick={this.props.onHide}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='50'
+                height='50'/>
+            </button>
+          </div>
+
+
         </Modal.Footer>
       </Modal>
     )

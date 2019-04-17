@@ -54,16 +54,18 @@ class ClientShow extends React.Component {
 
 
   handleDelete(e) {
-    e.preventDefault()
-    axios.delete(`/api/invoices/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => {
-        this.props.history.push('/invoices')
+    if (window.confirm('Are you sure you want to do this?')) {
+      e.preventDefault()
+      axios.delete(`/api/invoices/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => {
+          this.props.history.push('/invoices')
 
-      })
-      .catch((err) => {
-        console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
-      })
+        })
+        .catch((err) => {
+          console.log('the error is', err)
+          this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        })
+    }
   }
 
 

@@ -121,7 +121,7 @@ class Projects extends React.Component {
               <img alt='edit'
                 src='http://www.orjon.com/dev/project4/iconAddCircle.png'
                 width='25'
-                height='25' />
+                height='25'/>
             </button>
           </div>
         </div>

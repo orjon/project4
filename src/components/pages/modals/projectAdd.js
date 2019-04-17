@@ -21,9 +21,6 @@ class ModalProjectAdd extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  
-
-
 
   }
 
@@ -52,7 +49,7 @@ class ModalProjectAdd extends React.Component {
       .then(() => this.clearState())
       .catch((err) => {
         console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        this.setState({ error: 'Something went wrong...'}, () => console.log('this.state', this.state))
       })
   }
 
@@ -103,18 +100,16 @@ class ModalProjectAdd extends React.Component {
                   </option>
                 ))}
               </select>
-            </div>
-            <br />
+            </div><br />
             <div>
               <input
                 className={`input ${this.props.error ? 'is-danger': ''}`}
                 name="code"
-                placeholder="Project code"
+                placeholder="Project code eg XX-123"
                 value={this.state.data.code}
                 onChange={this.handleChange}
               />
-            </div>
-            <br />
+            </div><br />
             <div>
               <input
                 className={`input ${this.props.error ? 'is-danger': ''}`}
@@ -123,8 +118,7 @@ class ModalProjectAdd extends React.Component {
                 value={this.state.data.name}
                 onChange={this.handleChange}
               />
-            </div>
-            <br />
+            </div><br />
             {this.state.error && <div className="help is-danger">{this.state.error} </div>}
 
           </form>
@@ -158,7 +152,3 @@ class ModalProjectAdd extends React.Component {
 }
 
 export default ModalProjectAdd
-//
-// <div>
-//   <button form="projectNew" className="button">Add new project</button>
-// </div>

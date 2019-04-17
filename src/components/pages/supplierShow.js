@@ -48,13 +48,15 @@ class InvoiceShow extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault()
-    axios.post('/api/invoices', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => this.getData())
-      .catch((err) => {
-        console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
-      })
+    if (window.confirm('Are you sure you want to do this?')) {
+      e.preventDefault()
+      axios.post('/api/invoices', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => this.getData())
+        .catch((err) => {
+          console.log('the error is', err)
+          this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        })
+    }
   }
 
 
@@ -134,7 +136,7 @@ class InvoiceShow extends React.Component {
             <InvoiceItem invoice={invoice} overdue={overdue} paid={paid}/>
           </div>
         </div>
-        
+
         <div className = 'columns icons'>
           <div className= 'icons'>
             <button className='icon' onClick={this.handleShow}>

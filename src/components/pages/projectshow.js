@@ -62,16 +62,18 @@ class ProjectShow extends React.Component {
 
 
   handleDelete(e) {
-    e.preventDefault()
-    axios.delete(`/api/projects/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => {
-        this.props.history.push('/projects')
+    if (window.confirm('Are you sure you want to do this?')) {
+      e.preventDefault()
+      axios.delete(`/api/projects/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => {
+          this.props.history.push('/projects')
 
-      })
-      .catch((err) => {
-        console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
-      })
+        })
+        .catch((err) => {
+          console.log('the error is', err)
+          this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        })
+    }
   }
 
 
@@ -199,7 +201,7 @@ class ProjectShow extends React.Component {
             <ExpenseSummary totalExpenses={totalExpense}/>
           </div>
         </div>
-        
+
         <div className = 'columns icons'>
           <div className= 'icons'>
             <button className='icon' onClick={this.handleShow}>

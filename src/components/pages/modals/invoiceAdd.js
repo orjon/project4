@@ -89,7 +89,7 @@ class ModalInvoiceAdd extends React.Component {
       .then(() => this.clearState())
       .catch((err) => {
         console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        this.setState({ error: 'Something went wrong...'}, () => console.log('this.state', this.state))
       })
   }
 
@@ -120,84 +120,107 @@ class ModalInvoiceAdd extends React.Component {
     return (
       <Modal
         {...this.props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
         centered
       >
 
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            <div className="subHeader2">New Invoice</div>
+          <Modal.Title id='contained-modal-title-vcenter'>
+            <div className='subHeader2'>New Invoice</div>
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <form id="invoiceNew" className="update" onSubmit={this.handleSubmit}>
+          <form id='invoiceNew' className='update' onSubmit={this.handleSubmit}>
 
-            <div className="select">
+            <div className='select'>
               <select
-                name="project_id"
-                defaultValue="default"
+                name='project_id'
+                defaultValue='default'
                 onChange={this.handleChangeDropDown}>
-                <option disabled value="default">Select client: project</option>
+                <option disabled value='default'>Which client & project was this for?</option>
                 {this.state.projects && this.state.projects.map(project => (
                   <option key={project.id} value={`${project.id}-${project.client.id}`}>{project.client.name}: {project.name}</option>
                 ))}
               </select>
-            </div>
-
+            </div><br />
             <div>
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
-                name="number"
-                placeholder="Invoice number"
+                name='number'
+                placeholder='Enter invoice number'
                 value={this.state.data.number}
                 onChange={this.handleChange}
               />
-            </div>
-
+            </div><br />
             <div>
               <input
                 className={`input ${this.props.error ? 'is-danger': ''}`}
-                name="description"
-                placeholder="Invoice description"
+                name='description'
+                placeholder='Invoice description'
                 value={this.state.data.description}
                 onChange={this.handleChange}
               />
-            </div>
-
-            <br />
+            </div><br />
             <div>
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
-                name="amount"
-                placeholder="Amount"
+                name='amount'
+                placeholder='Amount'
                 value={this.state.data.amount}
                 onChange={this.handleChange}
               />
+            </div><br />
+            <label htmlFor='invIssue'> Please select date of issue</label>
+            <div>
+              <DayPickerInput
+                id='invIssue'
+                onDayChange={this.handleDateIssued}
+                format={'YYYY-MM-DD'}/>
+            </div>
+            <label htmlFor='invDue'> Please select due date</label>
+            <div>
+              <DayPickerInput
+                id='invDue'
+                onDayChange={this.handleDateDue}
+                format={'YYYY-MM-DD'}/>
+            </div>
+            <label htmlFor='invPaid'> Please select date of payment (if paid)</label>
+            <div>
+              <DayPickerInput
+                id='invPaid'
+                onDayChange={this.handleDatePaid}
+                format={'YYYY-MM-DD'}/>
             </div>
 
-            <br />
+            {this.state.error && <small className='help is-danger'>{this.state.error} </small>}
 
-            <div>
-              <DayPickerInput onDayChange={this.handleDateIssued} format={'YYYY-MM-DD'}/>
-            </div>
-            <div>
-              <DayPickerInput onDayChange={this.handleDateDue} format={'YYYY-MM-DD'}/>
-            </div>
-            <div>
-              <DayPickerInput onDayChange={this.handleDatePaid} format={'YYYY-MM-DD'}/>
-            </div>
-
-            {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-            <div>
-              <button form="invoiceNew" className="button">Add new invoice</button>
-            </div>
           </form>
 
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={this.props.onHide}>Cancel</button>
+
+          <div className = 'columns ticks'>
+            <div className= 'icons'>
+              <button className='icon' form='invoiceNew'>
+                <img alt='edit'
+                  src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                  width='50'
+                  height='50' />
+              </button>
+            </div>
+          </div>
+
+          <div className= 'icons'>
+            <button className='icon' onClick={this.props.onHide}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='50'
+                height='50' />
+            </button>
+          </div>
+
         </Modal.Footer>
       </Modal>
     )

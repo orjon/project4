@@ -25,8 +25,14 @@ class Nav extends React.Component {
       <nav className="navbar">
         <div className = "leftSide">
           project4
-          {!Auth.isAuthenticated() && <Link to="/login" className="menuItem">in</Link>}
-          {Auth.isAuthenticated() && <a className="menuItem" onClick={this.logout}>out</a>}
+          {!Auth.isAuthenticated() && <Link to="/login" className="menuItem">login</Link>}
+          {Auth.isAuthenticated() && <Link to="/dashboard" className="menuItem">.</Link>}
+          {Auth.isAuthenticated() && <Link to="/projects" className="menuItem">projects</Link>}
+          {Auth.isAuthenticated() && <Link to="/expenses" className="menuItem">expenses</Link>}
+          {Auth.isAuthenticated() && <Link to="/invoices" className="menuItem">invoices</Link>}
+          {Auth.isAuthenticated() && <Link to="/clients" className="menuItem">clients</Link>}
+          {Auth.isAuthenticated() && <Link to="/suppliers" className="menuItem">suppliers</Link>}
+          {Auth.isAuthenticated() && <a className="menuItem" onClick={this.logout}>logout</a>}
         </div>
         <div className = "rightSide">
           <Clock className = "nowDate" format={'YYYY-MM-DD'} ticking={true}/>
@@ -38,11 +44,3 @@ class Nav extends React.Component {
 }
 
 export default withRouter(Nav)
-
-// {!Auth.isAuthenticated() && <Link to="/register" className="menuItem">register</Link>}
-// {Auth.isAuthenticated() && <Link to="/dashboard" className="menuItem">dashboard</Link>}
-// {Auth.isAuthenticated() && <Link to="/projects" className="menuItem">projects</Link>}
-// {Auth.isAuthenticated() && <Link to="/invoices" className="menuItem">invoices</Link>}
-// {Auth.isAuthenticated() && <Link to="/expenses" className="menuItem">expenses</Link>}
-// {Auth.isAuthenticated() && <Link to="/clients" className="menuItem">clients</Link>}
-// {Auth.isAuthenticated() && <Link to="/suppliers" className="menuItem">suppliers</Link>}

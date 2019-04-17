@@ -79,7 +79,7 @@ class ModalExpenseUpdate extends React.Component {
       })
       .catch((err) => {
         console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        this.setState({ error: 'Something went wrong...'}, () => console.log('this.state', this.state))
       })
   }
 
@@ -119,79 +119,66 @@ class ModalExpenseUpdate extends React.Component {
     return (
       <Modal
         {...this.props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
         centered
       >
 
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            <div className="subHeader2">Update Expense</div>
+          <Modal.Title id='contained-modal-title-vcenter'>
+            <div className='subHeader2'>Update Expense</div>
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
 
-          <form id="invoiceUpdate" className="update" onSubmit={this.handleSubmit}>
+          <form id='invoiceUpdate' className='update' onSubmit={this.handleSubmit}>
 
-            <div className="select">
+            <div className='select'>
               <select
-                name="supplier_id"
+                name='supplier_id'
                 defaultValue={this.props.supplier_id}
                 onChange={this.handleChange}>
-                <option disabled value="default">Select Supplier</option>
+                <option disabled value='default'>Select supplier / service provider</option>
                 {this.state.suppliers && this.state.suppliers.map(supplier => (
                   <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
                 ))}
               </select>
-            </div>
-
-            <div className="select">
+            </div><br />
+            <div className='select'>
               <select
-                name="project_id"
-                defaultValue="default"
+                name='project_id'
+                defaultValue='default'
                 onChange={this.handleChangeDropDown}>
-                <option disabled value="default">Select Client & Project</option>
+                <option disabled value='default'>Which client & project was this for?</option>
                 {this.state.projects && this.state.projects.map(project => (
                   <option key={project.id} value={`${project.id}-${project.client.id}`}>{project.client.name}: {project.name}</option>
                 ))}
               </select>
-            </div>
-
+            </div><br />
             <div>
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
-                name="description"
-                placeholder="description"
+                name='description'
+                placeholder='Expense description'
                 defaultValue={this.props.description}
                 onChange={this.handleChange}
               />
-            </div>
-
-
-
-            <br />
-            {this.state.error && <div className="help is-danger">{this.state.error} </div>}
+            </div><br />
             <div>
-              <button form="invoiceUpdate" className="button">Update Expense</button>
+              <input
+                className={`input ${this.state.error ? 'is-danger': ''}`}
+                name='amount'
+                placeholder='Cost of good / service eg £ 175.50 '
+                defaultValue={this.props.amount}
+                onChange={this.handleChange}
+              />
+            </div><br />
+            {this.state.error && <div className='help is-danger'>{this.state.error} </div>}
+            <div>
+              <button form='invoiceUpdate' className='button'>Update Expense</button>
             </div>
           </form>
-
-          <br />
-          <div>
-            <input
-              className={`input ${this.state.error ? 'is-danger': ''}`}
-              name="amount"
-              placeholder="Amount"
-              defaultValue={this.props.amount}
-              onChange={this.handleChange}
-            />
-          </div>
-
-
-
-
-
 
         </Modal.Body>
         <Modal.Footer>
@@ -202,62 +189,4 @@ class ModalExpenseUpdate extends React.Component {
   }
 }
 
-
 export default ModalExpenseUpdate
-
-
-/*
-
-
-
-<div className="select">
-  <select
-    name="project_id"
-    defaultValue={`${this.state.data.project_id}-${this.props.client_id}`}
-    onChange={this.handleChangeDropDown}>
-    {this.state.projects && this.state.projects.map(project => (
-      <option
-        key={project.id}
-        value={`${project.id}-${project.client.id}`}>
-        {project.client.name}: {project.name}
-      </option>
-    ))}
-  </select>
-</div>
-
-
-
-
-
-
-            <br />
-
-            <div>
-              <DayPickerInput
-                defaultValue={this.state.data.date_issued}
-                onDayChange={this.handleDateIssued}
-                format={'YYYY-MM-DD'}/>
-            </div>
-            <div>
-              <DayPickerInput
-
-                onDayChange={this.handleDateDue}
-                format={'YYYY-MM-DD'}/>
-            </div>
-            <div>
-              <DayPickerInput
-
-                onDayChange={this.handleDatePaid}
-                format={'YYYY-MM-DD'}/>
-            </div>
-
-*/
-
-
-
-
-
-
-// value={this.state.data.date_issued}
-// value={this.state.data.date_due}
-// value={this.state.data.date_paid}

@@ -26,6 +26,7 @@ class ExpenseShow extends React.Component {
     this.handleShow = this.handleShow.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleClose() {
@@ -43,6 +44,37 @@ class ExpenseShow extends React.Component {
     const error = ''
     this.setState({ data, error })
   }
+
+
+  handleSubmit(e) {
+    e.preventDefault()
+    axios.post('/api/expenses', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.getData())
+      .catch((err) => {
+        console.log('the error is', err)
+        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+      })
+  }
+
+
+  handleDelete(e) {
+    if (window.confirm('Are you sure you want to do this?')) {
+      e.preventDefault()
+      axios.delete(`/api/expenses/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => {
+          this.props.history.push('/expenses')
+
+        })
+        .catch((err) => {
+          console.log('the error is', err)
+          this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        })
+    }
+  }
+
+
+
+
 
   getData() {
     axios.get(`/api/expenses/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
@@ -152,35 +184,6 @@ this.handleSubmit = this.handleSubmit.bind(this)
 this.handleDelete = this.handleDelete.bind(this)
 
 
-handleChange({ target: { name, value }}) {
-  const data = {...this.state.data, [name]: value }
-  const error = ''
-  this.setState({ data, error })
-}
-
-handleSubmit(e) {
-  e.preventDefault()
-  axios.post('/api/expenses', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-    .then(() => this.getData())
-    .catch((err) => {
-      console.log('the error is', err)
-      this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
-    })
-}
-
-
-handleDelete(e) {
-  e.preventDefault()
-  axios.delete(`/api/expenses/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-    .then(() => {
-      this.props.history.push('/expenses')
-
-    })
-    .catch((err) => {
-      console.log('the error is', err)
-      this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
-    })
-}
 
 
 
