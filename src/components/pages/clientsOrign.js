@@ -1,10 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
-import { Link } from 'react-router-dom'
 import ClientHeader from './lists/clientHeader'
 import ClientList from './lists/clientList'
+import ClientSummaryList from './lists/clientSummaryList'
 import ModalClient from './modals/clientModal'
+import ClientSummary from './lists/clientSummary'
+
 
 
 class Clients extends React.Component {
@@ -82,33 +84,28 @@ class Clients extends React.Component {
 
     return (
       <main className="section">
-        <div className="subHeader2">
-          <Link to='/suppliers' className='cell'>
-            Clients
-          </Link>
-        </div>
+        <div className="subHeader2">Clients</div>
         <div className = 'dataTable'>
           <ClientHeader />
           {this.state.clients && this.state.clients.map(client => (
             <div key={client.id} className="lineItem">
               <ClientList
                 client={client}
+                sumArray={this.sumArray}
+                totalExpenses={this.sumArray(client.expenses)}
+                comparator={this.comparator(client.expenses, client.invoices)}
+                totalInvoiced={this.sumArray(client.invoices)}
               />
-              <div className="tableRow">&nbsp;</div>
+              <ClientSummary
+                totalExpenses={this.sumArray(client.expenses)}
+                comparator={this.comparator(client.expenses,client.invoices)}
+                totalInvoiced={this.sumArray(client.invoices)}
+              />
             </div>
           ))}
         </div>
+        <button onClick={this.handleShow}>Add Client</button>
 
-        <div className = 'columns icons'>
-          <div className= 'icons'>
-            <button className='icon' onClick={this.handleShow}>
-              <img alt='edit'
-                src='http://www.orjon.com/dev/project4/iconAddCircle.png'
-                width='25'
-                height='25' />
-            </button>
-          </div>
-        </div>
 
         <ModalClient show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
@@ -118,3 +115,9 @@ class Clients extends React.Component {
 }
 
 export default Clients
+
+// <ClientSummary
+//   totalExpenses={this.sumArray(client.expenses)}
+//   comparator={this.comparator(project.expenses,project.invoices)}
+//   totalInvoiced={this.sumArray(project.invoices)}
+// />

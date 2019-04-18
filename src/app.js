@@ -13,6 +13,9 @@ import Dashboard from './components/pages/dashboard'
 import Projects from './components/pages/projects'
 import ProjectShow from './components/pages/projectShow'
 import InvoiceShow from './components/pages/invoiceShow'
+import ExpenseShow from './components/pages/expenseShow'
+import ClientShow from './components/pages/clientShow'
+import SupplierShow from './components/pages/supplierShow'
 import Invoices from './components/pages/invoices'
 import Clients from './components/pages/clients'
 import Expenses from './components/pages/expenses'
@@ -41,6 +44,9 @@ class App extends React.Component {
               <Route path="/projects" component={Projects} />
               <Route path="/invoice/:id" component={InvoiceShow}/>
               <Route path="/project/:id" component={ProjectShow}/>
+              <Route path="/expenses/:id" component={ExpenseShow} />
+              <Route path="/client/:id" component={ClientShow}/>
+              <Route path="/supplier/:id" component={SupplierShow} />
               <Route path="/invoices" component={Invoices} />
               <Route path="/clients" component={Clients} />
               <Route path="/expenses" component={Expenses} />

@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
-import ExpenseList from './lists/expenseList'
+import ExpenseItem from './lists/expenseItem'
 import ExpenseHeader from './lists/expenseHeader'
 import ModalExpense from './modals/expenseModal'
 
@@ -32,6 +33,7 @@ class Expenses extends React.Component {
   handleShow() {
     this.setState({ modalShow: true })
   }
+
 
   clearState() {
     const data = { amount: '',description: ''}
@@ -97,8 +99,9 @@ class Expenses extends React.Component {
     return (
       <main className="section">
         <div className="subHeader2 columns">
-          <div>Expenses</div>
-
+          <Link to='/invoices' className='cell'>
+            Expenses
+          </Link>
           <div className='subHeader2Right' >£&thinsp;{this.state.expenses && this.sumArray(this.state.expenses).toFixed(2)}</div>
         </div>
         <div className = 'dataTable'>
@@ -106,14 +109,23 @@ class Expenses extends React.Component {
           {this.state.expenses && this.state.expenses.map(expense => (
             <div key={expense.id}
               className='lineItem'>
-              <ExpenseList
+              <ExpenseItem
                 expense={expense}
               />
             </div>
           ))}
         </div>
 
-        <button onClick={this.handleShow}>Add Expense</button>
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+        </div>
 
         <ModalExpense show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 

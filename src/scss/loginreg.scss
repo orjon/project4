@@ -1,0 +1,15 @@
+.flex1 {
+  width: 150px;
+  height: 100%;
+  // border: 1px blue solid;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.regicon {
+  display: flex;
+  justify-content: space-between;
+
+}

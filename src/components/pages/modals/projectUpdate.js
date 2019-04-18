@@ -54,7 +54,7 @@ class ModalProjectUpdate extends React.Component {
       })
       .catch((err) => {
         console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        this.setState({ error: 'Something went wrong...'}, () => console.log('this.state', this.state))
       })
   }
 
@@ -135,14 +135,30 @@ class ModalProjectUpdate extends React.Component {
 
             <br />
             {this.state.error && <div className="help is-danger">{this.state.error} </div>}
-            <div>
-              <button form="projectUpdate" className="button">Update project</button>
-            </div>
+
           </form>
 
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={this.props.onHide}>Cancel</button>
+          <div className = 'columns ticks'>
+            <div className= 'icons'>
+              <button className='icon' form="projectUpdate">
+                <img alt='edit'
+                  src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                  width='50'
+                  height='50'/>
+              </button>
+            </div>
+          </div>
+
+          <div className= 'icons'>
+            <button className='icon' onClick={this.props.onHide}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='50'
+                height='50'/>
+            </button>
+          </div>
         </Modal.Footer>
       </Modal>
     )

@@ -1,10 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 import InvoiceList from './lists/invoiceList'
 import InvoiceHeader from './lists/invoiceHeader'
-import TableStats from './lists/tableStats'
+import InvoiceSummary from './lists/invoiceSummary'
 import ModalInvoiceAdd from './modals/invoiceAdd'
 
 class Invoices extends React.Component {
@@ -134,27 +135,25 @@ class Invoices extends React.Component {
       this.getData()
     }
 
-    const totalDue = this.state.invoices && this.sumDue(this.state.invoices)
-    const totalOverdue= this.state.invoices && this.sumOverdue(this.state.invoices)
+    const totalDue = (this.state.invoices && this.sumDue(this.state.invoices))|| 0
+    const totalOverdue= (this.state.invoices && this.sumOverdue(this.state.invoices)) || 0
 
     return (
       <main className='section'>
         <div className='subHeader2 columns'>
-          <div>Invoices</div>
+          <Link to='/clients' className='cell'>
+            Invoices
+          </Link>
           <div className='columns'>
-            <div className='subHeader2Label'>Total invoiced:</div>
+            <div className='subHeader2Label'></div>
             <div className='subHeader2Currency'>£&thinsp;{this.state.invoices && this.sumArray(this.state.invoices).toFixed(2)}</div>
           </div>
         </div>
 
-        <div className = 'statsTable'>
-          <TableStats totalDue={totalDue} totalOverdue={totalOverdue}/>
-        </div>
         <div className = 'dataTable'>
           <InvoiceHeader />
           {this.state.invoices && this.state.invoices.map(invoice => (
-            <div key={invoice.id}
-              className={`lineItem
+            <div key={invoice.id} className={`lineItem
                 ${this.checkOverdue(invoice) ? 'overdue':''}
                 ${this.checkPaid(invoice) ? 'paid':''}
                 `}>
@@ -162,13 +161,25 @@ class Invoices extends React.Component {
                 invoice={invoice}
                 overdue={this.checkOverdue(invoice)}
                 paid={this.checkPaid(invoice)}/>
+
             </div>
           ))}
-
-
+          <div className = 'summary'>
+            <InvoiceSummary totalDue={totalDue} totalOverdue={totalOverdue}/>
+          </div>
         </div>
 
-        <button onClick={this.handleAddShow}>Add Invoice</button>
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleAddShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+        </div>
+
         <ModalInvoiceAdd show={this.state.modalAddShow} error={this.state.error} onHide={modalClose}/>
       </main>
     )

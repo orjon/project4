@@ -19,7 +19,11 @@ const ExpenseList = (props) => {
         <div className='cellThird'>
           {(expense.supplier && expense.supplier.name) || 'UNASSIGNED'}
         </div>
-        <div className='cellThird'>{expense.description}</div>
+
+        <Link to={expense.project && `/expenses/${expense.id}`} className='cellThird cell'>
+          {expense.description}
+        </Link>
+
       </div>
       <div className = 'rowRight'>
         <div className ='cellDateRight'>£&thinsp;{expense.amount.toFixed(2)}</div>

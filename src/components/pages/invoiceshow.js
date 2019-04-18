@@ -59,16 +59,18 @@ class InvoiceShow extends React.Component {
 
 
   handleDelete(e) {
-    e.preventDefault()
-    axios.delete(`/api/invoices/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => {
-        this.props.history.push('/invoices')
+    if (window.confirm('Are you sure you want to do this?')) {
+      e.preventDefault()
+      axios.delete(`/api/invoices/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => {
+          this.props.history.push('/invoices')
 
-      })
-      .catch((err) => {
-        console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
-      })
+        })
+        .catch((err) => {
+          console.log('the error is', err)
+          this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        })
+    }
   }
 
 
@@ -114,32 +116,51 @@ class InvoiceShow extends React.Component {
     }
 
     const invoice = this.state.invoice
-
+    const overdue = this.checkOverdue(invoice)
+    const paid = this.checkPaid(invoice)
 
 
     return (
       <main className="section">
         <div className="subHeader2 columns">
-          <div>Invoice : {this.state.invoice.number}</div>
+          <div><Link to="/invoices" className='headerLink'>Invoice</Link><span> : {this.state.invoice.number}</span></div>
+          <div className='columns'>
+            <div className='subHeader2Label'></div>
+            <div className='subHeader2Currency'>£&thinsp;{invoice && invoice.amount.toFixed(2)}</div>
+          </div>
         </div>
 
         <div className = 'dataTable'>
           <InvoiceItemHeader />
-          <div className={`lineItem
-                ${this.checkOverdue(this.state.invoice) ? 'overdue':''}
-                ${this.checkPaid(this.state.invoice) ? 'paid':''}
-                `}>
-            <InvoiceItem invoice={invoice}/>
+          <div className='lineItem'>
+            <InvoiceItem invoice={invoice} overdue={overdue} paid={paid}/>
           </div>
-
         </div>
 
-        <button onClick={this.handleShow}>Update Invoice</button>
-        <div>
-          <button className="button delete" onClick={this.handleDelete}>Delete Invoice</button>
+
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconEditCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleDelete}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
         </div>
+
 
         <ModalInvoiceUpdate
+          overdue={overdue}
+          paid={paid}
           show={this.state.modalShow}
           error={this.state.error}
           onHide={modalClose}

@@ -1,5 +1,15 @@
+.headerLink {
+  text-decoration: none;
+  color: $colorFontMain;
+}
+
+.headerLink:hover {
+  text-decoration: none;
+  color: $colorFontHover;
+}
+
 .subHeader1 {
-  border: 1px solid orange;
+  // border: 1px solid orange;
   font-weight: 600;
   text-decoration: none;
   font-size: 25px;
@@ -12,15 +22,16 @@
   font-weight: 600;
   text-decoration: none;
   font-size: 20px;
-  padding: 0 0 0 5px;
+  padding: 0 5px;
   text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
 .subHeader2Right {
   // border: 1px solid red;
   font-weight: 600;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
   padding-right: 5px;
   text-align: right;
 }
@@ -29,24 +40,26 @@
   // border: 1px solid red;
   font-weight: 600;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
   width: 125px;
-  padding-right: 5px;
   text-align: right;
 }
 .subHeader2Label {
   // border: 1px solid red;
   font-weight: 600;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
   padding-right: 5px;
   text-align: right;
 }
 
 .subHeader3 {
   // border: 1px solid blue;
-  font-size: 15px;
-  padding-left: 5px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 0 5px;
+  text-transform: uppercase;
 }
 .subHeader3Right {
   // border: 1px solid blue;
@@ -58,6 +71,7 @@
 .summary {
   font-size: 16px;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 

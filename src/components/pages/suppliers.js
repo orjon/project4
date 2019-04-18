@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import { Link } from 'react-router-dom'
 import SupplierHeader from './lists/supplierHeader'
 import SupplierList from './lists/supplierList'
 import SupplierSummary from './lists/supplierSummary'
@@ -76,7 +77,11 @@ class Suppliers extends React.Component {
 
     return (
       <main className="section">
-        <div className="subHeader2">Suppliers</div>
+        <div className="subHeader2">
+          <Link to='/projects' className='cell'>
+            Suppliers
+          </Link>
+        </div>
         <div className = 'dataTable'>
           <SupplierHeader />
           {this.state.suppliers && this.state.suppliers.map(supplier => (
@@ -90,7 +95,17 @@ class Suppliers extends React.Component {
             </div>
           ))}
         </div>
-        <button onClick={this.handleShow}>Add Supplier</button>
+
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                width='25'
+                height='25' />
+            </button>
+          </div>
+        </div>
 
         <ModalSupplier show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 
@@ -100,10 +115,3 @@ class Suppliers extends React.Component {
 }
 
 export default Suppliers
-
-              //
-              // <ProjectSummary
-              //   totalExpenses={this.sumArray(project.expenses)}
-              //   comparator={this.comparator(project.expenses,project.invoices)}
-              //   totalInvoiced={this.sumArray(project.invoices)}
-              // />

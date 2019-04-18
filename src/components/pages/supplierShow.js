@@ -2,31 +2,30 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
-import ExpenseItem from './lists/expenseItem'
-import ExpenseHeader from './lists/expenseHeader'
-import ModalExpenseUpdate from './modals/expenseUpdate'
+import SupplierItem from './lists/supplierItem'
+import SupplierHeader from './lists/supplierHeader'
+import ModalInvoiceUpdate from './modals/invoiceUpdate'
 import moment from 'moment'
 
-
-class ExpenseShow extends React.Component {
+class SupplierShow extends React.Component {
   constructor() {
     super()
     this.state = {
-      expense: {
-        amount: '',
-        description: ''
+      client: {
+        name: ''
       },
       error: '',
       modalShow: false
     }
     this.today = moment()
     this.userCurrent = ''
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
 
-    this.invoice = ''
     this.handleShow = this.handleShow.bind(this)
     this.handleClose = this.handleClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
+    this.invoice = ''
   }
 
   handleClose() {
@@ -37,18 +36,15 @@ class ExpenseShow extends React.Component {
     this.setState({ modalShow: true })
   }
 
-
-
   handleChange({ target: { name, value }}) {
-    const data = {...this.state.expense, [name]: value }
+    const data = {...this.state.data, [name]: value }
     const error = ''
     this.setState({ data, error })
   }
 
-
   handleSubmit(e) {
     e.preventDefault()
-    axios.post('/api/expenses', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+    axios.post('/api/suppliers', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(() => this.getData())
       .catch((err) => {
         console.log('the error is', err)
@@ -60,9 +56,9 @@ class ExpenseShow extends React.Component {
   handleDelete(e) {
     if (window.confirm('Are you sure you want to do this?')) {
       e.preventDefault()
-      axios.delete(`/api/expenses/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      axios.delete(`/api/suppliers/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
         .then(() => {
-          this.props.history.push('/expenses')
+          this.props.history.push('/invoices')
 
         })
         .catch((err) => {
@@ -73,15 +69,14 @@ class ExpenseShow extends React.Component {
   }
 
 
-
-
-
   getData() {
-    axios.get(`/api/expenses/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+    axios.get(`/api/suppliers/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => {
-        this.setState({ expense: res.data })
+        this.setState({ supplier: res.data })
+        console.log(this.state.client.id)
       })
-      .then(() => this.invoice = this.state.invoice)
+
+      // .then(() => this.client = this.state.invoice)
       // .then(() => this.setState({ client_id: this.state.invoice.client.id}))
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
@@ -93,6 +88,14 @@ class ExpenseShow extends React.Component {
 
   }
 
+
+  checkOverdue(invoice) {
+    return this.today > moment(invoice.date_due)
+  }
+
+  checkPaid(invoice) {
+    return invoice.date_paid
+  }
 
   sumArray(array) {
     const length = array.length
@@ -109,24 +112,25 @@ class ExpenseShow extends React.Component {
       this.getData()
     }
 
-    const expense = this.state.expense
+    const client= this.state.client
+
 
 
     return (
       <main className="section">
-        <div className="subHeader2 columns">
-          <div>
-            <Link to="/expenses" className='headerLink'>Expense</Link> : {expense && expense.description}</div>
-          <div className='columns'>
-            <div className='subHeader2Label'></div>
-            <div className='subHeader2Currency'>£&thinsp;{expense.amount ? expense.amount.toFixed(2) : 0}</div>
-          </div>
-        </div>
+        <div className="subHeader2">
+          <Link to='/clients' className='cellQuarter cell'>
+            Suppliers</Link> : {this.state.client.name}</div>
         <div className = 'dataTable'>
-          <ExpenseHeader />
-          <div className='lineItem tableLastRow'>
-            <ExpenseItem expense={expense}/>
+
+          <SupplierHeader />
+          <div className="lineItem">
+            <SupplierItem
+              client={client}
+            />
+            <div className="tableRow">&nbsp;</div>
           </div>
+
         </div>
 
         <div className = 'columns icons'>
@@ -148,59 +152,15 @@ class ExpenseShow extends React.Component {
           </div>
         </div>
 
-        <ModalExpenseUpdate
+        <ModalInvoiceUpdate
           show={this.state.modalShow}
           error={this.state.error}
           onHide={modalClose}
-          id={this.props.match.params.id}
-          description={this.state.expense.description}
-          amount={this.state.expense.amount}
-          closeModal={this.handleClose}
-          supplier_id={this.state.expense.supplier_id}
-          expense_id={this.state.expense_id}
+          client_id={this.props.match.params.id}
         />
-
       </main>
     )
   }
 }
 
-export default ExpenseShow
-/*
-
-show={this.state.modalShow}
-error={this.state.error}
-onHide={modalClose}
-client_id={this.state.client_id}
-id={this.props.match.params.id}
-description={this.state.expense.description}
-amount={this.state.expense.amount}
-closeModal={this.handleClose}
-
-
-
-this.handleChange = this.handleChange.bind(this)
-this.handleSubmit = this.handleSubmit.bind(this)
-this.handleDelete = this.handleDelete.bind(this)
-
-
-
-
-
-
-
-
-
-
-        <ModalExpenseUpdate
-
-          show={this.state.modalShow}
-          error={this.state.error}
-          onHide={modalClose}
-          client_id={this.state.client_id}
-          id={this.props.match.params.id}
-          number={this.state.invoice.number}
-          amount={this.state.invoice.amount}
-          closeModal={this.handleClose}
-        />
-*/
+export default SupplierShow

@@ -34,7 +34,7 @@ class ModalSupplier extends React.Component {
       .then(() => this.clearState())
       .catch((err) => {
         console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        this.setState({ error: 'Something went wrong...'}, () => console.log('this.state', this.state))
       })
   }
 
@@ -69,20 +69,38 @@ class ModalSupplier extends React.Component {
               <input
                 className={`input ${this.props.error ? 'is-danger': ''}`}
                 name="name"
-                placeholder="Supplier name"
+                placeholder="Supplier / Service provider name"
                 value={this.state.data.name}
                 onChange={this.handleChange}
               />
             </div>
             <br />
             {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-            <div>
-              <button form="supplierNew" className="button">Add new supplier</button>
-            </div>
+
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={cancelForm}>Cancel</button>
+
+          <div className = 'columns ticks'>
+            <div className= 'icons'>
+              <button className='icon' form="supplierNew">
+                <img alt='edit'
+                  src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                  width='50'
+                  height='50'/>
+              </button>
+            </div>
+          </div>
+
+          <div className= 'icons'>
+            <button className='icon' onClick={this.props.onHide}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='50'
+                height='50'/>
+            </button>
+          </div>
+
         </Modal.Footer>
       </Modal>
     )

@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ClientList = (props) => {
+const ClientItem = (props) => {
   const client = props.client
+
+
+
 
   return (
     <div className = 'tableRow' >
@@ -38,4 +41,4 @@ const ClientList = (props) => {
   )
 }
 
-export default ClientList
+export default ClientItem

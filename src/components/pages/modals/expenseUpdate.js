@@ -6,54 +6,39 @@ import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 import moment from 'moment'
 
-class ModalInvoiceAdd extends React.Component {
-  constructor(...args) {
-    super(...args)
+
+class ModalExpenseUpdate extends React.Component {
+  constructor(...props) {
+    super(...props)
 
     this.state = {
       data: {
-        number: '',
-        description: '',
-        amount: '',
-        date_issued: '',
-        date_due: '',
-        date_paid: '',
-        client_id: '',
-        project_id: ''
+        amount: '0',
+        description: ''
       },
       error: '',
-      modalAddShow: false,
+      modalShow: true,
       selectedDay: undefined
     }
 
     this.userCurrent = ''
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleDateIssued = this.handleDateIssued.bind(this)
-    this.handleDatePaid = this.handleDatePaid.bind(this)
-    this.handleDateDue = this.handleDateDue.bind(this)
+
+    this.handleDate = this.handleDate.bind(this)
+
     this.handleChangeDropDown = this.handleChangeDropDown.bind(this)
-
   }
 
 
-  handleDateIssued(day)  {
-    const date = this.dateConvert(day)
-    const data = {...this.state.data, date_issued: date }
-    const error = ''
-    this.setState({ data, error })
+  handleClose() {
+    this.setState({ modalShow: false }, this.getData())
   }
 
-  handleDateDue(day) {
+  handleDate(day)  {
+    console.log(day)
     const date = this.dateConvert(day)
-    const data = {...this.state.data, date_due: date }
-    const error = ''
-    this.setState({ data, error })
-  }
-
-  handleDatePaid(day)  {
-    const date = this.dateConvert(day)
-    const data = {...this.state.data, date_paid: date }
+    const data = {...this.state.data, date: date }
     const error = ''
     this.setState({ data, error })
   }
@@ -62,61 +47,75 @@ class ModalInvoiceAdd extends React.Component {
     return moment(day).format('YYYY-MM-DD')
   }
 
-  clearState() {
-    const data = {
-      number: '',
-      description: '',
-      amount: '',
-      date_issued: '',
-      date_due: '',
-      date_paid: '',
-      client_id: '',
-      project_id: ''
-    }
-    this.setState({ data })
-  }
+
 
   handleChange({ target: { name, value }}) {
+    console.log('handlechange:')
+    console.log(value)
     const data = {...this.state.data, [name]: value }
     const error = ''
     this.setState({ data, error })
   }
 
+  componentDidMount() {
+    this.getData()
+    axios.get(`/api/expenses/${this.props.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(res => {
+        this.setState({
+          data: {...res.data, expense_id: res.data.expense.id}})
+      })
+      .then(() =>{
+        this.setState({
+          data: { description: this.props.description}
+        })
+      })
+  }
+
   handleSubmit(e) {
     e.preventDefault()
-    axios.post('/api/invoices', this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(this.props.onHide)
-      .then(() => this.clearState())
+    axios.put(`/api/expenses/${this.props.id}`, this.state.data,  { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => {
+        this.props.closeModal()
+      })
       .catch((err) => {
         console.log('the error is', err)
         this.setState({ error: 'Something went wrong...'}, () => console.log('this.state', this.state))
       })
   }
 
+
   handleChangeDropDown({ target: { value }}) {
     const [ project, client ] = value.split('-')
+    console.log('project no: ' + project)
+    console.log('client no: '+client)
     const data = {...this.state.data, project_id: project, client_id: client }
     const error = ''
     this.setState({ data, error })
   }
+
+
 
   getData() {
     axios.get('/api/user', { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(res => this.setState({
         invoices: res.data.invoices,
         projects: res.data.projects,
-        clients: res.data.clients
+        clients: res.data.clients,
+        suppliers: res.data.suppliers
       }))
+      .then(() => {
+        const data = {...this.state.data,
+          description: this.props.description,
+          amount: this.props.amount
+        }
+        const error = ''
+        this.setState({ data, error })
+      })
       .catch(err => console.log(err))
   }
 
-  componentDidMount() {
-    axios.get(`/api/user/${Auth.getPayload().sub}`)
-      .then(res => this.userCurrent = res.data.username)
-      .then(() => this.getData())
-  }
-
   render() {
+    console.log(this.state.data)
     return (
       <Modal
         {...this.props}
@@ -127,13 +126,25 @@ class ModalInvoiceAdd extends React.Component {
 
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-vcenter'>
-            <div className='subHeader2'>New Invoice</div>
+            <div className='subHeader2'>Update Expense</div>
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <form id='invoiceNew' className='update' onSubmit={this.handleSubmit}>
 
+          <form id='invoiceUpdate' className='update' onSubmit={this.handleSubmit}>
+
+            <div className='select'>
+              <select
+                name='supplier_id'
+                defaultValue={this.props.supplier_id}
+                onChange={this.handleChange}>
+                <option disabled value='default'>Select supplier / service provider</option>
+                {this.state.suppliers && this.state.suppliers.map(supplier => (
+                  <option key={supplier.id} value={supplier.id}>{supplier.name}</option>
+                ))}
+              </select>
+            </div><br />
             <div className='select'>
               <select
                 name='project_id'
@@ -148,18 +159,9 @@ class ModalInvoiceAdd extends React.Component {
             <div>
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
-                name='number'
-                placeholder='Enter invoice number'
-                value={this.state.data.number}
-                onChange={this.handleChange}
-              />
-            </div><br />
-            <div>
-              <input
-                className={`input ${this.props.error ? 'is-danger': ''}`}
                 name='description'
-                placeholder='Invoice description'
-                value={this.state.data.description}
+                placeholder='Expense description'
+                defaultValue={this.props.description}
                 onChange={this.handleChange}
               />
             </div><br />
@@ -167,35 +169,12 @@ class ModalInvoiceAdd extends React.Component {
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
                 name='amount'
-                placeholder='Amount'
-                value={this.state.data.amount}
+                placeholder='Cost of good / service eg £ 175.50 '
+                defaultValue={this.props.amount}
                 onChange={this.handleChange}
               />
             </div><br />
-            <label htmlFor='invIssue'> Please select date of issue</label>
-            <div>
-              <DayPickerInput
-                id='invIssue'
-                onDayChange={this.handleDateIssued}
-                format={'YYYY-MM-DD'}/>
-            </div>
-            <label htmlFor='invDue'> Please select due date</label>
-            <div>
-              <DayPickerInput
-                id='invDue'
-                onDayChange={this.handleDateDue}
-                format={'YYYY-MM-DD'}/>
-            </div>
-            <label htmlFor='invPaid'> Please select date of payment (if paid)</label>
-            <div>
-              <DayPickerInput
-                id='invPaid'
-                onDayChange={this.handleDatePaid}
-                format={'YYYY-MM-DD'}/>
-            </div>
-
-            {this.state.error && <small className='help is-danger'>{this.state.error} </small>}
-
+            {this.state.error && <div className='help is-danger'>{this.state.error} </div>}
           </form>
 
         </Modal.Body>
@@ -203,11 +182,11 @@ class ModalInvoiceAdd extends React.Component {
 
           <div className = 'columns ticks'>
             <div className= 'icons'>
-              <button className='icon' form='invoiceNew'>
+              <button className='icon' form="invoiceUpdate">
                 <img alt='edit'
                   src='http://www.orjon.com/dev/project4/iconAddCircle.png'
                   width='50'
-                  height='50' />
+                  height='50'/>
               </button>
             </div>
           </div>
@@ -217,7 +196,7 @@ class ModalInvoiceAdd extends React.Component {
               <img alt='edit'
                 src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
                 width='50'
-                height='50' />
+                height='50'/>
             </button>
           </div>
 
@@ -227,4 +206,4 @@ class ModalInvoiceAdd extends React.Component {
   }
 }
 
-export default ModalInvoiceAdd
+export default ModalExpenseUpdate

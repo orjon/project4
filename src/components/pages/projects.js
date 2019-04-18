@@ -94,7 +94,11 @@ class Projects extends React.Component {
 
     return (
       <main className="section">
-        <div className="subHeader2">Projects</div>
+        <div className="subHeader2">
+          <Link to='/expenses' className='cell'>
+            Projects
+          </Link>
+        </div>
         <div className = 'dataTable'>
           <ProjectHeader />
           {this.state.projects && this.state.projects.map(project => (
@@ -111,7 +115,17 @@ class Projects extends React.Component {
           ))}
         </div>
 
-        <button onClick={this.handleShow}>Add Project</button>
+        <div className = 'columns icons'>
+          <div className= 'icons'>
+            <button className='icon' onClick={this.handleShow}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                width='25'
+                height='25'/>
+            </button>
+          </div>
+        </div>
+
 
         <ModalProjectAdd show={this.state.modalShow} error={this.state.error} onHide={modalClose}/>
 

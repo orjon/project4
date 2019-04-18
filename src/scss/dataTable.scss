@@ -24,21 +24,30 @@
   // text-decoration: underline;
 }
 
-.iconsxx {
-  margin: 0 3px;
-  text-align: center;
+.icons {
+  vertical-align: super;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
   // border: 1px solid magenta;
-  vertical-align: top;
-  transform: -5px 0;
+
+
 }
 
 .icon {
-  border-radius: 20px;
+  border-radius: 50%;
   border: 1 solid rgba(0,0,0,0);
   background-color: rgba(0,0,0,0);
   color: $colorButtonText;
   line-height: 25px;
   padding: 0;
+  margin: 5px;
+}
+
+icon:hover {
+  border: 2px solid rgba(255,255,255,1);
+  background-color: rgba(255,255,255,1);
 }
 
 icon:focus {
@@ -60,22 +69,29 @@ icon:focus {
   text-decoration: none;
   font-size: 15px;
   letter-spacing: 0.5px;
-  line-height: 30px;
-  margin-bottom: 25px;
+  line-height: 25px;
+
 
   .rowHeader {
     border-bottom: 1px solid $colorFontMain;
     font-weight: bold;
     text-transform: uppercase;
   }
+
+  .tableLastRow {
+    border-bottom: 0px solid $colorTableLine;
+  }
+
   .tableRow {
     border-bottom: 1px solid $colorTableLine;
   }
+
   .tableRow, .rowHeader{
     // border: 1px solid green;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
 
     .rowLeft{
       // border: 1px solid orange;

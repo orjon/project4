@@ -94,7 +94,7 @@ class ModalInvoiceUpdate extends React.Component {
       })
       .catch((err) => {
         console.log('the error is', err)
-        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
+        this.setState({ error: 'Something went wrong...'}, () => console.log('this.state', this.state))
       })
   }
 
@@ -153,8 +153,7 @@ class ModalInvoiceUpdate extends React.Component {
                   </option>
                 ))}
               </select>
-            </div>
-
+            </div><br />
             <div>
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
@@ -163,8 +162,7 @@ class ModalInvoiceUpdate extends React.Component {
                 value={this.state.data.number}
                 onChange={this.handleChange}
               />
-            </div>
-
+            </div><br />
             <div>
               <input
                 className={`input ${this.props.error ? 'is-danger': ''}`}
@@ -173,9 +171,7 @@ class ModalInvoiceUpdate extends React.Component {
                 value={this.state.data.description}
                 onChange={this.handleChange}
               />
-            </div>
-
-            <br />
+            </div><br />
             <div>
               <input
                 className={`input ${this.state.error ? 'is-danger': ''}`}
@@ -184,43 +180,56 @@ class ModalInvoiceUpdate extends React.Component {
                 value={this.state.data.amount}
                 onChange={this.handleChange}
               />
-            </div>
+            </div><br />
 
-            <br />
-
+            <label htmlFor='invIssue'> Please select date of issue</label>
             <div>
               <DayPickerInput
+                id='invIssue'
                 defaultValue={this.state.data.date_issued}
                 onDayChange={this.handleDateIssued}
                 format={'YYYY-MM-DD'}/>
-            </div>
+            </div><br />
+            <label htmlFor='invDue'> Please select due date</label>
             <div>
               <DayPickerInput
-
                 onDayChange={this.handleDateDue}
                 format={'YYYY-MM-DD'}/>
-            </div>
+            </div><br />
+            <label htmlFor='invPaid'> Please select date of payment (if paid)</label>
             <div>
               <DayPickerInput
-
+                id='invPaid'
                 onDayChange={this.handleDatePaid}
                 format={'YYYY-MM-DD'}/>
-            </div>
-            <br />
+            </div><br />
             {this.state.error && <div className="help is-danger">{this.state.error} </div>}
-            <div>
-              <button form="invoiceUpdate" className="button">Update invoice</button>
-            </div>
           </form>
-
-
-
-
 
 
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={this.props.onHide}>Cancel</button>
+
+          <div className = 'columns ticks'>
+            <div className= 'icons'>
+              <button className='icon' form="invoiceUpdate">
+                <img alt='edit'
+                  src='http://www.orjon.com/dev/project4/iconAddCircle.png'
+                  width='50'
+                  height='50'/>
+              </button>
+            </div>
+          </div>
+
+          <div className= 'icons'>
+            <button className='icon' onClick={this.props.onHide}>
+              <img alt='edit'
+                src='http://www.orjon.com/dev/project4/iconDeleteCircle.png'
+                width='50'
+                height='50'/>
+            </button>
+          </div>
+
         </Modal.Footer>
       </Modal>
     )
@@ -229,8 +238,3 @@ class ModalInvoiceUpdate extends React.Component {
 
 
 export default ModalInvoiceUpdate
-
-
-// value={this.state.data.date_issued}
-// value={this.state.data.date_due}
-// value={this.state.data.date_paid}

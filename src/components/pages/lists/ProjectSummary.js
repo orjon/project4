@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 
 const ProjectSummary = (props) => {
-  const project = props.project
   const totalExpenses=props.totalExpenses
   const totalInvoiced=props.totalInvoiced
   const sign = Math.sign(totalInvoiced-totalExpenses)

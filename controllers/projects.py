@@ -12,7 +12,7 @@ api = Blueprint('projects', __name__)
 #     return 'Project4 is live!', 200
 
 @api.route('/projects', methods=['GET'])
-
+@secure_route
 def index():
     projects = Project.query.all()
     return project_schema.jsonify(projects, many=True), 200 #OK
