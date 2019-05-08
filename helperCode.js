@@ -1,3 +1,27 @@
+//image carosel
+
+<img class='keyboard ' src='./images/keyboardHidden.png' alt='tetris logo'>
+<img class='keyboard ' src='./images/keyboardHighlight.png' alt='tetris logo'>
+
+
+css
+  function carousel() {
+    console.log('carosel')
+    const x = document.getElementsByClassName('keyboard')
+    console.log(x)
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.display = 'none'
+
+    }
+    keyboardSlideIndex++
+    if (keyboardSlideIndex > x.length) keyboardSlideIndex = 1
+    x[keyboardSlideIndex-1].style.display = 'flex'
+    setTimeout(carousel, 6000) // Change image every 2 seconds
+  }
+
+
+
+
 <div className={`always ${isOverdue(loan) ? 'yes' : 'no'}`}>
 
 

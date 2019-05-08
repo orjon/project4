@@ -7,7 +7,7 @@
     "build": "webpack -p",
     "postinstall": "[ \"$NODE_ENV\" = \"production\" ] && yarn build || exit 0",
     "serve:react": "webpack-dev-server",
-    "serve:flask": "pipenv run flask run -p 4000"
+    "serve:flask": "pipenv run flask run -p 5000"
   },
   "author": "",
   "license": "ISC",
