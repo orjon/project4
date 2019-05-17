@@ -2,18 +2,39 @@
 ## Project 4 : Web Development Immersive, General Assembly ![General Assembly](images/readme/ga-logo.png "General Assembly logo")
 
 Live link: http://www.orjon.com/project4/<br>
-GitHub: https://github.com/orjon/project4<br>
 
-![alt text](images/readme/p4ScreenRecordingGeneral.gif)
+
 
 ## Overview
+
+
+Born out of my own frustrations, the purpose of this application is to give small businesses a clear oversight of their project-related finances.
+
+
+
+ through a clean and easily-understood interface. Users are able to add, update, and
+delete transactions, and allocate them to the appropriate client, project and supplier.
+[orjon.com/project4]
+Technologies:
+
+
+
+
+
+
+
+
 Tetris is a recreation of the original 1980’s classic puzzle game.
 
 Position falling blocks, of differing shapes, trying to complete horizontal lines in order to clear them from the grid. Game speed increases with the player’s score. Game ends when player’s blocks reach the top of the grid.
 
-![alt text](images/readme/screenshotGamePlay.gif "Tetris game play screen recording")
+![](images/readme/p4ScreenRecordingGeneral.gif)
 
-This was my first project completed whilst undertaking the Web Development Immersive course at General Assembly, London. It was an individual project to be completed in one week.
+This was my final project completed whilst undertaking the Web Development Immersive course at General Assembly, London. Decided to work on this as a solo  individual project to be completed in one week.
+
+
+Full-stack web application - Individual project [ 1 week ]
+![](images/readme/db_structure03.png)
 
 ## Brief
 
@@ -23,10 +44,15 @@ This was my first project completed whilst undertaking the Web Development Immer
 
 
 ## Technologies Used
-* HTML5
+* React.js
 * Sass
-* JavaScript ES6
-* jQuery
+* Axios
+* Python
+* Flask
+* PostgreSQL
+* SQLAlchemy
+* Marshmallow
+* Yarn
 * Git
 * GitHub
 
