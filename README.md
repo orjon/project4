@@ -10,7 +10,6 @@ Born out of my own frustrations, the purpose of this application is to give smal
 
 ![](images/readme/p4ScreenRecordingGeneral.gif)
 
-The app aims to structure this information through a clean and easily-understood interface to help users monitor their projects over time.
 
 This was my final project completed whilst undertaking the Web Development Immersive course at General Assembly, London. I decided to work on this as a solo project. It was completed in one week.
 
@@ -44,6 +43,8 @@ This was my final project completed whilst undertaking the Web Development Immer
 The below diagram explains the typical relationships between Projects, Clients, Suppliers, Expenses and Invoices. Each user will have their own unique set of Projects, Clients etc.
 
 ![](images/readme/p4datasummary.png)
+
+The app aims to structure this information through a clean and easily-understood interface to help users monitor their projects over time.
 
 ### Database Structure
 
@@ -177,10 +178,26 @@ The Clients and Suppliers pages list a user's clients and suppliers respectively
 
 ![](images/readme/p4ScreenshotSuppliers.jpg)
 
+## Wins and Blockers
+
+* As this was my first full stack react application created alone - it was a great learning experience.
+
+* Planning the data structure, creating routes, and testing everything using Insomnia was very useful.
+
+
 ## Bugs
 Some known bugs:
 
+* I had difficulty in pre-populating date fields. The problem occurs when editing an existing entry that has a date field - such as when editing an invoice. The edit modal will not populate the date fields with the existing information - they will appear empty. They still function correctly however.
 
-## Wins and Blockers
+* The cross hyper-linking was decided at a relatively late stage in development. As such, there are few places where the hyperlinks have not been added.
 
-* Sort options for table data. (choose column, ascendind/descedning etc.)
+## Future improvements
+
+* Time was short to create all of this by myself within a week. With more time I would have created a bigger seed file to test behaviour when the data flows over the length of a single page.
+
+* I would like to add sort options for table data. It would be useful to be able to choose a column with which to sort, ascending/descending, and perhaps a search/filter too.
+
+* I have started work a dashboard page. I'd like to expand on this, and have this as the default page when I user logs in.
+
+![](images/readme/p4ScreenshotDashboard.jpg)
