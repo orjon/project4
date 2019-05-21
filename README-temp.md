@@ -1,47 +1,30 @@
 # **Project4**
 ## Project 4 : Web Development Immersive, General Assembly ![General Assembly](images/readme/ga-logo.png "General Assembly logo")
 
-Live link: http://www.orjon.com/project4/<br>
-
+http://www.orjon.com/project4/
 
 
 ## Overview
 
-
 Born out of my own frustrations, the purpose of this application is to give small businesses a clear oversight of their project-related finances.
 
+The below diagram explains the typical relationships between Projects, Clients, Suppliers, Expenses and Invoices. Each user will have their own unique set of Projects, Clients etc.
 
+![](images/readme/p4datasummary.png)
 
- through a clean and easily-understood interface. Users are able to add, update, and
-delete transactions, and allocate them to the appropriate client, project and supplier.
-[orjon.com/project4]
-Technologies:
+The app aims to structure this information through a clean and easily-understood interface to help users monitor their projects over time.
 
-
-
-
-
-
-
-
-Tetris is a recreation of the original 1980’s classic puzzle game.
-
-Position falling blocks, of differing shapes, trying to complete horizontal lines in order to clear them from the grid. Game speed increases with the player’s score. Game ends when player’s blocks reach the top of the grid.
-
-![](images/readme/p4ScreenRecordingGeneral.gif)
-
-This was my final project completed whilst undertaking the Web Development Immersive course at General Assembly, London. Decided to work on this as a solo  individual project to be completed in one week.
-
-
-Full-stack web application - Individual project [ 1 week ]
-![](images/readme/db_structure03.png)
+This was my final project completed whilst undertaking the Web Development Immersive course at General Assembly, London. I decided to work on this as a solo project. It was completed in one week.
 
 ## Brief
 
-* The player should be able to move falling blocks and rotate them in 90º increments
-* The game should stop if a block reaches the top row of the grid
-* If a line is completed it should be removed and the pieces above should fall to take its place
 
+* Build a full-stack application.
+* Use a Python Flask API to serve your data from a Postgres database.
+* Consume your API with a separate front-end built with React.
+* [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) functionality for at least a couple of models.
+* Visually impressive design.
+* Application must be deployed online.
 
 ## Technologies Used
 * React.js
@@ -57,6 +40,42 @@ Full-stack web application - Individual project [ 1 week ]
 * GitHub
 
 ## Approach Taken
+
+### Database Structure
+
+The first step in creating the database was to define the fields of each table and analyse their relationships. The arrows in the diagram below show fields within tables that are referenced from other tables.
+
+![](images/readme/p4db_structure.png)
+
+The users in this application do not form part part of the main database structure - however it is their login details that grant them, and not others, access to their project information.
+
+The arrows also illustrate the order in which entries must be made. For instance, an invoice has to be allocated to an existing project, and similarly, a project must be assigned to a client.
+
+### Navigation
+
+
+page per entity type
+clickable interface
+
+### Site Structure & User Journey
+
+The site structure closely follows that of the database; Clients, Projects, Invoices, Suppliers and Expenses are all pages and each displays the users' data arranged accordingly.
+
+![](images/readme/p4ScreenshotProjects.jpg)
+![](images/readme/p4ScreenshotExpenses.jpg)
+![](images/readme/p4ScreenshotInvoices.jpg)
+![](images/readme/p4ScreenshotClients.jpg)
+![](images/readme/p4ScreenshotSuppliers.jpg)
+
+
+
+
+Highlight late payments
+add / edit / delete buttons
+
+
+![](images/readme/p4ScreenRecordingGeneral.gif)
+
 
 ### Screen Layout
 The game is divided into two views; the title page and the game page.
@@ -157,10 +176,6 @@ The game flow below represents the typical logic in a single clock tick.
 ### Music & Sound Effects
 Music and sound effects are important elements to a computer game. Music helps set the tone of the game and sound effects provide feedback assisting the gameplay.
 
-The background music was commissioned to be simple and catchy, yet not too repetitive to get annoying during long games. It is 32 seconds long and loops infinitely.
-
-
-A nudge sound is triggered as a block is moved in any direction and a ratchet type sound is played with each block rotation. For attempted moves that cannot be completed due to obstruction a bump noise is played. Four different sounds are played when 1, 2, 3 or 4 lines are cleared.
 
 
 *The music and sound effects were created for the game by Joe Lewis (<joe@dojostudios.com>), [DojoStudios](http://www.joelewis.info).*
@@ -168,44 +183,13 @@ A nudge sound is triggered as a block is moved in any direction and a ratchet ty
 ## Bugs
 Some known bugs in the game:
 
-* Long key-presses: If a key is held down the resulting block movement can be unpredictable. The sound effects also suffer from this.
-
-* Occasionally blocks seem to appear lower than they should. I believe this is a consequence of the above mentioned long key-presses.
-
-* Keyboard diagram on startup shows the up arrow illuminated - yet is serves no function in the game.
+* Long key-presses: If a key is held down the resulting block movement can be unpredictable. The
 
 ## Wins and Blockers
 * Adding four invisible 'staging' rows to the top of the grid made block placement much simpler.
 
-* Block rotation was difficult to resolve. Happy with my chosen matrices method.
 
-* Logo placement happened by accident! It was initially intended to be above the grid, but when I saw the translucent block fall over it, I thought it looked perfect. This also solved the problem of what to fill the sides of the screen with.
-
-* I'm really happy with the sound and music and Joe Lewis created for this game. Fits perfectly.
-
-* G hidden grid 'expert mode'. I turned the gird off during some testing and found the game surprisingly difficult to play without it - so decided to add it in as a little hidden secret for those that read readme's!
-
-* A win for me was getting very comfortable with Flexbox as I made this game. It's top-down logic is very helpful in structuring HTML.
 
 ## Possible Additions & Improvements
 
-* The original game shows a preview of the next block to come. This would be a nice feature to add and I don't believe it would be too complicated to achieve.
-
-* Two player mode: In theory this could be achieved my duplicated the grid ad adding control for the second player. Would be a nice feature to add.
-
-* Persistent score keeping. I'd like to be able to add a backend log of high scores.
-
-* I would like to generate the grid in JavaScript. I have started on this:
-```JavaScript
- function createGrid() {
-   let gridNumbers = 40      //starting point for visible grid
-   for (let i=0; i<20; i++){ //Create 20 rows of..
-     $('<div></div>').addClass('row').appendTo($gameGrid) //Divs with .row, with
-   }
-   for (let j=0; j<10; j++) {
-     $('.row').append('<div>'+gridNumbers+'</div>') //10 Divs with gridNumbers++
-     gridNumbers++
-   }
-   $('#gameGrid .row').children().addClass('square')
-}
-```
+* Sort options for table data. (choose column, ascendind/descedning etc.)
