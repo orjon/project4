@@ -1,9 +1,6 @@
 # **Project4**
 ## Project 4 : Web Development Immersive, General Assembly ![General Assembly](images/readme/ga-logo.png "General Assembly logo")
 
-http://www.orjon.com/project4/
-
-
 ## Overview
 
 Born out of my own frustrations, the purpose of this application is to give small businesses a clear oversight of their project-related finances.
